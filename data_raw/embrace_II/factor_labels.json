@@ -1,0 +1,428 @@
+{
+    "tnmt_stage_sta_d": {
+        "1": "T1a1",
+        "2": "T1a2",
+        "3": "T1b1",
+        "4": "T1b2",
+        "5": "T2a1",
+        "6": "T2a2",
+        "7": "T2b",
+        "8": "T3a",
+        "9": "T3b",
+        "10": "T4"
+    },
+        "tnmt_stage_grouped": {
+        "1": "T1",
+        "2": "T1",
+        "3": "T1",
+        "4": "T1",
+        "5": "T2a",
+        "6": "T2a",
+        "7": "T2b",
+        "8": "T3",
+        "9": "T3",
+        "10": "T4"
+    },
+    "fig_oincl_ib1": {
+        "2": "2A",
+        "3": "3A",
+        "4": "4A",
+        "6": "2B",
+        "7": "3B",
+        "8": "4B",
+        "9": "1B1",
+        "10": "1B2"
+    },
+    "VagMorbStudyValue_TR": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "VagIQStudyVisible_TR": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "co_morbidity_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "myocardial_infarction_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "congestive_cardiac_failure_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "peripheral_vascular_disease_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "cerebrovascular_disease_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "dementia_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "chronic_obtructive_pulm_disease_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "rheumatologic_disease_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "peptic_ulcer_disease_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "mild_liver_disease_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "diabetes_without_chronic_complications_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "diabetes_with_chronic_complications_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "hemiplegia_or_paraplegia_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "renal_disease_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "moderate_severe_liver_disease_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "aidshiv_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "smoker_sta_d": {
+        "0": "No",
+        "1": "Yes",
+        "2": "Previous smoker",
+        "9": "NA"
+    },
+    "previous_pelvic_abd_surgery_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "partner_sta_d": {
+        "0": "No partner",
+        "1": "Partner",
+        "9": "Unknown"
+    },
+    "menopause_sta_d": {
+        "0": "Premenopausal",
+        "1": "Postmenopausal",
+        "9": "Unknown"
+    },
+    "vaginal_bleeding_sta_d": {
+        "0": "No",
+        "1": "Moderate",
+        "2": "Transfusion required"
+    },
+    "pain_sta_d": {
+        "0": "No",
+        "1": "Non-opoid medication",
+        "2": "Opoids required"
+    },
+    "other_symptoms_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "who_score_sta_d": {
+        "0": "PS0",
+        "1": "PS1",
+        "2": "PS2",
+        "3": "PS3",
+        "4": "PS4"
+    },
+    "gyn_left_parametrium_sta_d": {
+        "0": "Not involved",
+        "1": "Proximal",
+        "2": "Distal",
+        "3": "To pelvic wall"
+    },
+    "gyn_right_parametrium_sta_d": {
+        "0": "Not involved",
+        "1": "Proximal",
+        "2": "Distal",
+        "3": "To pelvic wall"
+    },
+    "gyn_vagina_sta_d": {
+        "0": "Not involved",
+        "1": "Upper 1/3",
+        "2": "Middle 1/3",
+        "3": "Lower 1/3"
+    },
+    "gyn_vagina_anterior_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "gyn_vagina_posterior_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "gyn_vagina_left_lateral_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "gyn_vagina_right_lateral_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "gyn_bladder_cystoscopy_sta_d": {
+        "0": "Not involved",
+        "1": "Bullous edema",
+        "2": "Mucosa involved",
+        "9": "Not done"
+    },
+    "gyn_rectum_exploration_sta_d": {
+        "0": "Not involved",
+        "1": "Palpable impression",
+        "2": "Tumor directly palpable",
+        "9": "Not done"
+    },
+    "gyn_rectum_endoscopy_sta_d": {
+        "0": "Not involved",
+        "1": "Impression but mucosa intact",
+        "2": "Mucosa involved",
+        "9": "Not done"
+    },
+    "biopsy_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "cone_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "laparascopic_staging_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "diagnostic_other_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "histopathological_type_sta_d": {
+        "1": "SQ",
+        "2": "AC",
+        "3": "AdSq"
+    },
+    "degree_of_differentiation_sta_d": {
+        "1": "High",
+        "2": "Moderate",
+        "3": "Low",
+        "9": "NA"
+    },
+    "lvi_sta_d": {
+        "0": "No",
+        "1": "Yes",
+        "9": "NA"
+    },
+    "BloodTestHgbUnit_TR": {
+        "1": "mmol/L",
+        "2": "g/dL"
+    },
+    "BloodTestCreatinineUnit_TR": {
+        "1": "\u00b5mol/L",
+        "2": "mg/dL"
+    },
+    "fdgpetct_whole_body_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "c_talone_sta_d": {
+        "1": "pelvis, abdomen, chest",
+        "2": "pelvis, abdomen",
+        "3": "chest"
+    },
+    "mri_cervix1_sta_d": {
+        "0": "No tumor",
+        "1": "Exophytic tumour",
+        "2": "Endophytic tumour",
+        "3": "Exo- and endophytic tumour"
+    },
+    "mri_cervix2_sta_d": {
+        "0": "No necrosis",
+        "1": "Necrosis"
+    },
+    "mri_left_parametrium_sta_d": {
+        "0": "Not involved",
+        "1": "Proximal",
+        "2": "Distal",
+        "3": "To pelvic wall"
+    },
+    "mri_right_parametrium_sta_d": {
+        "0": "Not involved",
+        "1": "Proximal",
+        "2": "Distal",
+        "3": "To pelvic wall"
+    },
+    "mri_tumor_infiltration_type_sta_d": {
+        "1": "Predominant expansive",
+        "2": "Predominant infiltrating tumours"
+    },
+    "mri_corpus_uteri_sta_d": {
+        "0": "Not involved",
+        "1": "Lower",
+        "2": "Mid",
+        "3": "Upper"
+    },
+    "mri_vagina_sta_d": {
+        "0": "Not involved",
+        "1": "Upper 1/3",
+        "2": "Middle 1/3",
+        "3": "Lower 1/3"
+    },
+    "mri_bladder_sta_d": {
+        "0": "Not involved",
+        "1": "Bladder wall infiltration"
+    },
+    "mri_rectum_sta_d": {
+        "0": "Not involved",
+        "1": "Mesorectum invaded",
+        "2": "Rectal wall invaded"
+    },
+    "mri_contrast_agent_type_sta_d": {
+        "1": "Dotarem",
+        "2": "Gadovist",
+        "3": "Clariscan",
+        "9": "Other"
+    },
+    "mri_including_t2_sta_d": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "hydronephrosis_sta_d": {
+        "0": "No",
+        "1": "Left",
+        "2": "Right",
+        "3": "Bilat"
+    },
+    "pathological_nodes_present": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "other_metastases": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "gastro_fecal_urgency": {
+        "0": "Defer defecation > 15min",
+        "1": "Disability to defer for 15 min"
+    },
+    "gastro_hemorrhage_bleeding_gi": {
+        "0": "None",
+        "1": "Yes"
+    },
+    "gastro_stenosis_stricture_gi": {
+        "0": "None",
+        "1": "Yes"
+    },
+    "bladder_hemorrhage_bleeding_gu": {
+        "0": "None",
+        "1": "Yes"
+    },
+    "bladder_stenosis_stricture": {
+        "0": "None",
+        "1": "Yes"
+    },
+    "vag_adhesions": {
+        "0": "No adhesions",
+        "1": "In the upper third",
+        "2": "In the middle third",
+        "3": "In the lower third"
+    },
+    "vag_adhesions_reopen": {
+        "0": "Possible to reopen",
+        "1": "Occlusion"
+    },
+    "vagina_hormonal_therapy": {
+        "0": "No",
+        "1": "Oral or transdermal",
+        "2": "Local (vaginal)",
+        "3": "Systemic and local",
+        "9": "Unknown"
+    },
+    "vagina_regular_dilatation": {
+        "0": "No",
+        "1": "Yes",
+        "9": "Unknown"
+    },
+    "fistula": {
+        "0": "No",
+        "1": "Yes"
+    },
+    "fistula_localization_anus": {
+        "0": "Not involved",
+        "1": "Involved"
+    },
+    "fistula_localization_rectum": {
+        "0": "Not involved",
+        "1": "Involved"
+    },
+    "fistula_localization_sigmoid": {
+        "0": "Not involved",
+        "1": "Involved"
+    },
+    "fistula_localization_colon": {
+        "0": "Not involved",
+        "1": "Involved"
+    },
+    "fistula_localization_small_bowel": {
+        "0": "Not involved",
+        "1": "Involved"
+    },
+    "fistula_localization_bladder": {
+        "0": "Not involved",
+        "1": "Involved"
+    },
+    "fistula_localization_ureter": {
+        "0": "Not involved",
+        "1": "Involved"
+    },
+    "fistula_localization_urethra": {
+        "0": "Not involved",
+        "1": "Involved"
+    },
+    "fistula_localization_vagina": {
+        "0": "Not involved",
+        "1": "Involved"
+    },
+    "fistula_localization_other": {
+        "0": "Not involved",
+        "1": "Involved"
+    },
+    "ebrt_itv45_elective_nodes_incl_tdvh": {
+        "1": "Small pelvis",
+        "2": "Large pelvis",
+        "3": "Large pelvic and PAN",
+        "4": "Large pelvis and inguinal",
+        "5": "Large pelvis, PAN and inguinal"
+    },
+    "fraction01dose_rate_tdvh": {
+        "1": "HDR",
+        "2": "PDR"
+    },
+    "tnmn_stage_sta_d": {
+        "1": "N0",
+        "2": "N1"
+    },
+    "tnmm_stage_sta_d": {
+        "1": "M0",
+        "2": "M1PALN",
+        "3": "M1ing",
+        "4": "M1paln+ing"
+    }
+}

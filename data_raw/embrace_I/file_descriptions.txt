@@ -1,0 +1,7 @@
+This directory contains raw data EMBRACE-I files that should not be tracked in Git.
+
+Files in this directory:
+- emi_2021_01.Rds: EMI data from 2021 - masterdump
+- Various .sav files containing SPSS data for morbidity
+
+Note: These files are intentionally not tracked in Git to protect sensitive data.

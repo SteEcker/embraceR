@@ -1,0 +1,21 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/67C4E39B/sources/session-57fdb328/0E2816D8-contents
+.Rproj.user/
+.Rproj.user/67C4E39B/
+.Rproj.user
+# Ignore all files in data_raw subdirectories
+data_raw/*
+data_raw/**/*
+
+# But keep the directory structure
+!data_raw/
+!data_raw/*/
+!data_raw/*/.gitkeep
+
+# Specific file types to ignore everywhere
+*.sav
+*.Rds
+*.xlsx
