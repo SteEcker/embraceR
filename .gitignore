@@ -20,3 +20,5 @@ data_raw/**/*
 *.Rds
 *.xlsx
 docs
+/doc/
+/Meta/

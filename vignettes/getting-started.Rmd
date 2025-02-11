@@ -1,0 +1,49 @@
+---
+title: "Getting Started"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Prerequisites
+
+- R (version 4.0 or later)
+- RStudio (optional but recommended)
+
+Place the `data_raw` folder which contains the necessary data files for EMBRACE I and EMBRACE II in the root directory of the project.
+
+## Installation
+
+```r
+# Install from GitHub
+if (!require("devtools")) install.packages("devtools")
+devtools::install_github("steecker/embraceR")
+```
+
+## Basic Usage
+
+### Loading Data
+
+```r
+library(embraceR)
+
+# Load EMBRACE I data
+data <- load_embrace_i()
+
+# Load EMBRACE II data
+data <- load_embrace_ii()
+
+# Load combined data
+data <- load_combined_embrace()
+```
+
+
