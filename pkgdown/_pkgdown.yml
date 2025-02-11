@@ -1,0 +1,18 @@
+url: https://steecker.github.io/embraceR/
+
+authors:
+  Stefan Ecker:
+    href: stefan.ecker@meduniwien.ac.at
+
+template:
+  bootstrap: 5
+
+navbar:
+  structure:
+    left:  [intro, reference, articles, tutorials, news]
+    right: [search, github, lightswitch]
+
+development:
+  mode: auto
+
+

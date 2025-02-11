@@ -2,12 +2,13 @@ Package: embraceR
 Type: Package
 Title: Data Processing Tools for EMBRACE Studies
 Version: 0.1.0
-Author: Stefan Ecker
-Maintainer: Stefan Ecker <stefan.ecker@meduniwien.ac.at>
+Authors@R:
+    person("Stefan", "Ecker", , "stefan.ecker@meduniwien.ac.at", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-9577-0694"))
 Description: A comprehensive toolkit for processing and analyzing data from 
     EMBRACE I and EMBRACE II studies. Provides functions for data loading, 
     transformation, and analysis of clinical outcomes.
-License: MIT + file LICENSE
+License: MIT
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.2
@@ -31,4 +32,4 @@ Imports:
     haven,
     sjlabelled,
     readr
-URL: https://steecker.github.io/embraceR/
+URL: https://github.com/SteEcker/embraceR
