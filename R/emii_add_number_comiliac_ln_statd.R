@@ -1,7 +1,7 @@
 #' Add Number of Common Iliac Lymph Nodes per Patient
 #'
 #' @export
-emii_add_number_paraaortic_ln_statd <- function(df) {
+emii_add_number_common_iliac_ln_stat_d <- function(df) {
 
   ln_df <- emii_get_lymph_nodes_statd(df)
 

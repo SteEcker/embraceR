@@ -17,8 +17,10 @@
 #' threshold(NA, grade_threshold = 4)
 #' @export
 threshold <- function(x, grade_threshold) {
+
   if (!is.na(x) && !is.character(x) && x != 9) {
-    if (x >= grade_threshold) {
+
+    if (x == grade_threshold) {
       print(x)
     }
     return(x == grade_threshold)
@@ -56,9 +58,9 @@ filter_grade_threshold <- function(df, side_effect_cols,  grade_threshold = 4) {
   # Used for threshold
   outcome_columns <- names(df) %>%
     purrr::keep(~any(str_detect(., paste0("^", threshold_cols, ".*")))) %>%
-    # purrr::discard(~str_detect(., "baseline_morbidity$|bm_4w$|bm_eort$")) %>% # Followup
+    purrr::discard(~str_detect(., "baseline_morbidity$|bm_4w$|bm_eort$")) %>% # Followup
     # purrr::discard(~str_detect(., "bm_4w$|bm_eort$|m$")) %>% # Baseline
-    purrr::discard(~str_detect(., "baseline_morbidity$|m$")) %>% # Acute
+    # purrr::discard(~str_detect(., "baseline_morbidity$|m$")) %>% # Acute
     purrr::discard(~str_detect(., "text"))  # Exclude columns containing "text"
 
   print("===========================")
@@ -436,7 +438,7 @@ generateExcelReportsForPatients <- function(data, outputDir, grade_threshold) {
     "gastro_hemorrhage_bleeding_gi",
     "gastro_stenosis_stricture_gi",
     "bladder_hemorrhage_bleeding_gu",
-    "bladder_stenosis_stricture",
+    "bladder_stricture_stenosis_gu",
     "vag_adhesions",
     "vag_adhesions_reopen",
     "fistula",
@@ -503,8 +505,7 @@ add_grade_ctcae_event_column <- function(df, grade_threshold) {
 }
 
 # # Example usage
-# emii <- emii %>% recode_and_convert_all_columns(mapping_path = "./data_raw/embrace_II/factor_labels.json") %>% emii_add_number_common_iliac_ln_stat_d() %>% emii_add_number_paraaortic_ln_stat_d() %>% replace_neg_one_with_NA()
-
+# emii <- emii %>% recode_and_convert_all_columns() %>% emii_add_number_common_iliac_ln_stat_d() %>% add_number_paraaortic_ln_stat_d() %>% replace_neg_one_with_NA()
 
 # generateExcelReportsForPatients(emii, "Grade4/", 4)
 

@@ -26,11 +26,11 @@ clean_side_effect_names <- function(df, time_suffix = "_3m") {
                starts_with("gastro_hemorrhage_bleeding_gi"),
                starts_with("gastro_stenosis_stricture_gi"),
                starts_with("bladder_hemorrhage_bleeding_gu"),
-               starts_with("bladder_stenosis_stricture"),
+               starts_with("bladder_stricture_stenosis"),
                )
 
            ) %>%
-    select_if(is.numeric) %>%
+    select_if(function(x) is.numeric(x) | is.factor(x)) %>%
     colnames()
 
   # Remove the time_suffix from the column names
