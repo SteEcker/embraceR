@@ -2,6 +2,7 @@
 <url><loc>https://steecker.github.io/embraceR/404.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/articles/getting-started.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/articles/index.html</loc></url>
+<url><loc>https://steecker.github.io/embraceR/articles/variable-description.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/authors.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/index.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/reference/NODAL_POSITION_MAPPING.html</loc></url>
@@ -66,13 +67,11 @@
 <url><loc>https://steecker.github.io/embraceR/reference/emii_find_outliers.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/reference/emii_get_clean_data.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/reference/emii_get_critical_parameter_status.html</loc></url>
-<url><loc>https://steecker.github.io/embraceR/reference/emii_get_data_dictionary.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/reference/emii_get_dosimetric_parameter_status.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/reference/emii_get_gyn_remission_data.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/reference/emii_get_lymph_nodes_statd.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/reference/emii_get_remission_data.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/reference/emii_get_summary_statistics.html</loc></url>
-<url><loc>https://steecker.github.io/embraceR/reference/emii_select_key_variables.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/reference/emii_verify_all_events.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/reference/filter_grade_threshold.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/reference/generateExcelReportsForPatients.html</loc></url>

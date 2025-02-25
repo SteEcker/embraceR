@@ -3,7 +3,8 @@ pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   getting-started: getting-started.html
-last_built: 2025-02-17T21:08Z
+  variable-description: variable-description.html
+last_built: 2025-02-25T07:56Z
 urls:
   reference: https://steecker.github.io/embraceR/reference
   article: https://steecker.github.io/embraceR/articles
