@@ -2,13 +2,23 @@
 % Please edit documentation in R/emii_get_dosimetric_parameter_status.R
 \name{emii_get_dosimetric_parameter_status}
 \alias{emii_get_dosimetric_parameter_status}
-\title{Get Status of Dosimetric Parameters and Compare with EMBRACE-I}
+\title{Compare Dosimetric Parameters Between EMBRACE-I and EMBRACE-II}
 \usage{
 emii_get_dosimetric_parameter_status()
 }
 \value{
-A gtsummary object containing the comparative summary table.
+A gtsummary object containing the comparative summary table with p-values
 }
 \description{
-Get Status of Dosimetric Parameters and Compare with EMBRACE-I
+Generates a summary table comparing dosimetric parameters between EMBRACE-I and 
+EMBRACE-II datasets. The function selects relevant dosimetric parameters from both 
+studies, combines them, and performs statistical comparisons to identify significant 
+differences between the two cohorts.
 }
+\examples{
+\dontrun{
+# Generate dosimetric parameter comparison table
+summary_table <- emii_get_dosimetric_parameter_status()
+}
+}
+\keyword{internal}

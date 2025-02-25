@@ -1,14 +1,12 @@
 #' Add ICIS Indicator Based on Technique
 #'
-#' This function takes a data frame that includes an `embrace_id` column and other columns ending with "technique_tdvh"
-#' and starting with "fraction". It processes these columns to determine if ICIS should be "TRUE" or "FALSE" for each `embrace_id`,
-#' converting it into a numerical indicator (1 or 0) in a new column named `icis`.
+#' Creates a binary indicator (1/0) for interstitial component of intracavitary/interstitial (ICIS) 
+#' brachytherapy based on technique data.
 #'
-#' @param .data A data frame containing an `embrace_id` column and other columns that end with "technique_tdvh" and
-#'             start with "fraction". These should contain values that can be transformed into factors.
+#' @param .data A data frame with embrace_id and fraction technique columns
 #'
-#' @return A data frame with an additional column `icis`, which is a numerical indicator (1 or 0) based on the
-#'         conditions applied to columns ending with "technique_tdvh" and starting with "fraction".
+#' @return A data frame with an additional 'icis' column (1 or 0)
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
@@ -17,7 +15,6 @@
 #'                  fraction_2_technique_tdvh = c("0", "1", "1"))
 #' add_icis(df)
 #' }
-#' @export
 add_icis <- function(.data) {
   df <- .data %>%
     select(embrace_id, ends_with("technique_tdvh")&starts_with("fraction")) %>%
@@ -37,9 +34,23 @@ add_icis <- function(.data) {
 }
 
 
-#' Add parallel or oblique classification for icis
+#' Add Parallel or Oblique Needle Classification
 #'
-#' @export
+#' Classifies needle arrangements as "no needles", "parallel needles", "oblique needles", or "other"
+#' based on technique data.
+#'
+#' @param .data A data frame with embrace_id and fraction technique columns
+#'
+#' @return A data frame with an additional 'icis_parallel_oblique' column
+#' @keywords internal
+#'
+#' @examples
+#' \dontrun{
+#' df <- data.frame(embrace_id = c(1, 2, 3),
+#'                  fraction_1_technique_tdvh = c("1", "2", "3"),
+#'                  fraction_2_technique_tdvh = c("1", "2", "4"))
+#' add_parallel_oblique_needles(df)
+#' }
 add_parallel_oblique_needles <- function(.data) {
   df <- .data %>%
     select(embrace_id, ends_with("technique_tdvh")&starts_with("fraction")) %>%

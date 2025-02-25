@@ -35,3 +35,4 @@ is more than 3 times the IQR below Q1 or above Q3.
   outliers <- emii_find_outliers(clean_data, save_excel = TRUE)
 }
 }
+\keyword{internal}

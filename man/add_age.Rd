@@ -7,21 +7,21 @@
 add_age(df)
 }
 \arguments{
-\item{df}{A data frame containing the columns `study`, `histology_assessment_date`,
-`birth_date_pat`, and `year_of_birth`. The `study` column is used to determine
-the method of age calculation. The `histology_assessment_date` must be in a
-date format that `lubridate::year()` can recognize.}
+\item{df}{A data frame containing:
+- study: Character indicating the study name ("embrace_i" or other)
+- histology_assessment_date: Date of histology assessment
+- birth_date_pat: Birth date for EMBRACE-I subjects
+- year_of_birth: Birth year for non-EMBRACE-I subjects}
 }
 \value{
-Returns the input data frame with an additional column `age` that contains
-  the calculated age of the subjects.
+The input data frame with an additional 'age' column
 }
 \description{
-This function calculates the age of subjects in a data frame based on their
-year of birth or birth date and the date of histology assessment. The method
-of calculation depends on the study specified in the data frame.
+Calculates the age of subjects based on their birth information and histology assessment date.
+For EMBRACE-I study, age is calculated using birth_date_pat, while other studies use year_of_birth.
 }
 \examples{
+\dontrun{
 df <- data.frame(
   study = c("embrace_i", "other_study"),
   histology_assesment_date = as.Date(c("2024-01-01", "2024-01-02")),
@@ -30,3 +30,5 @@ df <- data.frame(
 )
 df_with_age <- add_age(df)
 }
+}
+\keyword{internal}

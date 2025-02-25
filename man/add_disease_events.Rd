@@ -2,25 +2,23 @@
 % Please edit documentation in R/add_disease_events.R
 \name{add_disease_events}
 \alias{add_disease_events}
-\title{Add Disease Event Columns to a DataFrame}
+\title{Add Disease Event Columns}
 \usage{
 add_disease_events(df)
 }
 \arguments{
-\item{df}{A dataframe containing patient data. It is expected that `df` already contains
-the necessary columns required by the `add_local_failure_event()`,
-`add_nodal_failure_event()`, `add_systemic_failure_event()`, and
-`add_time_to_diseaseevent()` functions.}
+\item{df}{A dataframe containing patient data with required columns for failure events}
 }
 \value{
-A dataframe that includes the original data along with four new columns:
-  - Local failure event: Indicates whether a local failure event occurred.
-  - Nodal failure event: Indicates whether a nodal failure event occurred.
-  - Systemic failure event: Indicates whether a systemic failure event occurred.
-  - Time to disease event: The time until a disease event occurred.
+A dataframe with added columns for failure events and time measurements
 }
 \description{
-This function enriches a dataframe by adding several new columns related to disease events.
-It sequentially applies functions to add local failure event, nodal failure event,
-systemic failure event, and time to disease event columns.
+Adds columns for local, nodal, and systemic failure events, plus time-to-event data.
 }
+\examples{
+\dontrun{
+patient_data <- data.frame(...)
+enhanced_data <- add_disease_events(patient_data)
+}
+}
+\keyword{internal}

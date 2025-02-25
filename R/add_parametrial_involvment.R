@@ -1,12 +1,22 @@
-#' Add new columns to a data frame that contain the maximum parametrial involvement
+#' Add Maximum Parametrial Involvement Columns
 #'
-#' This function adds several new columns to a given data frame, each containing the
-#' maximum value between two existing columns related to parametrial involvement.
+#' Creates new columns containing the maximum parametrial involvement values 
+#' between left and right sides for different assessment methods.
 #'
-#' @param data A data frame containing at least two sets of numeric columns representing parametrial involvement on the left and right side.
-#' @return A data frame with new columns added.
+#' @param data A data frame with parametrial involvement columns for left and right sides
 #'
-#' @export
+#' @return A data frame with added maximum parametrial involvement columns
+#'
+#' @keywords internal
+#'
+#' @examples
+#' \dontrun{
+#' df <- data.frame(
+#'   mri_left_parametrium_sta_d = c(0, 1, 2),
+#'   mri_right_parametrium_sta_d = c(1, 0, 1)
+#' )
+#' result <- add_parametrial_involvement(df)
+#' }
 add_parametrial_involvement <- function(data) {
   if (!is.data.frame(data)) {
     stop("Input should be a data frame.")

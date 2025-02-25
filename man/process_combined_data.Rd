@@ -2,21 +2,40 @@
 % Please edit documentation in R/process_combined_data.R
 \name{process_combined_data}
 \alias{process_combined_data}
-\title{Process and Transform Combined Data}
+\title{Process and Transform Combined EMBRACE Data}
 \usage{
 process_combined_data(data)
 }
 \arguments{
-\item{data}{A tibble or dataframe containing the combined data to be processed.}
+\item{data}{A tibble or dataframe containing the combined EMBRACE data to be processed}
 }
 \value{
-A tibble or dataframe
+A tibble with additional derived columns for analysis
 }
 \description{
-This function takes a combined dataset and applies transformations
+Applies a series of data transformations to the combined EMBRACE dataset to create
+derived variables needed for analysis. This function serves as a pipeline that
+sequentially applies multiple data processing functions to:
+}
+\details{
+1. Add ICIS (International Cervical Cancer Imaging Score) values
+2. Calculate average active needles used in brachytherapy
+3. Compute time from diagnosis to brachytherapy
+4. Determine parametrial involvement status
+5. Create HRCTV volume bins for stratification
+6. Calculate maximum tumor dimension
+7. Add patient age at diagnosis
 }
 \examples{
 \dontrun{
+  # Load combined data
+  combined_data <- load_combined_embrace()
+  
+  # Apply all transformations
   processed_data <- process_combined_data(combined_data)
+  
+  # Check new columns
+  names(processed_data)[!names(processed_data) \%in\% names(combined_data)]
 }
 }
+\keyword{internal}

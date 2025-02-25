@@ -7,20 +7,19 @@
 add_max_tumor_dimension(.data)
 }
 \arguments{
-\item{.data}{A dataframe containing MRI and GYN tumor dimension columns with specific naming patterns.}
+\item{.data}{A dataframe containing MRI and GYN tumor dimension columns}
 }
 \value{
-A dataframe with additional columns for the maximum MRI tumor dimension (`mri_max_tumor_dimension`),
-the maximum GYN tumor dimension (`gyn_max_tumor_dimension`), and the overall maximum tumor dimension
-(`max_tumor_dimension`). Infinite values in these new columns are replaced with NA.
+A dataframe with added columns: `mri_max_tumor_dimension_sta_d`,
+  `gyn_max_tumor_dimension_sta_d`, and `max_tumor_dimension_sta_d`
 }
 \description{
-This function calculates and adds maximum tumor dimension columns for MRI and GYN measurements
-to the given dataframe. It computes the maximum dimension across specified tumor columns without
-using row-wise operations for improved performance. Additionally, it replaces infinite values
-with NA in the newly calculated maximum dimension columns.
+Calculates maximum tumor dimensions from MRI and GYN measurements in the dataset.
+Creates three new columns: maximum MRI dimension, maximum GYN dimension, and overall
+maximum tumor dimension.
 }
 \examples{
+\dontrun{
 # Assuming `df` is your dataframe with MRI and GYN tumor dimension columns:
 df <- data.frame(
   mri_tumor_width_sta_d = c(2, Inf, 4),
@@ -32,3 +31,5 @@ df <- data.frame(
 df <- add_max_tumor_dimension(df)
 print(df)
 }
+}
+\keyword{internal}

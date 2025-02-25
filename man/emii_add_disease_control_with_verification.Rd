@@ -30,3 +30,4 @@ result <- emii_add_disease_control_with_verification(data)
 result <- emii_add_disease_control_with_verification(data, save_excel = TRUE)
 }
 }
+\keyword{internal}

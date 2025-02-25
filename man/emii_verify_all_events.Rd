@@ -2,24 +2,26 @@
 % Please edit documentation in R/emii_add_event_verification.R
 \name{emii_verify_all_events}
 \alias{emii_verify_all_events}
-\title{Run All Event Verification Functions}
+\title{Verify All Event Calculations}
 \usage{
 emii_verify_all_events(save_excel = TRUE)
 }
 \arguments{
-\item{save_excel}{Logical indicating whether to save results as Excel file (default: TRUE)}
-
-\item{.data}{The input dataframe containing patient data}
+\item{save_excel}{Logical; whether to save results to Excel file (default: TRUE)}
 }
 \value{
-A list containing all verification results
+A list containing all verification results with each element representing
+  a different event verification dataset
 }
 \description{
-This function runs all event-related verification functions and combines their results
-into a single Excel workbook with multiple sheets.
+Runs all event verification functions and combines results into a single Excel workbook
+with multiple sheets. Provides a comprehensive validation of disease events, survival
+outcomes, and failure patterns for EMBRACE-II data.
 }
 \examples{
 \dontrun{
-results <- emii_verify_all_events(data)
+results <- emii_verify_all_events()
+results <- emii_verify_all_events(save_excel = FALSE)
 }
 }
+\keyword{internal}

@@ -16,3 +16,4 @@ Original dataframe with an additional boolean column 'distant_alone'
 This function adds a column indicating whether a patient had distant metastases alone,
 defined as having systemic failure without para-aortic nodes and no local or nodal failures.
 }
+\keyword{internal}

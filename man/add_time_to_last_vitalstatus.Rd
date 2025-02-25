@@ -2,26 +2,31 @@
 % Please edit documentation in R/add_time_to_vitalstatus.R
 \name{add_time_to_last_vitalstatus}
 \alias{add_time_to_last_vitalstatus}
-\title{Calculate Time to Last Vital Status in Months}
+\title{Calculate Time to Last Vital Status}
 \usage{
 add_time_to_last_vitalstatus(df)
 }
 \arguments{
-\item{df}{A data frame that contains the required columns based on study type}
+\item{df}{A data frame with histology assessment date and vital status information}
 }
 \value{
-A data frame with the new or updated `timetoevent_vitalstatus` column.
+A data frame with added `timetoevent_vitalstatus` column
 }
 \description{
-This function adds a new column named `timetoevent_vitalstatus` to the given data frame.
-For EMBRACE I, it calculates the time interval in months between `histology_assesment_date`
-and the latest of `vital_status_last_info_date` or assessment dates.
-For EMBRACE II, it also considers `vital_status_date_of_death_vital_status` when available.
+Adds `timetoevent_vitalstatus` column measuring months from histology assessment
+to the latest vital status date. For EMBRACE-I, uses the latest of assessment dates
+or last info date. For EMBRACE-II, also considers date of death when available.
 }
 \examples{
 \dontrun{
-# Given a DataFrame df with the required columns
-# df <- add_time_to_last_vitalstatus(df)
+df <- data.frame(
+  embrace_id = 1,
+  study = "embrace_i",
+  histology_assesment_date = as.Date("2020-01-01"),
+  vital_status_last_info_date = as.Date("2022-06-01"),
+  assessment_date_3m = as.Date("2020-04-01")
+)
+result <- add_time_to_last_vitalstatus(df)
 }
-
 }
+\keyword{internal}

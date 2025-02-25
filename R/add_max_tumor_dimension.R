@@ -1,21 +1,20 @@
 #' Add Maximum Tumor Dimension Columns
 #'
-#' This function calculates and adds maximum tumor dimension columns for MRI and GYN measurements
-#' to the given dataframe. It computes the maximum dimension across specified tumor columns without
-#' using row-wise operations for improved performance. Additionally, it replaces infinite values
-#' with NA in the newly calculated maximum dimension columns.
+#' Calculates maximum tumor dimensions from MRI and GYN measurements in the dataset.
+#' Creates three new columns: maximum MRI dimension, maximum GYN dimension, and overall
+#' maximum tumor dimension.
 #'
-#' @param .data A dataframe containing MRI and GYN tumor dimension columns with specific naming patterns.
+#' @param .data A dataframe containing MRI and GYN tumor dimension columns
 #'
-#' @return A dataframe with additional columns for the maximum MRI tumor dimension (`mri_max_tumor_dimension`),
-#' the maximum GYN tumor dimension (`gyn_max_tumor_dimension`), and the overall maximum tumor dimension
-#' (`max_tumor_dimension`). Infinite values in these new columns are replaced with NA.
+#' @return A dataframe with added columns: `mri_max_tumor_dimension_sta_d`,
+#'   `gyn_max_tumor_dimension_sta_d`, and `max_tumor_dimension_sta_d`
 #'
 #' @importFrom dplyr select mutate across
 #' @importFrom tidyr replace_na
-#' @export
+#' @keywords internal
 #'
 #' @examples
+#' \dontrun{
 #' # Assuming `df` is your dataframe with MRI and GYN tumor dimension columns:
 #' df <- data.frame(
 #'   mri_tumor_width_sta_d = c(2, Inf, 4),
@@ -26,6 +25,7 @@
 #'
 #' df <- add_max_tumor_dimension(df)
 #' print(df)
+#' }
 add_max_tumor_dimension <- function(.data) {
   # Pre-select MRI and GYN tumor columns
   mri_tumor_cols <- select(.data, starts_with('mri_tumor') & ends_with('sta_d') & !ends_with("type_sta_d"))

@@ -1,23 +1,16 @@
 #' Check for Specific Nodal Location
 #'
-#' @description
-#' This function checks whether patients have lymph nodes in specific anatomical locations,
+#' Checks whether patients have lymph nodes in specific anatomical locations,
 #' either at diagnosis, during follow-up, or at any time point.
 #'
-#' @param .data The input dataframe containing patient node data
-#' @param location Character string specifying the anatomical location to check.
-#'   Must be one of: "L ext iliac", "L int iliac", "L com iliac", "R ext iliac",
-#'   "R int iliac", "R com iliac", "Para Aortic", "L groin", "R groin",
-#'   "R parame/paracervix", "L parame/paracervix", "other"
-#' @param time_point Optional character string to specify which timepoint to check.
-#'   Must be one of: "diagnosis", "followup", or "any" (default)
+#' @param .data A data frame containing patient node data
+#' @param location Character string specifying the anatomical location to check
+#' @param time_point Character string specifying which timepoint to check:
+#'   "diagnosis", "followup", or "any" (default)
 #'
-#' @return A tibble with columns:
-#'   \itemize{
-#'     \item embrace_id: The patient identifier
-#'     \item has_location: Boolean indicating presence of specified nodal location
-#'   }
-#' @export
+#' @return A tibble with patient IDs and boolean indicators for the specified location
+#'
+#' @keywords internal
 #'
 #' @import dplyr
 #' @importFrom tidyr pivot_longer
@@ -27,9 +20,9 @@
 #' \dontrun{
 #' # Check for right internal iliac nodes at any time
 #' result <- check_nodal_location(patient_data, "R int iliac")
-#'
+#' 
 #' # Check only at diagnosis
-#' diagnosis_nodes <- check_nodal_location(patient_data, "R int iliac",
+#' diagnosis_nodes <- check_nodal_location(patient_data, "R int iliac", 
 #'                                        time_point = "diagnosis")
 #' }
 check_nodal_location <- function(.data, location, time_point = "any") {
@@ -76,20 +69,18 @@ check_nodal_location <- function(.data, location, time_point = "any") {
   return(result)
 }
 
-#' Check for Multiple Nodal Locations and Add to Original Data
+#' Check for Multiple Nodal Locations
 #'
-#' @description
-#' This function extends check_nodal_location to check for multiple locations simultaneously
+#' Extends check_nodal_location to check for multiple locations simultaneously
+#' and adds the results as new columns to the original data frame.
 #'
-#' @param .data The input dataframe containing patient node data
+#' @param .data A data frame containing patient node data
 #' @param locations Character vector of anatomical locations to check
-#' @param time_point Optional character string to specify which timepoint to check
+#' @param time_point Character string specifying which timepoint to check
 #'
-#' @return Original dataframe with additional boolean columns for each location
-#' @export
+#' @return Original data frame with additional boolean columns for each location
 #'
-#' @import dplyr
-#' @importFrom tidyr pivot_wider
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
@@ -127,12 +118,14 @@ check_multiple_locations <- function(.data, locations, time_point = "any") {
 
 #' Process Follow-up Node Data
 #'
-#' @description
-#' Internal helper function to efficiently process follow-up node data
+#' Internal helper function to efficiently process follow-up node data by
+#' extracting and transforming node information from multiple follow-up visits.
 #'
-#' @param .data The input dataframe
+#' @param .data A data frame containing follow-up node information
 #' @param diagnosis_nodes Lookup table of nodes at diagnosis
+#'
 #' @return A tibble with processed follow-up node data
+#'
 #' @keywords internal
 process_followup_nodes <- function(.data, diagnosis_nodes) {
   followup_data <- .data %>%
@@ -187,21 +180,21 @@ process_followup_nodes <- function(.data, diagnosis_nodes) {
   return(result)
 }
 
-#' Add Recurrent Node Locations to EMII Data
+#' Add Recurrent Node Locations
 #'
-#' @description
-#' This function adds columns for all possible nodal locations at follow-up to the input dataset.
+#' Adds boolean columns for all possible nodal locations at follow-up to identify
+#' recurrent disease patterns in EMBRACE-II patients.
 #'
-#' @param .data The input dataframe containing patient node data
+#' @param .data A data frame containing patient node data
 #'
-#' @return Original dataframe with additional boolean columns for each nodal location at follow-up
-#' @export
+#' @return Data frame with additional boolean columns for each nodal location at follow-up
 #'
-#' @import dplyr
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
-#' patient_data <- emii_add_recurrent_nodes(patient_data)
+#' emii_data <- load_embrace_ii()
+#' result <- emii_add_recurrent_nodes(emii_data)
 #' }
 emii_add_recurrent_nodes <- function(.data) {
   check_multiple_locations(
@@ -211,22 +204,21 @@ emii_add_recurrent_nodes <- function(.data) {
   )
 }
 
-
-#' Add Diagnostic Node Locations to EMII Data
+#' Add Diagnostic Node Locations
 #'
-#' @description
-#' This function adds columns for all possible nodal locations at diagnosis to the input dataset.
+#' Adds boolean columns for all possible nodal locations at diagnosis to identify
+#' initial disease patterns in EMBRACE-II patients.
 #'
-#' @param .data The input dataframe containing patient node data
+#' @param .data A data frame containing patient node data
 #'
-#' @return Original dataframe with additional boolean columns for each nodal location at diagnosis
-#' @export
+#' @return Data frame with additional boolean columns for each nodal location at diagnosis
 #'
-#' @import dplyr
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
-#' patient_data <- emii_add_diagnostic_nodes(patient_data)
+#' emii_data <- load_embrace_ii()
+#' result <- emii_add_diagnostic_nodes(emii_data)
 #' }
 emii_add_diagnostic_nodes <- function(.data) {
   check_multiple_locations(
@@ -236,24 +228,21 @@ emii_add_diagnostic_nodes <- function(.data) {
   )
 }
 
-
-
-#' Add Nodal Classification Column
+#' Add Nodal Classification
 #'
-#' @description
-#' This function adds a new column classifying nodal status as 'N0', 'N1PAN', or 'N1pelvic'
-#' based on pathological nodes present and Para Aortic lymph node status at diagnosis.
+#' Adds a new column classifying nodal status as 'N0', 'N1PAN', or 'N1pelvic'
+#' based on pathological nodes present and Para-Aortic lymph node status at diagnosis.
 #'
-#' @param .data The input dataframe containing patient node data
+#' @param .data A data frame containing patient node data
 #'
-#' @return Original dataframe with an additional 'nodal_classification' column
-#' @export
+#' @return Data frame with an additional 'nodal_classification' column
 #'
-#' @import dplyr
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
-#' patient_data <- emii_add_nodal_classification(patient_data)
+#' emii_data <- load_embrace_ii()
+#' result <- emii_add_nodal_classification(emii_data)
 #' }
 emii_add_nodal_classification <- function(.data) {
   # First ensure we have Para Aortic status at diagnosis
@@ -273,16 +262,22 @@ emii_add_nodal_classification <- function(.data) {
   return(data_with_nodes)
 }
 
-#' Generate Patient-Level Summary Table of Recurrent Nodes and Metastases
+#' Generate Recurrence and Metastases Summary
 #'
-#' @description
-#' Creates a formatted summary table using gtsummary showing the number and percentage
-#' of patients who have recurrent lymph nodes or metastases at follow-up from EMBRACE-II.
+#' Creates a formatted summary table showing the number and percentage of patients
+#' who have recurrent lymph nodes or metastases at follow-up from EMBRACE-II.
 #'
-#' @param df A dataframe containing the EMBRACE-II dataset
-#' @return A gt table object showing the distribution of patients with recurrent nodes
-#'   and metastases by location
-#' @export
+#' @param df A data frame containing EMBRACE-II data with follow-up information
+#'
+#' @return A gt table object showing the distribution of recurrences and metastases
+#'
+#' @keywords internal
+#'
+#' @examples
+#' \dontrun{
+#' emii_data <- load_embrace_ii()
+#' summary_table <- get_recurrence_and_metastases_summary(emii_data)
+#' }
 get_recurrence_and_metastases_summary <- function(df) {
     # Get recurrent nodes data
     nodes_data <- check_multiple_locations(
@@ -323,7 +318,13 @@ get_recurrence_and_metastases_summary <- function(df) {
         )
 }
 
-#' Helper function to create combined labels for gtsummary
+#' Create Combined Labels for Summary Table
+#'
+#' Helper function to create formatted labels for the recurrence and metastases
+#' summary table.
+#'
+#' @return A named list of labels for gtsummary
+#'
 #' @keywords internal
 create_combined_labels <- function() {
     # Node labels

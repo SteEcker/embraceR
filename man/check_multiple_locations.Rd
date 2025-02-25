@@ -2,22 +2,23 @@
 % Please edit documentation in R/emii_add_recurrent_nodes.R
 \name{check_multiple_locations}
 \alias{check_multiple_locations}
-\title{Check for Multiple Nodal Locations and Add to Original Data}
+\title{Check for Multiple Nodal Locations}
 \usage{
 check_multiple_locations(.data, locations, time_point = "any")
 }
 \arguments{
-\item{.data}{The input dataframe containing patient node data}
+\item{.data}{A data frame containing patient node data}
 
 \item{locations}{Character vector of anatomical locations to check}
 
-\item{time_point}{Optional character string to specify which timepoint to check}
+\item{time_point}{Character string specifying which timepoint to check}
 }
 \value{
-Original dataframe with additional boolean columns for each location
+Original data frame with additional boolean columns for each location
 }
 \description{
-This function extends check_nodal_location to check for multiple locations simultaneously
+Extends check_nodal_location to check for multiple locations simultaneously
+and adds the results as new columns to the original data frame.
 }
 \examples{
 \dontrun{
@@ -26,3 +27,4 @@ locations <- c("R int iliac", "L int iliac", "Para Aortic")
 result <- check_multiple_locations(patient_data, locations)
 }
 }
+\keyword{internal}

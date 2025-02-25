@@ -1,22 +1,19 @@
-#' Add Disease Event Columns to a DataFrame
+#' Add Disease Event Columns
 #'
-#' This function enriches a dataframe by adding several new columns related to disease events.
-#' It sequentially applies functions to add local failure event, nodal failure event,
-#' systemic failure event, and time to disease event columns.
+#' Adds columns for local, nodal, and systemic failure events, plus time-to-event data.
 #'
-#' @param df A dataframe containing patient data. It is expected that `df` already contains
-#'   the necessary columns required by the `add_local_failure_event()`,
-#'   `add_nodal_failure_event()`, `add_systemic_failure_event()`, and
-#'   `add_time_to_diseaseevent()` functions.
+#' @param df A dataframe containing patient data with required columns for failure events
 #'
-#' @return A dataframe that includes the original data along with four new columns:
-#'   - Local failure event: Indicates whether a local failure event occurred.
-#'   - Nodal failure event: Indicates whether a nodal failure event occurred.
-#'   - Systemic failure event: Indicates whether a systemic failure event occurred.
-#'   - Time to disease event: The time until a disease event occurred.
+#' @return A dataframe with added columns for failure events and time measurements
+#' @keywords internal
 #'
-#' @export
 #' @importFrom dplyr "%>%"
+#'
+#' @examples
+#' \dontrun{
+#' patient_data <- data.frame(...)
+#' enhanced_data <- add_disease_events(patient_data)
+#' }
 add_disease_events <- function(df){
   df %>%
     add_local_failure_event() %>%

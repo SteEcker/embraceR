@@ -2,16 +2,29 @@
 % Please edit documentation in R/add_latest_side_effects.R
 \name{get_latest_side_effects}
 \alias{get_latest_side_effects}
-\title{Get the latest side effects for each patient}
+\title{Get Latest Side Effects}
 \usage{
 get_latest_side_effects(df)
 }
 \arguments{
-\item{df}{The data frame containing the side effect and follow-up columns.}
+\item{df}{The data frame containing side effect and follow-up columns}
 }
 \value{
-A data frame with new columns for the latest side effects at the latest follow-up ID.
+A data frame with new columns for the latest side effects
 }
 \description{
-Get the latest side effects for each patient
+Extracts the most recent side effect values for each patient based on follow-up data.
 }
+\examples{
+\dontrun{
+df <- data.frame(
+  embrace_id = 1:3,
+  latest_followup_id = c("3", "6", "12"),
+  bladder_pain_3m = c(1,2,3),
+  bladder_pain_6m = c(2,1,NA),
+  bladder_pain_12m = c(NA,NA,1)
+)
+result <- get_latest_side_effects(df)
+}
+}
+\keyword{internal}

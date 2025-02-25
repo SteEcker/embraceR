@@ -2,11 +2,15 @@
 % Please edit documentation in R/emii_add_recurrent_nodes.R
 \name{create_combined_labels}
 \alias{create_combined_labels}
-\title{Helper function to create combined labels for gtsummary}
+\title{Create Combined Labels for Summary Table}
 \usage{
 create_combined_labels()
 }
+\value{
+A named list of labels for gtsummary
+}
 \description{
-Helper function to create combined labels for gtsummary
+Helper function to create formatted labels for the recurrence and metastases
+summary table.
 }
 \keyword{internal}

@@ -1,9 +1,15 @@
-#' Add Time-to-BT and OTT-EBRT Features to Data Frame
+#' Add Time-to-BT and OTT-EBRT Features
 #'
-#' Adds `time_to_bt`, `ott_ebrt`, and `time_to_bt_percent` columns to a data frame based on EBRT start and end dates.
+#' Calculates and adds time-related columns for brachytherapy (BT) and external beam 
+#' radiation therapy (EBRT): time to first BT fraction, overall treatment time for EBRT,
+#' and time to BT as a percentage of EBRT duration.
 #'
-#' @param x Data frame containing `embrace_id`, `ebrt_start_date_tdvh`, `ebrt_end_date_tdvh`, and `fraction01date_tdvh`.
-#' @return Data frame with additional columns `time_to_bt`, `ott_ebrt`, and `time_to_bt_percent`.
+#' @param x Data frame with EBRT dates and first BT fraction date
+#'
+#' @return Data frame with added columns: `time_to_bt`, `ott_ebrt`, and `time_to_bt_percent`
+#'
+#' @keywords internal
+#'
 #' @examples
 #' \dontrun{
 #' df <- data.frame(
@@ -14,7 +20,6 @@
 #' )
 #' add_time_to_bt(df)
 #' }
-#' @export
 add_time_to_bt <- function(x){
   out <- x %>%
     select(embrace_id,

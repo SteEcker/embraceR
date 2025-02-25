@@ -1,14 +1,30 @@
-#' Get All EMII Outcome Endpoints
+#' Add All EMBRACE-II Outcome Endpoints
 #'
-#' @description
-#' This function applies all endpoint definitions to the raw EMII data,
+#' Applies all endpoint definitions to the raw EMBRACE-II data,
 #' creating a comprehensive dataset with all outcome measures.
 #'
-#' @param .data The raw EMII dataframe
-#' @return Dataframe with all additional outcome columns added
-#' @export
+#' @param .data A data frame containing the raw EMBRACE-II data
+#' 
+#' @return A data frame with additional outcome columns for various endpoints:
+#'   - Nodal recurrence and classification
+#'   - Pelvic nodal events
+#'   - Systemic events (excluding para-aortic)
+#'   - Para-aortic nodal events
+#'   - Locoregional events
+#'   - Cancer-specific survival
+#'   - Disease control
+#'   - Progression-free survival
+#'   - Distant metastasis
+#'
+#' @keywords internal
 #'
 #' @import dplyr
+#'
+#' @examples
+#' \dontrun{
+#' emii_data <- load_embrace_ii()
+#' outcome_data <- emii_add_outcome(emii_data)
+#' }
 emii_add_outcome <- function(.data) {
   # Required input columns
   required_cols <- c(

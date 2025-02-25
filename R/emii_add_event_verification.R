@@ -1,21 +1,23 @@
-#' Run All Event Verification Functions
+#' Verify All Event Calculations
 #'
-#' @description
-#' This function runs all event-related verification functions and combines their results
-#' into a single Excel workbook with multiple sheets.
+#' Runs all event verification functions and combines results into a single Excel workbook
+#' with multiple sheets. Provides a comprehensive validation of disease events, survival
+#' outcomes, and failure patterns for EMBRACE-II data.
 #'
-#' @param .data The input dataframe containing patient data
-#' @param save_excel Logical indicating whether to save results as Excel file (default: TRUE)
+#' @param save_excel Logical; whether to save results to Excel file (default: TRUE)
 #'
-#' @return A list containing all verification results
-#' @export
+#' @return A list containing all verification results with each element representing
+#'   a different event verification dataset
+#'
+#' @keywords internal
 #'
 #' @import dplyr
 #' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook
 #'
 #' @examples
 #' \dontrun{
-#' results <- emii_verify_all_events(data)
+#' results <- emii_verify_all_events()
+#' results <- emii_verify_all_events(save_excel = FALSE)
 #' }
 emii_verify_all_events <- function(save_excel = TRUE) {
   # Create list to store all verification results

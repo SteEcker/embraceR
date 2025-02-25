@@ -9,7 +9,7 @@
 #' @param .data The input dataframe containing patient node data
 #'
 #' @return Original dataframe with an additional boolean column 'event_pelvic_nodal'
-#' @export
+#' @keywords internal
 #'
 #' @import dplyr
 emii_add_pelvic_nodal_event <- function(.data) {
@@ -37,7 +37,7 @@ emii_add_pelvic_nodal_event <- function(.data) {
 #' @param save_excel Logical indicating whether to save results as Excel file (default: FALSE)
 #'
 #' @return A tibble with the pelvic nodal event variable and relevant columns
-#' @export
+#' @keywords internal
 #'
 #' @import dplyr
 #' @importFrom openxlsx write.xlsx

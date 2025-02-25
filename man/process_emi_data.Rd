@@ -2,21 +2,24 @@
 % Please edit documentation in R/process_emi_data.R
 \name{process_emi_data}
 \alias{process_emi_data}
-\title{Process and Transform EM-I Data}
+\title{Process and Transform EMBRACE-I Data}
 \usage{
 process_emi_data(data)
 }
 \arguments{
-\item{data}{A tibble or dataframe containing the combined data to be processed.}
+\item{data}{A tibble or dataframe containing the EMBRACE-I data}
 }
 \value{
-A tibble or dataframe
+A tibble with standardized column names
 }
 \description{
-Preprocessing for EMBRACE-I
+Standardizes column naming conventions for EMBRACE-I data by reformatting 
+fraction numbers to ensure consistent two-digit representation.
 }
 \examples{
 \dontrun{
-  processed_data <- process_emi_data(combined_data)
+  emi_data <- load_embrace_i()
+  processed_data <- process_emi_data(emi_data)
 }
 }
+\keyword{internal}

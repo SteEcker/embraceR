@@ -2,18 +2,25 @@
 % Please edit documentation in R/add_latest_side_effects.R
 \name{clean_eortc_names}
 \alias{clean_eortc_names}
-\title{Clean up eortc column names}
+\title{Clean EORTC Column Names}
 \usage{
 clean_eortc_names(df, time_suffix)
 }
 \arguments{
-\item{df}{The data frame containing the side effect columns.}
+\item{df}{The data frame containing the EORTC columns}
 
-\item{time_suffix}{The suffix indicating the time point (e.g., "_3m").}
+\item{time_suffix}{The suffix indicating the time point (e.g., "_3m")}
 }
 \value{
-A vector of cleaned-up side effect column names.
+A vector of cleaned EORTC column names
 }
 \description{
-Clean up eortc column names
+Extracts and cleans EORTC column names by removing time suffixes.
 }
+\examples{
+\dontrun{
+df <- data.frame(eortc_q1_3m = c(1,2,3), eortc_q2_3m = c(3,4,5))
+clean_names <- clean_eortc_names(df, "_3m")
+}
+}
+\keyword{internal}

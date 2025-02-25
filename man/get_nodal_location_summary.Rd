@@ -13,7 +13,13 @@ get_nodal_location_summary(df)
 A gt table object showing the distribution of lymph node locations
 }
 \description{
-Creates a formatted summary table using gtsummary showing the frequency
-and percentage of each anatomical location in the nodal dataset from EMBRACE-II
-at diagnosis.
+Creates a formatted summary table showing the frequency and percentage
+of each anatomical location in the nodal dataset from EMBRACE-II at diagnosis.
 }
+\examples{
+\dontrun{
+emii_data <- load_embrace_ii()
+summary_table <- get_nodal_location_summary(emii_data)
+}
+}
+\keyword{internal}

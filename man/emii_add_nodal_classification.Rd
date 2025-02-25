@@ -2,22 +2,24 @@
 % Please edit documentation in R/emii_add_recurrent_nodes.R
 \name{emii_add_nodal_classification}
 \alias{emii_add_nodal_classification}
-\title{Add Nodal Classification Column}
+\title{Add Nodal Classification}
 \usage{
 emii_add_nodal_classification(.data)
 }
 \arguments{
-\item{.data}{The input dataframe containing patient node data}
+\item{.data}{A data frame containing patient node data}
 }
 \value{
-Original dataframe with an additional 'nodal_classification' column
+Data frame with an additional 'nodal_classification' column
 }
 \description{
-This function adds a new column classifying nodal status as 'N0', 'N1PAN', or 'N1pelvic'
-based on pathological nodes present and Para Aortic lymph node status at diagnosis.
+Adds a new column classifying nodal status as 'N0', 'N1PAN', or 'N1pelvic'
+based on pathological nodes present and Para-Aortic lymph node status at diagnosis.
 }
 \examples{
 \dontrun{
-patient_data <- emii_add_nodal_classification(patient_data)
+emii_data <- load_embrace_ii()
+result <- emii_add_nodal_classification(emii_data)
 }
 }
+\keyword{internal}

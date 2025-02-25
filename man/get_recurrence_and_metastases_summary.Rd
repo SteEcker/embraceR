@@ -2,18 +2,24 @@
 % Please edit documentation in R/emii_add_recurrent_nodes.R
 \name{get_recurrence_and_metastases_summary}
 \alias{get_recurrence_and_metastases_summary}
-\title{Generate Patient-Level Summary Table of Recurrent Nodes and Metastases}
+\title{Generate Recurrence and Metastases Summary}
 \usage{
 get_recurrence_and_metastases_summary(df)
 }
 \arguments{
-\item{df}{A dataframe containing the EMBRACE-II dataset}
+\item{df}{A data frame containing EMBRACE-II data with follow-up information}
 }
 \value{
-A gt table object showing the distribution of patients with recurrent nodes
-  and metastases by location
+A gt table object showing the distribution of recurrences and metastases
 }
 \description{
-Creates a formatted summary table using gtsummary showing the number and percentage
-of patients who have recurrent lymph nodes or metastases at follow-up from EMBRACE-II.
+Creates a formatted summary table showing the number and percentage of patients
+who have recurrent lymph nodes or metastases at follow-up from EMBRACE-II.
 }
+\examples{
+\dontrun{
+emii_data <- load_embrace_ii()
+summary_table <- get_recurrence_and_metastases_summary(emii_data)
+}
+}
+\keyword{internal}

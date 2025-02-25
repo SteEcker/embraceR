@@ -2,17 +2,19 @@
 % Please edit documentation in R/get_morbidity_events.R
 \name{generateExcelReportsForPatients}
 \alias{generateExcelReportsForPatients}
-\title{Generate Excel Reports for Patients}
+\title{Generate Excel Reports for Patients with Grade-Specific Events}
 \usage{
 generateExcelReportsForPatients(data, outputDir, grade_threshold)
 }
 \arguments{
-\item{data}{DataFrame, the data to be processed.}
+\item{data}{DataFrame containing the complete patient dataset}
 
-\item{outputDir}{Character, the output directory for the Excel reports.}
+\item{outputDir}{Character, the output directory for Excel reports}
 
-\item{grade_threshold}{Grade threshold}
+\item{grade_threshold}{Numeric, the CTCAE grade threshold to filter by}
 }
 \description{
-Cleans side effect names, filters the data based on a grade threshold, and generates Excel reports for each patient.
+Processes patient data to identify those with side effects meeting a specified 
+grade threshold, then generates formatted Excel reports for clinical review.
 }
+\keyword{internal}

@@ -2,25 +2,28 @@
 % Please edit documentation in R/add_vitalstatus_event.R
 \name{add_vitalstatus_event}
 \alias{add_vitalstatus_event}
-\title{Add Vital Status Events to DataFrame}
+\title{Add Vital Status Event Column}
 \usage{
 add_vitalstatus_event(df)
 }
 \arguments{
-\item{df}{A data frame that contains at least the columns `vital_status_os` and `latest_assessment_date_disease`.}
+\item{df}{A data frame with `vital_status` and `latest_assessment_date_disease` columns}
 }
 \value{
-A data frame with the updated or new `vital_status_os` column.
+A data frame with added or updated `event_vitalstatus` column
 }
 \description{
-This function adds or updates a column named `vital_status_os` in the given data frame.
-It sets the value of `vital_status_os` based on the existing value and the value of `latest_assessment_date_disease`.
-If `vital_status_os` is NA and `latest_assessment_date_disease` is not NA, `vital_status_os` is set to 0.
+Creates or updates the `event_vitalstatus` column based on existing vital status
+and disease assessment data. Uses existing vital status when available, otherwise
+sets to 0 if disease assessment date exists.
 }
 \examples{
 \dontrun{
-# Given a DataFrame df with columns `vital_status_os` and `latest_assessment_date_disease`
-# df <- add_vitalstatus_event(df)
+df <- data.frame(
+  vital_status = c(1, NA, NA),
+  latest_assessment_date_disease = c(NA, as.Date("2022-01-01"), NA)
+)
+result <- add_vitalstatus_event(df)
 }
-
 }
+\keyword{internal}

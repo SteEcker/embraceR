@@ -2,25 +2,23 @@
 % Please edit documentation in R/add_hrctv_volume_bins.R
 \name{add_hrctv_volume_bins}
 \alias{add_hrctv_volume_bins}
-\title{Bins values in a specified column of a dataframe}
+\title{Bin HRCTV Volume Values}
 \usage{
 add_hrctv_volume_bins(df)
 }
 \arguments{
-\item{df}{A dataframe containing the volume column to be binned.}
+\item{df}{A dataframe containing the 'fraction01hrctv_volume_tdvh' column}
 }
 \value{
-A dataframe with the original data and a new column 'fraction01hrctv_volume_bins' with encoded values.
+A dataframe with an additional 'fraction01hrctv_volume_bins' column (0, 1, or 2)
 }
 \description{
-Takes a dataframe and bins the values of the specified column into three categories:
-less than 30, between 30 and 45 inclusive, and greater than 45. These bins are
-then encoded as 0, 1, and 2, respectively. Missing values are left as NA.
+Categorizes HRCTV volumes into three bins: <30, 30-45, and >45.
 }
 \examples{
-# Example usage:
-library(dplyr)
+\dontrun{
 sample_df <- data.frame(fraction01hrctv_volume_tdvh = c(10, 35, 50, 22, 40, NA))
 binned_df <- add_hrctv_volume_bins(sample_df)
-print(binned_df)
 }
+}
+\keyword{internal}

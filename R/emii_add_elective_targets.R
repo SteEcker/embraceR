@@ -332,19 +332,25 @@ recode_elective_targets <- function(df) {
 
 
 
-#' Elective Targets Analysis
+#' Add Elective Target Analysis for EMBRACE-II
 #'
-#' This function processes the input data frame to analyze and determine elective targets based on various criteria including nodal information, tumor dimensions, and risk assessments. It integrates multiple internal functions to perform the analysis and finally adds the elective target analysis results to the input data frame.
+#' Analyzes patient data to determine appropriate elective radiation targets based on 
+#' nodal involvement, tumor characteristics, and risk factors. Categorizes patients into 
+#' treatment target groups (Small Pelvis, Large Pelvis, Large Pelvis + Para-aortic, etc.)
+#' based on established clinical criteria.
 #'
-#' @param .data EMII dataframe
+#' @param .data EMBRACE-II data frame with required clinical and pathological information
 #'
-#' @return A data frame with additional columns indicating the elective target analysis results, including whether the case is high risk, has inguinal involvement, and the selected elective target algorithm outcome.
+#' @return Data frame with added columns for risk classification and recommended 
+#'   elective target volumes
 #'
-#' @export
+#' @keywords internal
 #'
 #' @examples
-#' # Assuming `df` is your data frame with the necessary columns:
-#' # result <- elective_targets(df)
+#' \dontrun{
+#' emii_data <- load_embrace_ii()
+#' result <- emii_add_elective_targets(emii_data)
+#' }
 emii_add_elective_targets <- function(.data){
   tmp <- .data
 
@@ -369,33 +375,75 @@ emii_add_elective_targets <- function(.data){
     recode_elective_targets()
 }
 
-# library(gtsummary)
-# emii <- load_embrace_ii() %>% emii_add_elective_targets()
-#
-# df <- emii %>%
-#   select(
-#     embrace_id,
-#     ebrt_elective_target_algorithm,
-#     ebrt_elective_target_selected
-#     ) %>%
-#   replace_neg_one_with_NA() %>%
-#   mutate(
-#     ebrt_elective_target_algorithm = factor(ebrt_elective_target_algorithm, levels = c('Small Pelvis', "Large Pelvis", "Large Pelvis + Para-aortic",
-#                                                                                                 "Large Pelvis + Inguinal", "Large Pelvis + Para-aortic + Inguinal")))
-#
-# df %>% gtsummary::tbl_cross(row = "ebrt_elective_target_algorithm",
-#                             col = "ebrt_elective_target_selected",
-#                             percent = "column",
-#                             label = list(
-#                               ebrt_elective_target_algorithm ~ "Based on diag. inf.",
-#                               ebrt_elective_target_selected ~ "Selected by center"
-#                             ),
-#
-#
-#                             ) %>%
-#   gtsummary::bold_labels() %>%
-#   as_gt() %>%
-#   gt::tab_options(table.width = "100%")
-#
-#
-# openxlsx::write.xlsx(x = df, file = '2025-01-13_emii_elective_targets.xlsx')
+#' Create Elective Targets Comparison Table
+#'
+#' Generates a formatted table comparing algorithm-recommended elective targets with 
+#' those actually selected by treatment centers. Shows the distribution of treatment 
+#' field selections and highlights potential discrepancies between recommendations 
+#' and clinical practice.
+#'
+#' @param data EMBRACE-II data frame with elective target information
+#' @param save_excel Logical; if TRUE, saves the table data to an Excel file (default: FALSE)
+#' @param file_path File path for Excel output (default: "emii_elective_targets.xlsx")
+#'
+#' @return A gt table object comparing algorithm-recommended vs. selected elective targets
+#'
+#' @keywords internal
+#'
+#' @importFrom gtsummary tbl_cross bold_labels as_gt
+#' @importFrom gt tab_options
+#' @importFrom openxlsx write.xlsx
+#'
+#' @examples
+#' \dontrun{
+#' emii_data <- load_embrace_ii() %>% emii_add_elective_targets()
+#' comparison_table <- emii_create_elective_targets_table(emii_data)
+#' comparison_table <- emii_create_elective_targets_table(emii_data, save_excel = TRUE)
+#' }
+emii_create_elective_targets_table <- function(data, save_excel = FALSE, 
+                                              file_path = "emii_elective_targets.xlsx") {
+  # Define the target levels in order
+  target_levels <- c('Small Pelvis', 
+                    'Large Pelvis', 
+                    'Large Pelvis + Para-aortic',
+                    'Large Pelvis + Inguinal', 
+                    'Large Pelvis + Para-aortic + Inguinal')
+  
+  # Prepare the data
+  df <- data %>%
+    select(
+      embrace_id,
+      ebrt_elective_target_algorithm,
+      ebrt_elective_target_selected
+    ) %>%
+    replace_neg_one_with_NA() %>%
+    mutate(
+      ebrt_elective_target_algorithm = factor(
+        ebrt_elective_target_algorithm, 
+        levels = target_levels
+      )
+    )
+  
+  # Create the comparison table
+  table <- df %>% 
+    gtsummary::tbl_cross(
+      row = "ebrt_elective_target_algorithm",
+      col = "ebrt_elective_target_selected",
+      percent = "column",
+      label = list(
+        ebrt_elective_target_algorithm ~ "Based on diagnostic information",
+        ebrt_elective_target_selected ~ "Selected by treatment center"
+      )
+    ) %>%
+    gtsummary::bold_labels() %>%
+    gtsummary::as_gt() %>%
+    gt::tab_options(table.width = "100%")
+  
+  # Save to Excel if requested
+  if (save_excel) {
+    message(paste("Saving elective targets comparison to", file_path))
+    openxlsx::write.xlsx(x = df, file = file_path)
+  }
+  
+  return(table)
+}

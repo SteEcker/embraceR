@@ -2,7 +2,7 @@
 % Please edit documentation in R/add_latest_side_effects.R
 \name{get_max_side_effects}
 \alias{get_max_side_effects}
-\title{Get maximum side effect values and corresponding timepoints and export to Excel with conditional formatting}
+\title{Get Maximum Side Effects}
 \usage{
 get_max_side_effects(
   df,
@@ -13,19 +13,26 @@ get_max_side_effects(
 )
 }
 \arguments{
-\item{df}{A data frame containing side effect columns with multiple timepoints and a patient ID column "embrace_id".}
+\item{df}{A data frame with side effect columns across multiple timepoints}
 
-\item{endpoints}{A character vector of endpoint basenames (e.g., from embraceR::clean_side_effect_names()).}
+\item{endpoints}{A character vector of endpoint basenames}
 
-\item{max_grade}{Numeric threshold; only patients with at least one max_value >= max_grade will be retained.}
+\item{max_grade}{Numeric threshold for filtering results}
 
-\item{export_to_excel}{Logical; if TRUE, exports the result to an Excel file.}
+\item{export_to_excel}{Whether to export results to Excel}
 
-\item{file_name}{Character; the name of the Excel file to export if export_to_excel is TRUE.}
+\item{file_name}{Name of the Excel file if exporting}
 }
 \value{
-A data frame with maximum side effect values and timepoints for each endpoint and patient.
+A data frame with maximum side effect values and timepoints
 }
 \description{
-Get maximum side effect values and corresponding timepoints and export to Excel with conditional formatting
+Identifies the maximum grade of each side effect and its corresponding timepoint.
 }
+\examples{
+\dontrun{
+endpoints <- c("bladder_pain", "gastro_diarrhea")
+result <- get_max_side_effects(patient_data, endpoints, max_grade=2)
+}
+}
+\keyword{internal}

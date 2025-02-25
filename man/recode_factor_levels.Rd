@@ -21,3 +21,4 @@ This function takes a data frame and recodes the factor levels of multiple colum
 based on the supplied old and new levels. It is designed to be used with dplyr's
 mutate(across()) function.
 }
+\keyword{internal}

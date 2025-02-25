@@ -2,20 +2,27 @@
 % Please edit documentation in R/emii_add_elective_targets.R
 \name{emii_add_elective_targets}
 \alias{emii_add_elective_targets}
-\title{Elective Targets Analysis}
+\title{Add Elective Target Analysis for EMBRACE-II}
 \usage{
 emii_add_elective_targets(.data)
 }
 \arguments{
-\item{.data}{EMII dataframe}
+\item{.data}{EMBRACE-II data frame with required clinical and pathological information}
 }
 \value{
-A data frame with additional columns indicating the elective target analysis results, including whether the case is high risk, has inguinal involvement, and the selected elective target algorithm outcome.
+Data frame with added columns for risk classification and recommended 
+  elective target volumes
 }
 \description{
-This function processes the input data frame to analyze and determine elective targets based on various criteria including nodal information, tumor dimensions, and risk assessments. It integrates multiple internal functions to perform the analysis and finally adds the elective target analysis results to the input data frame.
+Analyzes patient data to determine appropriate elective radiation targets based on 
+nodal involvement, tumor characteristics, and risk factors. Categorizes patients into 
+treatment target groups (Small Pelvis, Large Pelvis, Large Pelvis + Para-aortic, etc.)
+based on established clinical criteria.
 }
 \examples{
-# Assuming `df` is your data frame with the necessary columns:
-# result <- elective_targets(df)
+\dontrun{
+emii_data <- load_embrace_ii()
+result <- emii_add_elective_targets(emii_data)
 }
+}
+\keyword{internal}

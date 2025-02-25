@@ -1,6 +1,15 @@
-
-
-# Helper function to calculate absolute contribution
+#' Calculate Absolute TRAK Component Contribution
+#'
+#' Internal helper function that calculates absolute TRAK values for tandem applicator,
+#' vaginal applicator, and needles for a specific fraction.
+#'
+#' @param df A data frame containing TRAK percentage columns
+#' @param fraction_num The fraction number to process
+#'
+#' @return A data frame with added absolute TRAK component columns
+#'
+#' @keywords internal
+#' @noRd
 trak_calculate_absolute_contribution <- function(df, fraction_num) {
   # Create the column names dynamically
   total_col <- paste0("fraction0", fraction_num, "trak_tdvh")
@@ -17,7 +26,17 @@ trak_calculate_absolute_contribution <- function(df, fraction_num) {
     )
 }
 
-# Apply the function to multiple fractions dynamically
+#' Calculate TRAK Components for All Fractions
+#'
+#' Internal helper function that applies absolute TRAK calculations to all fractions.
+#'
+#' @param df A data frame containing TRAK percentage columns
+#' @param num_fractions The number of fractions to process
+#'
+#' @return A data frame with absolute TRAK values for all fractions
+#'
+#' @keywords internal
+#' @noRd
 trak_calculate_all_fractions <- function(df, num_fractions) {
   for (i in 1:num_fractions) {
     df <- trak_calculate_absolute_contribution(df, i)
@@ -25,7 +44,18 @@ trak_calculate_all_fractions <- function(df, num_fractions) {
   return(df)
 }
 
-# Calculate the total sum for each component and trak over all fractions, while keeping other columns
+#' Calculate Total TRAK Values
+#'
+#' Internal helper function that sums the absolute TRAK values across all fractions
+#' for each component (tandem, vaginal, needles) and the total.
+#'
+#' @param df A data frame with absolute TRAK component values
+#' @param num_fractions The number of fractions to include in totals
+#'
+#' @return A data frame with added total TRAK columns
+#'
+#' @keywords internal
+#' @noRd
 trak_calculate_totals <- function(df, num_fractions) {
   # Generate column names for absolute values of each component across all fractions
   tandem_cols <- paste0("fraction0", 1:num_fractions, "_tandem_applicator_abs")
@@ -45,7 +75,16 @@ trak_calculate_totals <- function(df, num_fractions) {
   return(df)
 }
 
-# Helper function to clean data based on conditions
+#' Clean TRAK Data
+#'
+#' Internal helper function that converts zero TRAK values to NA.
+#'
+#' @param df A data frame with TRAK sum columns
+#'
+#' @return A data frame with cleaned TRAK values
+#'
+#' @keywords internal
+#' @noRd
 trak_clean_data <- function(df) {
   df <- df %>%
     mutate(trak_tandem_applicator_sum = if_else(trak_tandem_applicator_sum == 0, NA, trak_tandem_applicator_sum)) %>%
@@ -57,25 +96,28 @@ trak_clean_data <- function(df) {
   return(df)
 }
 
-
-#' Add Trak Absolute Values and Clean Data
+#' Calculate Absolute TRAK Values
 #'
-#' This function calculates the absolute contributions for `tandem_applicator`, `vaginal_applicator`, `needles`,
-#' and `trak` totals across multiple fractions
+#' Calculates the absolute Total Reference Air Kerma (TRAK) values for tandem applicator,
+#' vaginal applicator, and needles across all brachytherapy fractions. Converts percentage
+#' contributions to absolute values in cGy at 1m and provides fraction-specific and total
+#' TRAK metrics.
 #'
-#' @param df A dataframe containing the trak and percentage columns for multiple fractions.
-#' @param num_fractions An integer specifying the number of fractions to process. Default is 7.
+#' @param df A data frame containing TRAK percentage columns for multiple fractions
+#' @param num_fractions Number of fractions to process (default: 7)
 #'
-#' @details
-#' The function works in three main steps:
-#' 1. **trak_calculate_all_fractions()**: Calculates absolute contributions for all components (tandem, vaginal, needles) for each fraction.
-#' 2. **trak_calculate_totals()**: Calculates total sums for all fractions.
-#' 3. **trak_clean_data()**: Cleans the data, setting the sum columns to `NA` if volume is greater than 150 or any trak component is zero.
+#' @return A data frame with added columns:
+#'   - Fraction-specific absolute values for each component
+#'   - Total sum columns: trak_tandem_applicator_sum, trak_vaginal_applicator_sum,
+#'     trak_needles_sum, and trak_total_sum
 #'
-#' @return The dataframe with the new absolute values for each trak component, cleaned based on the given rules.
+#' @keywords internal
 #'
-#'
-#' @export
+#' @examples
+#' \dontrun{
+#' emii_data <- load_embrace_ii()
+#' result <- emii_add_trak_absolute(emii_data)
+#' }
 emii_add_trak_absolute <- function(df, num_fractions = 7) {
   df %>%
     trak_calculate_all_fractions(num_fractions) %>%

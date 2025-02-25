@@ -1,8 +1,18 @@
-#' Create Comparative Outcomes Table for EMBRACE Studies
+#' Create Comparative Outcomes Table
 #'
-#' @return A gtsummary table comparing outcomes between EMBRACE-I and EMBRACE-II
+#' Generates a formatted table comparing clinical outcomes between EMBRACE-I and EMBRACE-II
+#' studies, including local control, nodal control, survival metrics, and time-to-event data.
+#'
+#' @return A gtsummary table with outcome comparisons and p-values
+#'
+#' @keywords internal
+#'
 #' @importFrom gtsummary tbl_summary add_overall add_p modify_header modify_spanning_header modify_caption bold_p
-#' @export
+#'
+#' @examples
+#' \dontrun{
+#' outcomes_table <- create_comparative_outcomes_table()
+#' }
 create_comparative_outcomes_table <- function() {
   # Get combined outcomes data
   combined_outcomes <- get_combined_outcomes()

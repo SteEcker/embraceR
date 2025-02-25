@@ -6,6 +6,28 @@
 \usage{
 recode_and_convert_all_columns(df, stop_on_missing_col = FALSE)
 }
-\description{
-Recode and convert columns based on the mapping
+\arguments{
+\item{df}{A data frame containing the columns to be recoded and converted}
+
+\item{stop_on_missing_col}{Logical, if TRUE, stops if a column is missing; if FALSE, skips missing columns (default: FALSE)}
 }
+\value{
+A data frame with the specified columns recoded and converted to factors
+}
+\description{
+This function converts columns to factors and recodes their levels based on the provided mapping.
+It can process both specific column names and columns with common base names.
+}
+\examples{
+\dontrun{
+  # Load data
+  data <- load_embrace_ii()
+  
+  # Recode and convert all columns
+  recoded_data <- recode_and_convert_all_columns(data)
+  
+  # Recode with strict checking
+  recoded_data <- recode_and_convert_all_columns(data, stop_on_missing_col = TRUE)
+}
+}
+\keyword{internal}

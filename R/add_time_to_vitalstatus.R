@@ -1,21 +1,26 @@
-#' Calculate Time to Last Vital Status in Months
+#' Calculate Time to Last Vital Status
 #'
-#' This function adds a new column named `timetoevent_vitalstatus` to the given data frame.
-#' For EMBRACE I, it calculates the time interval in months between `histology_assesment_date`
-#' and the latest of `vital_status_last_info_date` or assessment dates.
-#' For EMBRACE II, it also considers `vital_status_date_of_death_vital_status` when available.
+#' Adds `timetoevent_vitalstatus` column measuring months from histology assessment
+#' to the latest vital status date. For EMBRACE-I, uses the latest of assessment dates
+#' or last info date. For EMBRACE-II, also considers date of death when available.
 #'
-#' @param df A data frame that contains the required columns based on study type
+#' @param df A data frame with histology assessment date and vital status information
 #'
-#' @return A data frame with the new or updated `timetoevent_vitalstatus` column.
+#' @return A data frame with added `timetoevent_vitalstatus` column
+#'
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
-#' # Given a DataFrame df with the required columns
-#' # df <- add_time_to_last_vitalstatus(df)
+#' df <- data.frame(
+#'   embrace_id = 1,
+#'   study = "embrace_i",
+#'   histology_assesment_date = as.Date("2020-01-01"),
+#'   vital_status_last_info_date = as.Date("2022-06-01"),
+#'   assessment_date_3m = as.Date("2020-04-01")
+#' )
+#' result <- add_time_to_last_vitalstatus(df)
 #' }
-#'
-#' @export
 add_time_to_last_vitalstatus <- function(df) {
   message('Calculating time to last vital status')
   

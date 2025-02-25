@@ -1,26 +1,20 @@
-#' Add a Column for Local Failure Events
+#' Add Local Failure Event Column
 #'
-#' This function adds a new column to the dataframe that indicates whether a local failure event
-#' has occurred for each patient. A local failure event is defined as an occurrence of the value 2
-#' in any of the 'overall_disease_local_recurrence_' columns.
+#' Adds a binary indicator column for local failure events based on disease status.
 #'
-#' @param df A data frame containing at least one column starting with 'overall_disease_local_recurrence_'.
-#' These columns should contain numerical values where 2 indicates a local failure event.
+#' @param df A data frame containing columns starting with 'disease_local_status_'
 #'
-#' @return A data frame with an additional column named 'event_localfailure'. This column contains
-#' a 1 if a local failure event has occurred and a 0 otherwise.
+#' @return A data frame with an additional 'event_localfailure' column (1=failure, 0=no failure)
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
-#' # Example DataFrame (df)
-#' # overall_disease_local_recurrence_3m overall_disease_local_recurrence_6m
-#' #                                    0                                   2
-#' #                                    0                                   0
-#' #                                    2                                   0
-#' # df <- add_local_failure_event(df)
+#' df <- data.frame(
+#'   disease_local_status_3m = c(0, 2, 0),
+#'   disease_local_status_6m = c(0, 0, 2)
+#' )
+#' result <- add_local_failure_event(df)
 #' }
-#'
-#' @export
 add_local_failure_event <- function(df) {
   message('Adding local failure events')
 

@@ -11,7 +11,7 @@
 #' @param study name of study
 #'
 #' @return A dataframe with columns renamed based on the mapping table.
-#' @export
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
@@ -51,30 +51,3 @@ map_column_names <- function(data, mapping, study = 'emi') {
 
   return(data)
 }
-# map_column_names <- function(data, mapping, study = 'emi') {
-#   if (study == 'emi') {
-#
-#     for(i in seq_len(nrow(mapping))) {
-#       row <- mapping[i,]
-#       if(row$embrace_i_column %in% colnames(data)) {
-#         combined_col_name <- row$new_combined_name
-#         data <- dplyr::rename(data, !!combined_col_name := !!row$embrace_i_column)
-#       }
-#     }
-#
-#   } else if (study == 'emii'){
-#
-#     for(i in seq_len(nrow(mapping))) {
-#       row <- mapping[i,]
-#       if(row$embrace_ii_column %in% colnames(data)) {
-#         combined_col_name <- row$new_combined_name
-#         data <- dplyr::rename(data, !!combined_col_name := !!row$embrace_ii_column)
-#       }
-#     }
-#
-#   }
-#
-#
-#
-#   return(data)
-# }

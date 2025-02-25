@@ -1,25 +1,35 @@
-#' Load and Process Embrace I Data
+#' Load and Process EMBRACE-I Data
 #'
-#' This function loads data from two different sources for the Embrace I study,
-#' processes them, and joins them by the `embrace_id` column.
+#' Loads data from multiple sources for the EMBRACE-I study, processes them,
+#' and joins them by the `embrace_id` column. The function handles T-stage data,
+#' morbidity outcomes, and main study data, combining them into a comprehensive dataset.
 #'
-#' @param file_path The path to the directory containing the primary data files.
-#' @param add_new_columns If TRUE, calculate and add new columns
-#' @param mapping_file Path to the mapping table file
-#' @param filter_cohort Filter 1318
-#' @return A tibble containing the cleaned and joined data.
+#' @param file_path Character, path to the directory containing the primary data files
+#' @param add_new_columns Logical, if TRUE, calculate and add derived columns (default: TRUE)
+#' @param mapping_file Character, path to the column mapping table file
+#' @param filter_cohort Logical, if TRUE, filter to include only patients with local failure data (default: TRUE)
+#'
+#' @return A tibble containing the cleaned and joined EMBRACE-I data
+#'
 #' @export
 #' @import dplyr
 #' @import here
 #'
 #' @examples
 #' \dontrun{
+#'   # Load with default settings
 #'   df <- load_embrace_i()
+#'   
+#'   # Load without filtering cohort
+#'   df <- load_embrace_i(filter_cohort = FALSE)
+#'   
+#'   # Load with custom mapping file
+#'   df <- load_embrace_i(mapping_file = "path/to/custom_mapping.xlsx")
 #' }
 load_embrace_i <- function(file_path = here::here('data_raw/embrace_I'),
-                           add_new_columns = T,
+                           add_new_columns = TRUE,
                            mapping_file = here::here("data_raw/mapping_table/mapping_table.xlsx"),
-                           filter_cohort = T
+                           filter_cohort = TRUE
 ) {
 
   # Construct full paths for each file using here::here
@@ -85,7 +95,6 @@ load_embrace_i <- function(file_path = here::here('data_raw/embrace_I'),
   # Add study name
   joined_data <- joined_data %>% mutate(study = 'embrace_i')
 
-
   # Preprocessing steps
   joined_data <- joined_data %>%
     process_emi_data()
@@ -107,7 +116,6 @@ load_embrace_i <- function(file_path = here::here('data_raw/embrace_I'),
     joined_data <- joined_data %>%
       filter(!is.na(event_localfailure))
   }
-
 
   return(joined_data)
 }

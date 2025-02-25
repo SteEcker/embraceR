@@ -1,14 +1,33 @@
-#' Calculate the latest assessment date and follow-up time to the disease event
+#' Calculate Time to Disease Event
 #'
-#' This function processes the dataframe to find the latest assessment date before a disease event.
-#' If a disease event (as defined in the corresponding columns) occurs, this date is considered the latest.
+#' Determines the latest assessment date for a disease event and calculates
+#' the follow-up time in months from histology assessment to this date. If 
+#' no disease event is found, the follow-up time is calculated from the 
+#' histology assessment to the latest assessment date.
 #'
-#' @param df A data frame with columns that include assessment dates, histology assessment dates,
-#' and disease recurrence information.
+#' @param df A data frame with assessment dates and disease status information
 #'
-#' @return A data frame with added columns for the latest assessment date and the time to the event in months.
+#' @return A data frame with added columns: `latest_assessment_date_disease`,
+#'   `timetoevent_disease`, and `latest_followup_id`
 #'
-#' @export
+#' @keywords internal
+#'
+#' @examples
+#' \dontrun{
+#' df <- data.frame(
+#'   embrace_id = 1,
+#'   assessment_date_3m = as.Date("2022-03-01"),
+#'   assessment_date_6m = as.Date("2022-06-01"),
+#'   histology_assesment_date = as.Date("2022-01-01"),
+#'   disease_local_status_3m = 0,
+#'   disease_local_status_6m = 2,
+#'   disease_nodal_status_3m = 0,
+#'   disease_nodal_status_6m = 0,
+#'   disease_systemic_status_3m = 0,
+#'   disease_systemic_status_6m = 0
+#' )
+#' result <- add_time_to_diseaseevent(df)
+#' }
 add_time_to_diseaseevent <- function(df) {
   message('Calculating maximum followup time until disease event...')
   

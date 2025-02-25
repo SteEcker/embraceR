@@ -437,7 +437,7 @@ emii_get_summary_statistics <- function(data,
 #' @param save_excel Logical; if TRUE, saves the outliers as an Excel file
 #' @param excel_path Character; path where to save the Excel file (default: NULL)
 #' @return A tibble containing outlier information (embrace_id, variable, value, threshold, median)
-#' @export
+#' @keywords internal
 #'
 #' @import dplyr
 #' @import tidyr

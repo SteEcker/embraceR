@@ -2,19 +2,22 @@
 % Please edit documentation in R/get_morbidity_events.R
 \name{filter_grade_threshold}
 \alias{filter_grade_threshold}
-\title{Filter Data Based on Grade Threshold}
+\title{Filter Data for Specific CTCAE Grade Events}
 \usage{
 filter_grade_threshold(df, side_effect_cols, grade_threshold = 4)
 }
 \arguments{
-\item{df}{DataFrame containing the data to be filtered.}
+\item{df}{DataFrame containing the patient data}
 
-\item{side_effect_cols}{Character vector specifying the columns to check against the threshold.}
+\item{side_effect_cols}{Character vector specifying the side effect columns to check}
+
+\item{grade_threshold}{Numeric, the CTCAE grade threshold to filter by (default: 4)}
 }
 \value{
-DataFrame filtered based on the grade threshold.
+DataFrame containing only rows with events meeting the threshold criteria
 }
 \description{
-Filters a dataframe based on specified side effect columns and a grade threshold,
-retaining rows that meet the threshold criteria.
+Filters a dataframe to identify rows with side effect values meeting a specified 
+grade threshold, retaining relevant clinical information for analysis.
 }
+\keyword{internal}

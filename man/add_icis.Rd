@@ -7,17 +7,14 @@
 add_icis(.data)
 }
 \arguments{
-\item{.data}{A data frame containing an `embrace_id` column and other columns that end with "technique_tdvh" and
-start with "fraction". These should contain values that can be transformed into factors.}
+\item{.data}{A data frame with embrace_id and fraction technique columns}
 }
 \value{
-A data frame with an additional column `icis`, which is a numerical indicator (1 or 0) based on the
-        conditions applied to columns ending with "technique_tdvh" and starting with "fraction".
+A data frame with an additional 'icis' column (1 or 0)
 }
 \description{
-This function takes a data frame that includes an `embrace_id` column and other columns ending with "technique_tdvh"
-and starting with "fraction". It processes these columns to determine if ICIS should be "TRUE" or "FALSE" for each `embrace_id`,
-converting it into a numerical indicator (1 or 0) in a new column named `icis`.
+Creates a binary indicator (1/0) for interstitial component of intracavitary/interstitial (ICIS) 
+brachytherapy based on technique data.
 }
 \examples{
 \dontrun{
@@ -27,3 +24,4 @@ df <- data.frame(embrace_id = c(1, 2, 3),
 add_icis(df)
 }
 }
+\keyword{internal}

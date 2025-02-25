@@ -4,7 +4,7 @@
 #'
 #' @return A data frame where -1 values in numeric columns are replaced with NA.
 #'
-#' @export
+#' @keywords internal
 replace_neg_one_with_NA <- function(df) {
   # Loop through each column to check if it's numeric
   for(col_name in names(df)) {
@@ -24,7 +24,7 @@ replace_neg_one_with_NA <- function(df) {
 #'
 #' @return A data frame where Infinite values in numeric columns are replaced with NA.
 #'
-#' @export
+#' @keywords internal
 replace_infinite_with_NA <- function(df) {
   # Loop through each column to check if it's numeric
   for(col_name in names(df)) {

@@ -2,14 +2,25 @@
 % Please edit documentation in R/get_combined_outcomes.R
 \name{get_combined_outcomes}
 \alias{get_combined_outcomes}
-\title{Get Combined Outcomes Data from EMBRACE-I and EMBRACE-II}
+\title{Combine Outcomes Data from EMBRACE-I and EMBRACE-II}
 \usage{
 get_combined_outcomes()
 }
 \value{
-A tibble containing combined outcome data from both studies with a 'study' identifier
+A tibble containing combined outcome data from both studies with:
+  - Time-to-event variables for disease progression and vital status
+  - Event indicators for various failure types (local, nodal, systemic)
+  - Event indicators for specific anatomical locations
+  - Composite endpoint indicators (locoregional, distant, disease control)
+  - A 'study' identifier column to distinguish between cohorts
 }
 \description{
 Loads and combines outcome data from both EMBRACE studies, ensuring consistent
-variable names and structure.
+variable names and structure for comparative analysis.
+}
+\examples{
+\dontrun{
+combined_data <- get_combined_outcomes()
+table(combined_data$study)
+}
 }

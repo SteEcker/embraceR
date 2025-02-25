@@ -10,7 +10,7 @@
 #'
 #' @return A numeric vector containing the maximum value for each observation.
 #'
-#' @export
+#' @keywords internal
 get_max_of_two_columns <- function(df, col1, col2) {
   if (!is.data.frame(df)) {
     stop("Input should be a data frame.")

@@ -2,21 +2,24 @@
 % Please edit documentation in R/emii_add_recurrent_nodes.R
 \name{emii_add_recurrent_nodes}
 \alias{emii_add_recurrent_nodes}
-\title{Add Recurrent Node Locations to EMII Data}
+\title{Add Recurrent Node Locations}
 \usage{
 emii_add_recurrent_nodes(.data)
 }
 \arguments{
-\item{.data}{The input dataframe containing patient node data}
+\item{.data}{A data frame containing patient node data}
 }
 \value{
-Original dataframe with additional boolean columns for each nodal location at follow-up
+Data frame with additional boolean columns for each nodal location at follow-up
 }
 \description{
-This function adds columns for all possible nodal locations at follow-up to the input dataset.
+Adds boolean columns for all possible nodal locations at follow-up to identify
+recurrent disease patterns in EMBRACE-II patients.
 }
 \examples{
 \dontrun{
-patient_data <- emii_add_recurrent_nodes(patient_data)
+emii_data <- load_embrace_ii()
+result <- emii_add_recurrent_nodes(emii_data)
 }
 }
+\keyword{internal}

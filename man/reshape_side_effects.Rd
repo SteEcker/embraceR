@@ -15,3 +15,4 @@ DataFrame in long format with separated side effect names and time points.
 \description{
 Converts the side effects data from wide to long format, separating side effect names and time points.
 }
+\keyword{internal}

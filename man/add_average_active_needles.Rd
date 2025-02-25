@@ -2,22 +2,22 @@
 % Please edit documentation in R/add_average_active_needles.R
 \name{add_average_active_needles}
 \alias{add_average_active_needles}
-\title{Calculate the Average Number of Active Needles for Each Row in a Data Frame}
+\title{Calculate Average Number of Active Needles}
 \usage{
 add_average_active_needles(df)
 }
 \arguments{
-\item{df}{A data frame containing columns that start with "fraction" and contain "active_needles".
-These columns should contain numerical values.}
+\item{df}{A data frame containing columns with pattern "fraction_*_active_needles"
+that store the number of active needles for each treatment fraction}
 }
 \value{
-A data frame with an additional column `average_nr_active_needles` that contains the rounded average
-        number of active needles for each row. If the average was NaN, it is replaced with NA.
+The input data frame with an additional column `average_nr_active_needles`
+        containing the rounded average. NaN values are converted to NA.
 }
 \description{
-This function takes a data frame that contains columns starting with "fraction" and containing "active_needles".
-It calculates the average number of active needles for each row, rounds it, and adds this as a new column to the data frame.
-If the average is NaN, it is replaced with NA.
+Computes the average number of active needles across all fractions for each subject.
+Identifies columns containing fraction-specific active needle counts and calculates
+their mean value.
 }
 \examples{
 \dontrun{
@@ -27,3 +27,4 @@ df <- data.frame(fraction_1_active_needles = c(1, 2, 3),
 average_active_needles(df)
 }
 }
+\keyword{internal}

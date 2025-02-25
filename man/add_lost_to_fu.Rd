@@ -7,17 +7,25 @@
 add_lost_to_fu(df, pattern = "followup_")
 }
 \arguments{
-\item{df}{A data frame or tibble containing follow-up columns.}
+\item{df}{A data frame or tibble containing follow-up columns with values:
+- 1: Normal follow-up
+- 2: Lost to follow-up
+- 3: Withdrew consent
+- NA: Missing data}
 
-\item{pattern}{A character string specifying the pattern to identify follow-up columns. Default is `"followup"`.}
+\item{pattern}{A character string specifying the pattern to identify follow-up columns. 
+Default is "followup_". Columns must end with "m" (e.g., followup_3m, followup_6m).}
 }
 \value{
-A data frame with an additional logical column `is_lost_to_fu` indicating if the patient is lost to follow-up.
+A data frame with two additional logical columns:
+  - is_lost_to_fu: TRUE if patient was lost to follow-up
+  - withdrew_consent: TRUE if patient withdrew consent
 }
 \description{
-This function checks whether any follow-up columns in a data frame
-contain a value of `2`, which would indicate that the patient is lost to follow-up.
-EMBRACE-II only
+This function examines follow-up status columns in a data frame to identify:
+1. Patients lost to follow-up (indicated by a value of 2)
+2. Patients who withdrew consent (indicated by a value of 3)
+EMBRACE-II study only.
 }
 \examples{
 df <- tibble::tibble(
@@ -31,3 +39,4 @@ df <- tibble::tibble(
 )
 add_lost_to_fu(df)
 }
+\keyword{internal}

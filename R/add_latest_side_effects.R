@@ -1,11 +1,18 @@
-#' Clean up side effect column names
+#' Clean Side Effect Column Names
 #'
-#' @param df The data frame containing the side effect columns.
-#' @param time_suffix The suffix indicating the time point (e.g., "_3m").
+#' Extracts and cleans side effect column names by removing time suffixes.
 #'
-#' @return A vector of cleaned-up side effect column names.
+#' @param df The data frame containing the side effect columns
+#' @param time_suffix The suffix indicating the time point (e.g., "_3m")
 #'
-#' @export
+#' @return A vector of cleaned side effect column names
+#' @keywords internal
+#'
+#' @examples
+#' \dontrun{
+#' df <- data.frame(bladder_pain_3m = c(1,2,3), gastro_diarrhea_3m = c(0,1,2))
+#' clean_names <- clean_side_effect_names(df, "_3m")
+#' }
 clean_side_effect_names <- function(df, time_suffix = "_3m") {
   # Select columns based on the provided time_suffix
   selected_cols <- df %>%
@@ -40,14 +47,21 @@ clean_side_effect_names <- function(df, time_suffix = "_3m") {
 }
 
 
-#' Clean up eortc column names
+#' Clean EORTC Column Names
 #'
-#' @param df The data frame containing the side effect columns.
-#' @param time_suffix The suffix indicating the time point (e.g., "_3m").
+#' Extracts and cleans EORTC column names by removing time suffixes.
 #'
-#' @return A vector of cleaned-up side effect column names.
+#' @param df The data frame containing the EORTC columns
+#' @param time_suffix The suffix indicating the time point (e.g., "_3m")
 #'
-#' @export
+#' @return A vector of cleaned EORTC column names
+#' @keywords internal
+#'
+#' @examples
+#' \dontrun{
+#' df <- data.frame(eortc_q1_3m = c(1,2,3), eortc_q2_3m = c(3,4,5))
+#' clean_names <- clean_eortc_names(df, "_3m")
+#' }
 clean_eortc_names <- function(df, time_suffix) {
   # Select columns based on the provided time_suffix
   selected_cols <- df %>%
@@ -63,13 +77,26 @@ clean_eortc_names <- function(df, time_suffix) {
 }
 
 
-#' Get the latest side effects for each patient
+#' Get Latest Side Effects
 #'
-#' @param df The data frame containing the side effect and follow-up columns.
+#' Extracts the most recent side effect values for each patient based on follow-up data.
 #'
-#' @return A data frame with new columns for the latest side effects at the latest follow-up ID.
+#' @param df The data frame containing side effect and follow-up columns
 #'
-#' @export
+#' @return A data frame with new columns for the latest side effects
+#' @keywords internal
+#'
+#' @examples
+#' \dontrun{
+#' df <- data.frame(
+#'   embrace_id = 1:3,
+#'   latest_followup_id = c("3", "6", "12"),
+#'   bladder_pain_3m = c(1,2,3),
+#'   bladder_pain_6m = c(2,1,NA),
+#'   bladder_pain_12m = c(NA,NA,1)
+#' )
+#' result <- get_latest_side_effects(df)
+#' }
 get_latest_side_effects <- function(df) {
 
   message("Getting latest side effects...")
@@ -103,17 +130,24 @@ get_latest_side_effects <- function(df) {
 }
 
 
-#' Get maximum side effect values and corresponding timepoints and export to Excel with conditional formatting
+#' Get Maximum Side Effects
 #'
-#' @param df A data frame containing side effect columns with multiple timepoints and a patient ID column "embrace_id".
-#' @param endpoints A character vector of endpoint basenames (e.g., from embraceR::clean_side_effect_names()).
-#' @param max_grade Numeric threshold; only patients with at least one max_value >= max_grade will be retained.
-#' @param export_to_excel Logical; if TRUE, exports the result to an Excel file.
-#' @param file_name Character; the name of the Excel file to export if export_to_excel is TRUE.
+#' Identifies the maximum grade of each side effect and its corresponding timepoint.
 #'
-#' @return A data frame with maximum side effect values and timepoints for each endpoint and patient.
+#' @param df A data frame with side effect columns across multiple timepoints
+#' @param endpoints A character vector of endpoint basenames
+#' @param max_grade Numeric threshold for filtering results
+#' @param export_to_excel Whether to export results to Excel
+#' @param file_name Name of the Excel file if exporting
 #'
-#' @export
+#' @return A data frame with maximum side effect values and timepoints
+#' @keywords internal
+#'
+#' @examples
+#' \dontrun{
+#' endpoints <- c("bladder_pain", "gastro_diarrhea")
+#' result <- get_max_side_effects(patient_data, endpoints, max_grade=2)
+#' }
 get_max_side_effects <- function(df, endpoints, max_grade=0,
                                  export_to_excel = FALSE,
                                  file_name = "max_side_effects.xlsx") {

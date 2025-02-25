@@ -2,7 +2,7 @@
 % Please edit documentation in R/load_combined_embrace.R
 \name{load_combined_embrace}
 \alias{load_combined_embrace}
-\title{Load and Combine Embrace I and Embrace II Data}
+\title{Load and Combine EMBRACE-I and EMBRACE-II Data}
 \usage{
 load_combined_embrace(
   file_path_i = here::here("data_raw/embrace_I"),
@@ -13,18 +13,36 @@ load_combined_embrace(
 )
 }
 \arguments{
-\item{file_path_i}{The path to the EMBRACE-I data root folder.}
+\item{file_path_i}{Character, path to the EMBRACE-I data root folder}
 
-\item{file_path_ii}{The path to the EMBRACE-II Excel file.}
+\item{file_path_ii}{Character, path to the EMBRACE-II Excel file}
 
-\item{file_path_eqd2}{The path to the EMBRACE-II EQD2 Excel file.}
+\item{file_path_eqd2}{Character, path to the EMBRACE-II EQD2 Excel file}
 
-\item{return_common_columns}{If TRUE, return only matched columns}
+\item{mapping_file}{Character, path to the column mapping table Excel file}
+
+\item{return_common_columns}{Logical, if TRUE, return only columns present in both datasets}
 }
 \value{
-A tibble containing the cleaned and combined data from both studies.
+A tibble containing the cleaned and combined data from both studies
 }
 \description{
-This function loads data from EMBRACE-I and EMBRACE-II, processes them,
-and combines them into a single dataframe.
+Loads data from EMBRACE-I and EMBRACE-II studies, processes them,
+and combines them into a single dataframe with harmonized column names.
 }
+\examples{
+\dontrun{
+# Load with default paths
+combined_data <- load_combined_embrace()
+
+# Load with custom paths and return all columns
+combined_data <- load_combined_embrace(
+  file_path_i = "path/to/embrace_I",
+  file_path_ii = "path/to/emii.xlsx",
+  file_path_eqd2 = "path/to/emii_eqd2.xlsx",
+  mapping_file = "path/to/mapping_table.xlsx",
+  return_common_columns = FALSE
+)
+}
+}
+\keyword{internal}

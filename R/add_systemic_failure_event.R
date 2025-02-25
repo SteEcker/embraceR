@@ -1,20 +1,14 @@
-#' Add a Column for Systemic Failure Events
+#' Add Systemic Failure Event Column
 #'
-#' This function adds a new column to the data frame that indicates whether
-#' a systemic failure event has occurred for each patient. The column name and event 
-#' definition varies by study:
-#' 
-#' EMBRACE-I ('event_systemic_excl_pao'):
-#'   - Event defined as occurrence of value 1 or 2 in any systemic status column
-#' EMBRACE-II ('event_systemicfailure'):
-#'   - Event defined as occurrence of value 2 in any systemic status column
+#' Adds a study-specific systemic failure event indicator column.
+#' For EMBRACE-I: 'event_systemic_excl_pao' (values 1 or 2 count as events)
+#' For EMBRACE-II: 'event_systemicfailure' (only value 2 counts as event)
 #'
-#' @param df A data frame containing:
-#'   - columns starting with 'disease_systemic_status_' containing numerical values
-#'   - a 'study' column indicating either 'embrace_i' or 'embrace_ii'
+#' @param df A data frame with 'disease_systemic_status_*' columns and a 'study' column
 #'
-#' @return A data frame with additional columns for systemic events. Each patient will
-#' have a value in the column corresponding to their study, with NA in the other column.
+#' @return A data frame with added systemic failure event columns
+#'
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
@@ -25,8 +19,6 @@
 #' )
 #' result <- add_systemic_failure_event(test_data)
 #' }
-#'
-#' @export
 add_systemic_failure_event <- function(df) {
   message('Adding systemic failure events')
 

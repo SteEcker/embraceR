@@ -2,10 +2,24 @@
 % Please edit documentation in R/emii_add_number_comiliac_ln_statd.R
 \name{emii_add_number_common_iliac_ln_stat_d}
 \alias{emii_add_number_common_iliac_ln_stat_d}
-\title{Add Number of Common Iliac Lymph Nodes per Patient}
+\title{Count Common Iliac Lymph Nodes}
 \usage{
 emii_add_number_common_iliac_ln_stat_d(df)
 }
-\description{
-Add Number of Common Iliac Lymph Nodes per Patient
+\arguments{
+\item{df}{A data frame containing lymph node information with anatomical positions}
 }
+\value{
+A data frame with added `number_common_iliac_ln_stat_d` column
+}
+\description{
+Calculates the number of common iliac lymph nodes (left and right) per patient
+from staging data and adds this count as a new column to the dataset.
+}
+\examples{
+\dontrun{
+emii_data <- load_embrace_ii()
+result <- emii_add_number_common_iliac_ln_stat_d(emii_data)
+}
+}
+\keyword{internal}

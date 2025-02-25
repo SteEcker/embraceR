@@ -188,4 +188,43 @@ vignette: >
 |                           | - **Unit:** Millimeters                       |
 |                           | - **Note:** Infinite values converted to NA   |
 +---------------------------+-----------------------------------------------+
++---------------------------+-----------------------------------------------+
+| `is_lost_to_fu`           | - Lost to follow-up indicator                 |
+|                           | - **Calculation:** Based on                   |
+|                           |   `followup_*m` columns                       |
+|                           | - **Implementation:** `add_lost_to_fu()`      |
+|                           | - **Values:** TRUE/FALSE                      |
+|                           | - **Note:** TRUE if any followup value = 2    |
+|                           |   at any timepoint                            |
++---------------------------+-----------------------------------------------+
++---------------------------+-----------------------------------------------+
+| `withdrew_consent`        | - Consent withdrawal indicator                |
+|                           | - **Calculation:** Based on                   |
+|                           |   `followup_*m` columns                       |
+|                           | - **Implementation:** `add_lost_to_fu()`      |
+|                           | - **Values:** TRUE/FALSE                      |
+|                           | - **Note:** TRUE if any followup value = 3    |
+|                           |   at any timepoint                            |
++---------------------------+-----------------------------------------------+
++---------------------------+-----------------------------------------------+
+| `number_common_iliac_ln_` | - Count of common iliac lymph nodes at diag.  |
+| `stat_d`                  | - **Calculation:** Sum of left and right      |
+|                           |   common iliac lymph nodes from staging data  |
+|                           | - **Implementation:**                         |
+|                           |   `emii_add_number_common_iliac_ln_stat_d()`  |
+|                           | - **Unit:** Count                             |
+|                           | - **Note:** Includes both "L com iliac" and   |
+|                           |   "R com iliac" anatomical positions          |
++---------------------------+-----------------------------------------------+
++---------------------------+-----------------------------------------------+
+| `number_paraaortic_ln_`   | - Count of para-aortic lymph nodes at diag.   |
+| `stat_d`                  | - **Calculation:** Count of lymph nodes with  |
+|                           |   "Para Aortic" anatomical position from      |
+|                           |   staging data                                |
+|                           | - **Implementation:**                         |
+|                           |   `add_number_paraaortic_ln_stat_d()`         |
+|                           | - **Unit:** Count                             |
+|                           | - **Note:** Identifies nodes specifically     |
+|                           |   labeled as "Para Aortic"                    |
++---------------------------+-----------------------------------------------+
 

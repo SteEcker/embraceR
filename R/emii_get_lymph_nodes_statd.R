@@ -1,17 +1,21 @@
-#' Transform a Wide-Format Dataframe to a Long-Format Dataframe
+#' Transform Lymph Node Data to Long Format
 #'
-#' This function takes a dataframe with a wide-format structure,
-#' pivots specified columns to a long format, recodes anatomical positions,
-#' and returns a new dataframe where each row represents a single positive lymph node.
+#' Takes a dataframe with wide-format lymph node data, pivots specified columns to a long format,
+#' recodes anatomical positions, and returns a new dataframe where each row represents a single
+#' positive lymph node from EMBRACE-II at diagnosis.
 #'
-#' EMBRACE-II Only
-#'
-#' LN at diagnosis
-#'
-#' @param df A dataframe containing patient data with specific column structures.
+#' @param df A dataframe containing patient data with lymph node information
+#' 
 #' @return A dataframe in long-format with one row per positive lymph node,
-#'   including recoded anatomical position descriptions.
-#' @export
+#'   including recoded anatomical position descriptions
+#'
+#' @keywords internal
+#'
+#' @examples
+#' \dontrun{
+#' emii_data <- load_embrace_ii()
+#' ln_data <- emii_get_lymph_nodes_statd(emii_data)
+#' }
 emii_get_lymph_nodes_statd <- function(df) {
 
   node_cols <- grep("^node\\d{2}anatomical_position_sta_d$", names(df), value = TRUE)
@@ -66,14 +70,20 @@ emii_get_lymph_nodes_statd <- function(df) {
 
 #' Generate Summary Table of Nodal Anatomical Locations
 #'
-#' @description
-#' Creates a formatted summary table using gtsummary showing the frequency
-#' and percentage of each anatomical location in the nodal dataset from EMBRACE-II
-#' at diagnosis.
+#' Creates a formatted summary table showing the frequency and percentage
+#' of each anatomical location in the nodal dataset from EMBRACE-II at diagnosis.
 #'
 #' @param df A dataframe containing the EMBRACE-II dataset
+#' 
 #' @return A gt table object showing the distribution of lymph node locations
-#' @export
+#'
+#' @keywords internal
+#'
+#' @examples
+#' \dontrun{
+#' emii_data <- load_embrace_ii()
+#' summary_table <- get_nodal_location_summary(emii_data)
+#' }
 get_nodal_location_summary <- function(df) {
     emii_get_lymph_nodes_statd(df) %>%
         select(anatomical_position) %>%
@@ -95,16 +105,22 @@ get_nodal_location_summary <- function(df) {
 }
 
 
-#' Generate Patient-Level Summary Table of Nodal Anatomical Locations
+#' Generate Patient-Level Summary of Nodal Anatomical Locations
 #'
-#' @description
-#' Creates a formatted summary table using gtsummary showing the number and percentage
-#' of patients who have at least one lymph node in each anatomical location from
-#' EMBRACE-II at diagnosis.
+#' Creates a formatted summary table showing the number and percentage of patients
+#' who have at least one lymph node in each anatomical location from EMBRACE-II at diagnosis.
 #'
 #' @param df A dataframe containing the EMBRACE-II dataset
+#' 
 #' @return A gt table object showing the distribution of patients with lymph nodes by location
-#' @export
+#'
+#' @keywords internal
+#'
+#' @examples
+#' \dontrun{
+#' emii_data <- load_embrace_ii()
+#' patient_summary <- get_nodal_location_patient_summary(emii_data)
+#' }
 get_nodal_location_patient_summary <- function(df) {
   # Patients IDs with missing nodal anatomical location:
   # [1] "LON2001" "UTR2041" "AAR2073" "LJU2052" "LON2014"

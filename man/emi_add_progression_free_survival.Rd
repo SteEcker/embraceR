@@ -17,3 +17,4 @@ This function adds a column indicating progression-free survival events,
 defined as either any disease event (local failure, regional event,
 or systemic event) OR death.
 }
+\keyword{internal}

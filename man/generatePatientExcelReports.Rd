@@ -7,10 +7,12 @@
 generatePatientExcelReports(df_filtered, root_folder)
 }
 \arguments{
-\item{df_filtered}{DataFrame, the filtered data for which reports will be generated.}
+\item{df_filtered}{DataFrame containing filtered patient data}
 
-\item{root_folder}{Character, the root folder where subfolders and Excel files will be saved.}
+\item{root_folder}{Character, the root directory for saving reports}
 }
 \description{
-For each row in the filtered dataframe, generates an Excel report with a filename based on the patient ID.
+Creates individual Excel reports for each patient in the filtered dataset,
+organizing files by center ID in appropriate subfolders.
 }
+\keyword{internal}

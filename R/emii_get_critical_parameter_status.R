@@ -1,14 +1,28 @@
-
-
-#' Get Status of Critical Parameters in a Dataframe
+#' Get Status of Critical Parameters
 #'
-#' This function generates a summary table comparing critical parameters between EMBRACE I and II datasets.
-#' It also calculates the proportion of missing data for each parameter. Optionally, the summary
-#' table can be saved as an Excel file.
+#' Generates a summary table comparing critical parameters between EMBRACE I and II datasets.
+#' The function analyzes key clinical and treatment parameters, calculates the proportion 
+#' of missing data for each parameter, and performs statistical comparisons between the 
+#' two study cohorts.
 #'
-#' @return A gtsummary object containing the combined summary table.
+#' @param save_excel Logical; if TRUE, saves the summary table as an Excel file (default: FALSE)
 #'
-#' @export
+#' @return A gtsummary object containing the combined summary table with p-values
+#'
+#' @keywords internal
+#'
+#' @import dplyr
+#' @importFrom gtsummary tbl_summary modify_header modify_caption bold_labels add_p
+#' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook
+#'
+#' @examples
+#' \dontrun{
+#' # Generate summary table
+#' summary_table <- emii_get_critical_parameter_status()
+#' 
+#' # Generate and save to Excel
+#' summary_table <- emii_get_critical_parameter_status(save_excel = TRUE)
+#' }
 emii_get_critical_parameter_status <- function(save_excel = FALSE) {
 
   # Load both datasets

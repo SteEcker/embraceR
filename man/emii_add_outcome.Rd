@@ -2,17 +2,33 @@
 % Please edit documentation in R/emii_get_outcome.R
 \name{emii_add_outcome}
 \alias{emii_add_outcome}
-\title{Get All EMII Outcome Endpoints}
+\title{Add All EMBRACE-II Outcome Endpoints}
 \usage{
 emii_add_outcome(.data)
 }
 \arguments{
-\item{.data}{The raw EMII dataframe}
+\item{.data}{A data frame containing the raw EMBRACE-II data}
 }
 \value{
-Dataframe with all additional outcome columns added
+A data frame with additional outcome columns for various endpoints:
+  - Nodal recurrence and classification
+  - Pelvic nodal events
+  - Systemic events (excluding para-aortic)
+  - Para-aortic nodal events
+  - Locoregional events
+  - Cancer-specific survival
+  - Disease control
+  - Progression-free survival
+  - Distant metastasis
 }
 \description{
-This function applies all endpoint definitions to the raw EMII data,
+Applies all endpoint definitions to the raw EMBRACE-II data,
 creating a comprehensive dataset with all outcome measures.
 }
+\examples{
+\dontrun{
+emii_data <- load_embrace_ii()
+outcome_data <- emii_add_outcome(emii_data)
+}
+}
+\keyword{internal}

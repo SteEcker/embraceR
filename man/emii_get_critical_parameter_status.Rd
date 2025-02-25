@@ -2,15 +2,29 @@
 % Please edit documentation in R/emii_get_critical_parameter_status.R
 \name{emii_get_critical_parameter_status}
 \alias{emii_get_critical_parameter_status}
-\title{Get Status of Critical Parameters in a Dataframe}
+\title{Get Status of Critical Parameters}
 \usage{
 emii_get_critical_parameter_status(save_excel = FALSE)
 }
+\arguments{
+\item{save_excel}{Logical; if TRUE, saves the summary table as an Excel file (default: FALSE)}
+}
 \value{
-A gtsummary object containing the combined summary table.
+A gtsummary object containing the combined summary table with p-values
 }
 \description{
-This function generates a summary table comparing critical parameters between EMBRACE I and II datasets.
-It also calculates the proportion of missing data for each parameter. Optionally, the summary
-table can be saved as an Excel file.
+Generates a summary table comparing critical parameters between EMBRACE I and II datasets.
+The function analyzes key clinical and treatment parameters, calculates the proportion 
+of missing data for each parameter, and performs statistical comparisons between the 
+two study cohorts.
 }
+\examples{
+\dontrun{
+# Generate summary table
+summary_table <- emii_get_critical_parameter_status()
+
+# Generate and save to Excel
+summary_table <- emii_get_critical_parameter_status(save_excel = TRUE)
+}
+}
+\keyword{internal}

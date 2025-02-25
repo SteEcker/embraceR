@@ -2,24 +2,26 @@
 % Please edit documentation in R/emii_get_lymph_nodes_statd.R
 \name{emii_get_lymph_nodes_statd}
 \alias{emii_get_lymph_nodes_statd}
-\title{Transform a Wide-Format Dataframe to a Long-Format Dataframe}
+\title{Transform Lymph Node Data to Long Format}
 \usage{
 emii_get_lymph_nodes_statd(df)
 }
 \arguments{
-\item{df}{A dataframe containing patient data with specific column structures.}
+\item{df}{A dataframe containing patient data with lymph node information}
 }
 \value{
 A dataframe in long-format with one row per positive lymph node,
-  including recoded anatomical position descriptions.
+  including recoded anatomical position descriptions
 }
 \description{
-This function takes a dataframe with a wide-format structure,
-pivots specified columns to a long format, recodes anatomical positions,
-and returns a new dataframe where each row represents a single positive lymph node.
+Takes a dataframe with wide-format lymph node data, pivots specified columns to a long format,
+recodes anatomical positions, and returns a new dataframe where each row represents a single
+positive lymph node from EMBRACE-II at diagnosis.
 }
-\details{
-EMBRACE-II Only
-
-LN at diagnosis
+\examples{
+\dontrun{
+emii_data <- load_embrace_ii()
+ln_data <- emii_get_lymph_nodes_statd(emii_data)
 }
+}
+\keyword{internal}

@@ -6,7 +6,7 @@
 #'
 #' @param .data The input dataframe containing patient failure data
 #' @return Original dataframe with an additional boolean column 'distant_alone'
-#' @export
+#' @keywords internal
 #'
 #' @import dplyr
 emii_add_distant_alone <- function(.data) {
@@ -27,7 +27,7 @@ emii_add_distant_alone <- function(.data) {
 #' @param save_excel Logical indicating whether to save results as Excel file (default: FALSE)
 #'
 #' @return A tibble with the distant alone variable and relevant columns
-#' @export
+#' @keywords internal
 #'
 #' @import dplyr
 #' @importFrom openxlsx write.xlsx

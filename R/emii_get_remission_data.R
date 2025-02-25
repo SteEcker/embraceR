@@ -6,7 +6,7 @@
 #'
 #' @param data A tibble containing EMBRACE-II follow-up data
 #' @return A tibble with remission timepoint data (embrace_id, timepoint, and all MRI measurements)
-#' @export
+#' @keywords internal
 #'
 #' @import dplyr
 #' @import tidyr
@@ -102,7 +102,7 @@ emii_get_remission_data <- function(data) {
 #'
 #' @param data A tibble containing EMBRACE-II follow-up data
 #' @return A tibble with remission timepoint data (embrace_id, timepoint, and all gynecological measurements)
-#' @export
+#' @keywords internal
 #'
 #' @import dplyr
 #' @import tidyr

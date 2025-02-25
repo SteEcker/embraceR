@@ -2,23 +2,24 @@
 % Please edit documentation in R/get_morbidity_events.R
 \name{threshold}
 \alias{threshold}
-\title{Apply Threshold to Data}
+\title{Apply Threshold to CTCAE Grade}
 \usage{
 threshold(x, grade_threshold)
 }
 \arguments{
-\item{x}{Numeric, the value to be checked against the threshold.}
+\item{x}{Numeric, the CTCAE grade value to check}
 
-\item{grade_threshold}{Numeric, the threshold value to compare against.}
+\item{grade_threshold}{Numeric, the threshold value to compare against}
 }
 \value{
-Logical, TRUE if the value is above the threshold, otherwise FALSE.
+Logical, TRUE if the value equals the threshold, otherwise FALSE
 }
 \description{
-This function applies a threshold to a given data set to determine if the grade
-is above a specified level.
+Determines if a CTCAE grade value meets or exceeds a specified threshold.
 }
 \examples{
-threshold(5, grade_threshold = 4)
-threshold(NA, grade_threshold = 4)
+threshold(3, grade_threshold = 3)  # TRUE
+threshold(2, grade_threshold = 3)  # FALSE
+threshold(NA, grade_threshold = 3) # FALSE
 }
+\keyword{internal}

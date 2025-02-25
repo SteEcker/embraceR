@@ -2,13 +2,30 @@
 % Please edit documentation in R/save_eviguide_data.R
 \name{save_eviguide_data}
 \alias{save_eviguide_data}
-\title{save_eviguide_data}
+\title{Save EMBRACE Data for EviGuide Analysis}
 \usage{
-save_eviguide_data()
+save_eviguide_data(output_file = "clean_eviguide_em_data.csv", quote = TRUE)
 }
 \arguments{
-\item{emi}{}
+\item{output_file}{Character, path where to save the CSV file (default: "clean_eviguide_em_data.csv")}
+
+\item{quote}{Logical, whether to quote strings in the CSV output (default: TRUE)}
+}
+\value{
+Invisibly returns the processed data frame
 }
 \description{
-save_eviguide_data
+Extracts and processes a subset of EMBRACE data variables needed for EviGuide analysis.
+This function loads combined EMBRACE-I and EMBRACE-II data, selects relevant clinical
+and dosimetric variables, applies factor conversions, and saves the result as a CSV file.
 }
+\examples{
+\dontrun{
+  # Save with default filename
+  save_eviguide_data()
+  
+  # Save with custom filename
+  save_eviguide_data("my_eviguide_data.csv")
+}
+}
+\keyword{internal}

@@ -2,18 +2,25 @@
 % Please edit documentation in R/add_latest_side_effects.R
 \name{clean_side_effect_names}
 \alias{clean_side_effect_names}
-\title{Clean up side effect column names}
+\title{Clean Side Effect Column Names}
 \usage{
 clean_side_effect_names(df, time_suffix = "_3m")
 }
 \arguments{
-\item{df}{The data frame containing the side effect columns.}
+\item{df}{The data frame containing the side effect columns}
 
-\item{time_suffix}{The suffix indicating the time point (e.g., "_3m").}
+\item{time_suffix}{The suffix indicating the time point (e.g., "_3m")}
 }
 \value{
-A vector of cleaned-up side effect column names.
+A vector of cleaned side effect column names
 }
 \description{
-Clean up side effect column names
+Extracts and cleans side effect column names by removing time suffixes.
 }
+\examples{
+\dontrun{
+df <- data.frame(bladder_pain_3m = c(1,2,3), gastro_diarrhea_3m = c(0,1,2))
+clean_names <- clean_side_effect_names(df, "_3m")
+}
+}
+\keyword{internal}

@@ -1,13 +1,24 @@
-#' Get Combined Outcomes Data from EMBRACE-I and EMBRACE-II
+#' Combine Outcomes Data from EMBRACE-I and EMBRACE-II
 #'
-#' @description
 #' Loads and combines outcome data from both EMBRACE studies, ensuring consistent
-#' variable names and structure.
+#' variable names and structure for comparative analysis.
 #'
-#' @return A tibble containing combined outcome data from both studies with a 'study' identifier
+#' @return A tibble containing combined outcome data from both studies with:
+#'   - Time-to-event variables for disease progression and vital status
+#'   - Event indicators for various failure types (local, nodal, systemic)
+#'   - Event indicators for specific anatomical locations
+#'   - Composite endpoint indicators (locoregional, distant, disease control)
+#'   - A 'study' identifier column to distinguish between cohorts
+#'
 #' @export
 #'
 #' @importFrom dplyr select mutate bind_rows %>%
+#'
+#' @examples
+#' \dontrun{
+#' combined_data <- get_combined_outcomes()
+#' table(combined_data$study)
+#' }
 get_combined_outcomes <- function() {
   # Define the columns we want in our final dataset
   outcome_cols <- c(

@@ -1,11 +1,25 @@
-
-#' save_eviguide_data
+#' Save EMBRACE Data for EviGuide Analysis
 #'
-#' @param emi
+#' Extracts and processes a subset of EMBRACE data variables needed for EviGuide analysis.
+#' This function loads combined EMBRACE-I and EMBRACE-II data, selects relevant clinical
+#' and dosimetric variables, applies factor conversions, and saves the result as a CSV file.
 #'
-#' @export
+#' @param output_file Character, path where to save the CSV file (default: "clean_eviguide_em_data.csv")
+#' @param quote Logical, whether to quote strings in the CSV output (default: TRUE)
 #'
-save_eviguide_data <- function() {
+#' @return Invisibly returns the processed data frame
+#' @keywords internal
+#' @import dplyr
+#'
+#' @examples
+#' \dontrun{
+#'   # Save with default filename
+#'   save_eviguide_data()
+#'   
+#'   # Save with custom filename
+#'   save_eviguide_data("my_eviguide_data.csv")
+#' }
+save_eviguide_data <- function(output_file = "clean_eviguide_em_data.csv", quote = TRUE) {
 
   em <- load_combined_embrace(return_common_columns = F) %>%
     replace_neg_one_with_NA()
@@ -63,7 +77,9 @@ save_eviguide_data <- function() {
     embraceR::apply_guess_factor() %>%
     mutate(across(histopathological_type_sta_d, ~ recode_factor_levels(.x, c('1', '2', '3'), c('0', '1', '1'))))
 
-  out %>% write.csv(file = 'clean_eviguide_em_data.csv', quote = T )
+  out %>% write.csv(file = output_file, quote = quote)
+  
+  invisible(out)
 }
 
 

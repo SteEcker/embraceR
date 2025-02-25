@@ -7,25 +7,18 @@
 check_nodal_location(.data, location, time_point = "any")
 }
 \arguments{
-\item{.data}{The input dataframe containing patient node data}
+\item{.data}{A data frame containing patient node data}
 
-\item{location}{Character string specifying the anatomical location to check.
-Must be one of: "L ext iliac", "L int iliac", "L com iliac", "R ext iliac",
-"R int iliac", "R com iliac", "Para Aortic", "L groin", "R groin",
-"R parame/paracervix", "L parame/paracervix", "other"}
+\item{location}{Character string specifying the anatomical location to check}
 
-\item{time_point}{Optional character string to specify which timepoint to check.
-Must be one of: "diagnosis", "followup", or "any" (default)}
+\item{time_point}{Character string specifying which timepoint to check:
+"diagnosis", "followup", or "any" (default)}
 }
 \value{
-A tibble with columns:
-  \itemize{
-    \item embrace_id: The patient identifier
-    \item has_location: Boolean indicating presence of specified nodal location
-  }
+A tibble with patient IDs and boolean indicators for the specified location
 }
 \description{
-This function checks whether patients have lymph nodes in specific anatomical locations,
+Checks whether patients have lymph nodes in specific anatomical locations,
 either at diagnosis, during follow-up, or at any time point.
 }
 \examples{
@@ -34,7 +27,8 @@ either at diagnosis, during follow-up, or at any time point.
 result <- check_nodal_location(patient_data, "R int iliac")
 
 # Check only at diagnosis
-diagnosis_nodes <- check_nodal_location(patient_data, "R int iliac",
+diagnosis_nodes <- check_nodal_location(patient_data, "R int iliac", 
                                        time_point = "diagnosis")
 }
 }
+\keyword{internal}

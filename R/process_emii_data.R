@@ -1,18 +1,36 @@
-#' Process and Transform EM-II Data
+#' Process and Transform EMBRACE-II Data
 #'
-#' Preprocessing for EMBRACE-II. This function adds EMBRACE-II specific columns
-#' after the common columns have been added via process_combined_data.
+#' Performs comprehensive preprocessing for EMBRACE-II data. This function adds 
+#' EMBRACE-II specific columns after the common columns have been added via 
+#' process_combined_data. The processing includes:
+#' 
+#' 1. Adding T-Score data
+#' 2. Calculating TRAK (Total Reference Air Kerma) absolute values
+#' 3. Classifying needle arrangements (parallel/oblique)
+#' 4. Computing overall treatment time (OTT)
+#' 5. Adding elective target information
+#' 6. Identifying patients lost to follow-up or who withdrew consent
+#' 7. Adding disease event indicators (local/nodal/systemic failures)
+#' 8. Counting common iliac lymph nodes
 #'
-#' @param data A tibble or dataframe containing the combined data to be processed.
-#' @param file_path Path to the EMBRACE-II master dump file
-#' @return A tibble or dataframe
-#' @export
+#' @param data A tibble or dataframe containing the combined data to be processed
+#' @param file_path Path to the EMBRACE-II master dump file (default uses here::here)
+#'
+#' @return A tibble with additional EMBRACE-II specific columns
+#' @keywords internal
 #' @import dplyr
 #' @import here
 #'
 #' @examples
 #' \dontrun{
-#'   processed_data <- process_emii_data(combined_data)
+#'   # Load raw data
+#'   raw_data <- load_combined_embrace()
+#'   
+#'   # Process with common transformations
+#'   common_data <- process_combined_data(raw_data)
+#'   
+#'   # Add EMBRACE-II specific transformations
+#'   processed_data <- process_emii_data(common_data)
 #' }
 process_emii_data <- function(data,
                               file_path = here::here("data_raw/embrace_II/2023-01-18_emii_masterdump.Rds")) {
@@ -38,5 +56,8 @@ process_emii_data <- function(data,
     embraceR::add_parallel_oblique_needles() %>%
     embraceR::emii_add_ott() %>%
     embraceR::emii_add_elective_targets() %>%
-    embraceR::add_disease_events()
+    embraceR::add_lost_to_fu() %>%
+    embraceR::add_disease_events() %>%
+    embraceR::emii_add_number_common_iliac_ln_stat_d() %>%
+    embraceR::add_number_paraaortic_ln_stat_d()
 }

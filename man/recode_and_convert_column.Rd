@@ -2,21 +2,21 @@
 % Please edit documentation in R/recode_and_convert_all_columns.R
 \name{recode_and_convert_column}
 \alias{recode_and_convert_column}
-\title{Recode and convert columns based on the mapping}
+\title{Recode and convert a single column based on the mapping}
 \usage{
 recode_and_convert_column(df, col_name, mapping)
 }
 \arguments{
-\item{df}{A data frame containing the columns to be recoded and converted.}
+\item{df}{A data frame containing the column to be recoded}
 
-\item{mapping}{A list containing the old and new levels for each column or base name.}
+\item{col_name}{Character, name of the column to recode}
 
-\item{stop_on_missing_col}{A logical value. If TRUE, the function stops if a column is missing in the data frame. If FALSE, it skips the missing columns.}
+\item{mapping}{A list containing the old and new levels for the column}
 }
 \value{
-The data frame with the specified columns recoded and converted to factors.
+The data frame with the specified column recoded and converted to factor
 }
 \description{
-This function converts columns to factors and recodes their levels based on the provided mapping.
-It can process both specific column names and columns with common base names.
+Recode and convert a single column based on the mapping
 }
+\keyword{internal}

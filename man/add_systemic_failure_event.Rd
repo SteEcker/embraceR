@@ -2,29 +2,20 @@
 % Please edit documentation in R/add_systemic_failure_event.R
 \name{add_systemic_failure_event}
 \alias{add_systemic_failure_event}
-\title{Add a Column for Systemic Failure Events}
+\title{Add Systemic Failure Event Column}
 \usage{
 add_systemic_failure_event(df)
 }
 \arguments{
-\item{df}{A data frame containing:
-- columns starting with 'disease_systemic_status_' containing numerical values
-- a 'study' column indicating either 'embrace_i' or 'embrace_ii'}
+\item{df}{A data frame with 'disease_systemic_status_*' columns and a 'study' column}
 }
 \value{
-A data frame with additional columns for systemic events. Each patient will
-have a value in the column corresponding to their study, with NA in the other column.
+A data frame with added systemic failure event columns
 }
 \description{
-This function adds a new column to the data frame that indicates whether
-a systemic failure event has occurred for each patient. The column name and event 
-definition varies by study:
-}
-\details{
-EMBRACE-I ('event_systemic_excl_pao'):
-  - Event defined as occurrence of value 1 or 2 in any systemic status column
-EMBRACE-II ('event_systemicfailure'):
-  - Event defined as occurrence of value 2 in any systemic status column
+Adds a study-specific systemic failure event indicator column.
+For EMBRACE-I: 'event_systemic_excl_pao' (values 1 or 2 count as events)
+For EMBRACE-II: 'event_systemicfailure' (only value 2 counts as event)
 }
 \examples{
 \dontrun{
@@ -35,5 +26,5 @@ test_data <- tibble(
 )
 result <- add_systemic_failure_event(test_data)
 }
-
 }
+\keyword{internal}

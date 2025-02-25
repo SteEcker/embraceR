@@ -1,14 +1,19 @@
-#' Load and Process Embrace II Data
+#' Load and Process EMBRACE-II Data
 #'
-#' This function loads data from EMBRACE-II website exports,
-#' processes them, and joins them by the `embrace_id` column.
+#' Loads data from EMBRACE-II website exports, processes them, and joins them 
+#' by the `embrace_id` column. The function handles multiple data sheets including
+#' patient information, registration, diagnosis status, baseline morbidity,
+#' treatment data, and vital status.
 #'
-#' @param file_path The path to the directory containing the primary data files.
-#' @param file_path_eqd2 The path to the EMBRACE-II EQD2 Excel file.
-#' @param add_new_columns If TRUE, calculate and add new columns
-#' @param mapping_file Path to the mapping table file
-#' @param include_only_study_patients If TRUE, only return patients included in the study
-#' @return A tibble containing the cleaned and joined data.
+#' @param file_path Character, path to the directory containing the primary data files
+#' @param file_path_eqd2 Character, path to the EMBRACE-II EQD2 Excel file
+#' @param add_new_columns Logical, if TRUE, calculate and add derived columns (default: TRUE)
+#' @param mapping_file Character, path to the column mapping table file
+#' @param include_only_study_patients Logical, if TRUE, only return patients included in the study (default: TRUE)
+#' @param replace_minusone_with_na Logical, if TRUE, replace -1 values with NA (default: TRUE)
+#' 
+#' @return A tibble containing the cleaned and joined EMBRACE-II data
+#' 
 #' @export
 #' @import dplyr
 #' @import readxl
@@ -18,11 +23,21 @@
 #'
 #' @examples
 #' \dontrun{
-#'   df <- load_embrace_ii(file_path = "/path/to/xlsx", file_path_eqd2 = "/path/to/eqd2_xlsx")
+#'   # Load with default settings
+#'   df <- load_embrace_ii()
+#'   
+#'   # Load all patients, including those excluded from the study
+#'   df <- load_embrace_ii(include_only_study_patients = FALSE)
+#'   
+#'   # Load with custom file paths
+#'   df <- load_embrace_ii(
+#'     file_path = "path/to/emii.xlsx", 
+#'     file_path_eqd2 = "path/to/emii_eqd2.xlsx"
+#'   )
 #' }
 load_embrace_ii <- function(file_path = here::here("data_raw/embrace_II/emii.xlsx"),
                           file_path_eqd2 = here::here("data_raw/embrace_II/emii_eqd2.xlsx"),
-                          add_new_columns = T,
+                          add_new_columns = TRUE,
                           mapping_file = here::here("data_raw/mapping_table/mapping_table.xlsx"),
                           include_only_study_patients = TRUE,
                           replace_minusone_with_na = TRUE
@@ -83,7 +98,6 @@ load_embrace_ii <- function(file_path = here::here("data_raw/embrace_II/emii.xls
   # Join EQD2 data with the existing dataset
   all_data <- dplyr::left_join(all_data, emii_eqd2, by = c("embrace_id" = "embrace_id_eqd2"))
 
-
   # List of sheets to be transposed
   transpose_sheet_names <- c("EmbraceIIEarlyMorbidity", "Followup")
 
@@ -111,7 +125,6 @@ load_embrace_ii <- function(file_path = here::here("data_raw/embrace_II/emii.xls
 
   # Apply change log
   all_data <- apply_change_log(all_data)
-
 
   # Update exclusion list path with here::here
   exclusion_list <- openxlsx::read.xlsx(
@@ -150,9 +163,10 @@ load_embrace_ii <- function(file_path = here::here("data_raw/embrace_II/emii.xls
 #'
 #' @import dplyr
 #'
-#' @export
 #'
 #' @return A tibble in wide format.
+#'
+#' @keywords internal
 transpose_sheet_to_wide <- function(file_path, sheet_name, id_col, key_col) {
   # Read the sheet
   long_data <- readxl::read_excel(file_path, sheet = sheet_name, guess_max = 15000)

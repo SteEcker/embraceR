@@ -2,21 +2,24 @@
 % Please edit documentation in R/change_log.R
 \name{apply_change_log}
 \alias{apply_change_log}
-\title{Apply Changes from the Change Log to the Dataframe}
+\title{Apply Changes from Change Log}
 \usage{
 apply_change_log(data)
 }
 \arguments{
-\item{data}{A dataframe containing the master data.}
+\item{data}{A data frame containing the master data}
 }
 \value{
-A dataframe with the applied changes.
+A data frame with all changes from the change log applied
 }
 \description{
-This function reads a change log from an Excel file and applies the changes to a dataframe.
-It ensures the new values are correctly converted to the appropriate data types before applying the changes.
+Reads the change log file and applies all recorded changes to the provided data frame.
+Automatically converts values to the appropriate data types based on the target column.
 }
-\details{
-The change log should be an Excel file located at "data_raw/change_log/data_change_log.xlsx" with columns: `RecordID`, `Field`, `NewValue`.
-The function reads the change log, converts the `NewValue` to the appropriate type based on the column type in the master dataframe, and applies the changes.
+\examples{
+\dontrun{
+data <- data.frame(embrace_id = c("001", "002"), value = c(10, 20))
+updated_data <- apply_change_log(data)
 }
+}
+\keyword{internal}

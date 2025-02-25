@@ -7,7 +7,7 @@
 #'
 #' @param .data The input dataframe containing patient event data
 #' @return Original dataframe with an additional boolean column 'event_progression_free'
-#' @export
+#' @keywords internal
 #'
 #' @import dplyr
 emii_add_progression_free_survival <- function(.data) {
@@ -28,7 +28,7 @@ emii_add_progression_free_survival <- function(.data) {
 #'
 #' @param .data The input dataframe containing patient event data
 #' @return Original dataframe with an additional boolean column 'event_progression_free'
-#' @export
+#' @keywords internal
 #'
 #' @import dplyr
 emi_add_progression_free_survival <- function(.data) {
@@ -50,7 +50,7 @@ emi_add_progression_free_survival <- function(.data) {
 #' @param save_excel Logical indicating whether to save results as Excel file (default: FALSE)
 #'
 #' @return A tibble with the progression-free survival variable and relevant columns
-#' @export
+#' @keywords internal
 #'
 #' @import dplyr
 #' @importFrom openxlsx write.xlsx

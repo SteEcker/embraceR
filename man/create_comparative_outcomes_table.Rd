@@ -2,13 +2,20 @@
 % Please edit documentation in R/create_comparative_outcomes_table.R
 \name{create_comparative_outcomes_table}
 \alias{create_comparative_outcomes_table}
-\title{Create Comparative Outcomes Table for EMBRACE Studies}
+\title{Create Comparative Outcomes Table}
 \usage{
 create_comparative_outcomes_table()
 }
 \value{
-A gtsummary table comparing outcomes between EMBRACE-I and EMBRACE-II
+A gtsummary table with outcome comparisons and p-values
 }
 \description{
-Create Comparative Outcomes Table for EMBRACE Studies
+Generates a formatted table comparing clinical outcomes between EMBRACE-I and EMBRACE-II
+studies, including local control, nodal control, survival metrics, and time-to-event data.
 }
+\examples{
+\dontrun{
+outcomes_table <- create_comparative_outcomes_table()
+}
+}
+\keyword{internal}

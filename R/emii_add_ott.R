@@ -15,7 +15,7 @@
 #' }
 #' @importFrom dplyr mutate across
 #' @importFrom lubridate interval as.duration ddays
-#' @export
+#' @keywords internal
 #' @examples
 #' library(dplyr)
 #' library(lubridate)

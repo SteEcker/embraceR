@@ -2,17 +2,17 @@
 % Please edit documentation in R/get_morbidity_events.R
 \name{createStyledExcelSheet}
 \alias{createStyledExcelSheet}
-\title{Create Styled Excel Sheet}
+\title{Create Styled Excel Report for Patient Side Effects}
 \usage{
 createStyledExcelSheet(data, filePath, sheetName = "Side Effects")
 }
 \arguments{
-\item{data}{DataFrame to be written to the Excel sheet.}
+\item{data}{DataFrame containing the patient side effect data}
 
-\item{filePath}{Character, path where the Excel file will be saved.}
-
-\item{sheetName}{Character, name of the sheet within the Excel file.}
+\item{filePath}{Character, the path where the Excel file will be saved}
 }
 \description{
-Creates an Excel sheet with styled cells based on the data provided.
+Generates a formatted Excel report with conditional formatting based on side effect 
+grades, highlighting severe events for easy identification.
 }
+\keyword{internal}

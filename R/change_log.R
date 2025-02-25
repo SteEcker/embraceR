@@ -1,4 +1,3 @@
-
 # # Initialize the change log
 # change_log <- data.frame(
 #   ChangeID = integer(),
@@ -13,6 +12,30 @@
 # openxlsx::write.xlsx(change_log, "data_raw/change_log/data_change_log.xlsx")
 
 
+#' Update Record and Log Changes
+#'
+#' Updates a specific field value for a record and logs the change in the change log file.
+#'
+#' @param data A data frame containing the records to update
+#' @param log A data frame containing the change log
+#' @param record_id The ID of the record to update (embrace_id)
+#' @param field The field name to update
+#' @param new_value The new value to set
+#' @param reason The reason for making the change
+#'
+#' @return An updated change log data frame with the new entry
+#'
+#' @keywords internal
+#'
+#' @examples
+#' \dontrun{
+#' data <- data.frame(embrace_id = c("001", "002"), value = c(10, 20))
+#' log <- data.frame(ChangeID = integer(), RecordID = character(),
+#'                  Field = character(), OldValue = character(),
+#'                  NewValue = character(), ChangeDate = as.Date(character()),
+#'                  Reason = character())
+#' log <- update_record(data, log, "001", "value", 15, "Correction")
+#' }
 update_record <- function(data, log, record_id, field, new_value, reason) {
   old_value <- as.character(data[data$embrace_id == record_id, field])
 
@@ -52,22 +75,22 @@ update_record <- function(data, log, record_id, field, new_value, reason) {
 }
 
 
-#' Apply Changes from the Change Log to the Dataframe
+#' Apply Changes from Change Log
 #'
-#' This function reads a change log from an Excel file and applies the changes to a dataframe.
-#' It ensures the new values are correctly converted to the appropriate data types before applying the changes.
+#' Reads the change log file and applies all recorded changes to the provided data frame.
+#' Automatically converts values to the appropriate data types based on the target column.
 #'
-#' @param data A dataframe containing the master data.
+#' @param data A data frame containing the master data
 #'
-#' @return A dataframe with the applied changes.
+#' @return A data frame with all changes from the change log applied
 #'
-#' @details The change log should be an Excel file located at "data_raw/change_log/data_change_log.xlsx" with columns: `RecordID`, `Field`, `NewValue`.
-#' The function reads the change log, converts the `NewValue` to the appropriate type based on the column type in the master dataframe, and applies the changes.
+#' @keywords internal
 #'
-#'
-#' @import openxlsx
-#'
-#' @export
+#' @examples
+#' \dontrun{
+#' data <- data.frame(embrace_id = c("001", "002"), value = c(10, 20))
+#' updated_data <- apply_change_log(data)
+#' }
 apply_change_log <- function(data) {
   change_log_path <- here::here("data_raw", "change_log", "data_change_log.xlsx")
   change_log <- openxlsx::read.xlsx(change_log_path)
@@ -114,17 +137,3 @@ apply_change_log <- function(data) {
 
   return(data)
 }
-
-
-
-# change_log <- openxlsx::read.xlsx("data_raw/change_log/data_change_log.xlsx")
-#
-#
-#
-# # Example usage of update_record function
-# result <- update_record(emii, change_log, record_id = "VIE2001", field = "age", new_value = 19, reason = "Correcting age based on new information")
-#
-# change_log <- openxlsx::read.xlsx("data_raw/change_log/data_change_log.xlsx")
-#
-# # Apply changes from the log to the data
-# data <- apply_changes_from_log(emii, change_log)

@@ -2,19 +2,20 @@
 % Please edit documentation in R/get_morbidity_events.R
 \name{add_grade_ctcae_event_column}
 \alias{add_grade_ctcae_event_column}
-\title{Add a Column for Grade XX CTCAE Event}
+\title{Add Grade-Specific CTCAE Event Indicator}
 \usage{
 add_grade_ctcae_event_column(df, grade_threshold)
 }
 \arguments{
-\item{df}{DataFrame containing the data.}
+\item{df}{DataFrame containing patient data}
 
-\item{grade_threshold}{Numeric, the threshold value to compare against.}
+\item{grade_threshold}{Numeric, the CTCAE grade threshold to check for}
 }
 \value{
-DataFrame with an additional column "has_gradeX_ctcae_event" where X is the grade threshold.
+DataFrame with an additional indicator column for grade-specific events
 }
 \description{
-This function selects all outcome columns and adds a new column named dynamically
-based on the grade threshold (e.g., "grade4_ctcae_event").
+Adds a binary indicator column showing whether each patient has experienced
+any side effect meeting the specified grade threshold.
 }
+\keyword{internal}

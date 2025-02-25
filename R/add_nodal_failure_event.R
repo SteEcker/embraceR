@@ -1,19 +1,14 @@
-#' Add a Column for Nodal Failure Events
+#' Add Nodal Failure Event Column
 #'
-#' This function adds a new column to the data frame that indicates whether
-#' a nodal failure event has occurred for each patient. The column name varies by study:
-#' - EMBRACE-I: 'event_nodalcontrol_incl_pao'
-#' - EMBRACE-II: 'event_nodalfailure'
-#' 
-#' A nodal failure event is defined as an occurrence of value 2 in any nodal status column.
+#' Adds a study-specific nodal failure event indicator column based on disease nodal status.
+#' For EMBRACE-I: 'event_nodalcontrol_incl_pao'
+#' For EMBRACE-II: 'event_nodalfailure'
 #'
-#' @param df A data frame containing:
-#'   - columns starting with 'disease_nodal_status_' containing numerical values
-#'   - a 'study' column indicating either 'embrace_i' or 'embrace_ii'
+#' @param df A data frame with 'disease_nodal_status_*' columns and a 'study' column
 #'
-#' @return A data frame with an additional column (name depends on study) containing
-#' a 1 if a nodal failure event has occurred and 0 otherwise. If all values are NA across 
-#' all relevant columns for a particular patient, the result will also be NA.
+#' @return A data frame with an added nodal failure event column (1=failure, 0=no failure)
+#'
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
@@ -24,8 +19,6 @@
 #' )
 #' result <- add_nodal_failure_event(test_data)
 #' }
-#'
-#' @export
 add_nodal_failure_event <- function(df) {
   message('Adding nodal failure events')
 

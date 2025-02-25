@@ -7,33 +7,13 @@
 reorder_columns_based_on_date(df)
 }
 \arguments{
-\item{df}{A dataframe containing the data to be reordered. The first three
-columns should be `embrace_id`, `side_effect`, and `Diagnosis & Treatment`.
-The subsequent columns should be named with time points (e.g., `3m`, `6m`).}
+\item{df}{DataFrame with columns to be reordered}
 }
 \value{
-A dataframe with the columns reordered based on the assessment dates.
+DataFrame with columns reordered chronologically
 }
 \description{
-This function reorders all columns in a dataframe after the third column
-based on their corresponding assessment dates.
+Reorders columns in a dataframe chronologically based on their corresponding 
+assessment dates, facilitating temporal analysis of side effects.
 }
-\details{
-The function assumes that there is a row in the dataframe where the
-`side_effect` column is "assessment_date" and the subsequent columns contain
-the corresponding assessment dates. The function extracts these dates, sorts
-the columns accordingly, and returns the reordered dataframe.
-}
-\examples{
-\dontrun{
-df <- tibble::tibble(
-  embrace_id = c("AAR2005", "AAR2005"),
-  side_effect = c("general_comments", "assessment_date"),
-  `Diagnosis & Treatment` = c(NA, NA),
-  `3m` = c(NA, "2017-01-01"),
-  `6m` = c(NA, "2017-07-01"),
-  `9m` = c(NA, "2017-10-01")
-)
-reordered_df <- reorder_columns_based_on_date(df)
-}
-}
+\keyword{internal}

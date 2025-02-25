@@ -2,18 +2,20 @@
 % Please edit documentation in R/add_time_to_bt.R
 \name{add_time_to_bt}
 \alias{add_time_to_bt}
-\title{Add Time-to-BT and OTT-EBRT Features to Data Frame}
+\title{Add Time-to-BT and OTT-EBRT Features}
 \usage{
 add_time_to_bt(x)
 }
 \arguments{
-\item{x}{Data frame containing `embrace_id`, `ebrt_start_date_tdvh`, `ebrt_end_date_tdvh`, and `fraction01date_tdvh`.}
+\item{x}{Data frame with EBRT dates and first BT fraction date}
 }
 \value{
-Data frame with additional columns `time_to_bt`, `ott_ebrt`, and `time_to_bt_percent`.
+Data frame with added columns: `time_to_bt`, `ott_ebrt`, and `time_to_bt_percent`
 }
 \description{
-Adds `time_to_bt`, `ott_ebrt`, and `time_to_bt_percent` columns to a data frame based on EBRT start and end dates.
+Calculates and adds time-related columns for brachytherapy (BT) and external beam 
+radiation therapy (EBRT): time to first BT fraction, overall treatment time for EBRT,
+and time to BT as a percentage of EBRT duration.
 }
 \examples{
 \dontrun{
@@ -26,3 +28,4 @@ df <- data.frame(
 add_time_to_bt(df)
 }
 }
+\keyword{internal}

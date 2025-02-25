@@ -16,3 +16,4 @@ Original dataframe with an additional boolean column 'event_pelvic'
 This function adds a column indicating whether a patient had any pelvic event,
 defined as either a local failure or a pelvic nodal event.
 }
+\keyword{internal}

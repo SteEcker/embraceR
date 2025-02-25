@@ -2,10 +2,26 @@
 % Please edit documentation in R/add_icis.R
 \name{add_parallel_oblique_needles}
 \alias{add_parallel_oblique_needles}
-\title{Add parallel or oblique classification for icis}
+\title{Add Parallel or Oblique Needle Classification}
 \usage{
 add_parallel_oblique_needles(.data)
 }
-\description{
-Add parallel or oblique classification for icis
+\arguments{
+\item{.data}{A data frame with embrace_id and fraction technique columns}
 }
+\value{
+A data frame with an additional 'icis_parallel_oblique' column
+}
+\description{
+Classifies needle arrangements as "no needles", "parallel needles", "oblique needles", or "other"
+based on technique data.
+}
+\examples{
+\dontrun{
+df <- data.frame(embrace_id = c(1, 2, 3),
+                 fraction_1_technique_tdvh = c("1", "2", "3"),
+                 fraction_2_technique_tdvh = c("1", "2", "4"))
+add_parallel_oblique_needles(df)
+}
+}
+\keyword{internal}

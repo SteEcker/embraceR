@@ -32,3 +32,4 @@ result <- add_distant_alone_with_verification(data)
 result <- add_distant_alone_with_verification(data, save_excel = TRUE)
 }
 }
+\keyword{internal}

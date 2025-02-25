@@ -9,7 +9,7 @@
 #'
 #' @import dplyr
 #'
-#' @export
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
@@ -70,7 +70,7 @@ add_metastases <- function(data) {
 #' @import dplyr
 #' @importFrom openxlsx write.xlsx
 #'
-#' @export
+#' @keywords internal
 add_metastases_with_verification <- function(data, save_excel = FALSE) {
   # Define metastases patterns (moved to top level to avoid redefining)
   metastases_patterns <- c(

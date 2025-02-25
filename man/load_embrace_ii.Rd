@@ -2,37 +2,51 @@
 % Please edit documentation in R/load_embrace_ii.R
 \name{load_embrace_ii}
 \alias{load_embrace_ii}
-\title{Load and Process Embrace II Data}
+\title{Load and Process EMBRACE-II Data}
 \usage{
 load_embrace_ii(
   file_path = here::here("data_raw/embrace_II/emii.xlsx"),
   file_path_eqd2 = here::here("data_raw/embrace_II/emii_eqd2.xlsx"),
-  add_new_columns = T,
+  add_new_columns = TRUE,
   mapping_file = here::here("data_raw/mapping_table/mapping_table.xlsx"),
   include_only_study_patients = TRUE,
   replace_minusone_with_na = TRUE
 )
 }
 \arguments{
-\item{file_path}{The path to the directory containing the primary data files.}
+\item{file_path}{Character, path to the directory containing the primary data files}
 
-\item{file_path_eqd2}{The path to the EMBRACE-II EQD2 Excel file.}
+\item{file_path_eqd2}{Character, path to the EMBRACE-II EQD2 Excel file}
 
-\item{add_new_columns}{If TRUE, calculate and add new columns}
+\item{add_new_columns}{Logical, if TRUE, calculate and add derived columns (default: TRUE)}
 
-\item{mapping_file}{Path to the mapping table file}
+\item{mapping_file}{Character, path to the column mapping table file}
 
-\item{include_only_study_patients}{If TRUE, only return patients included in the study}
+\item{include_only_study_patients}{Logical, if TRUE, only return patients included in the study (default: TRUE)}
+
+\item{replace_minusone_with_na}{Logical, if TRUE, replace -1 values with NA (default: TRUE)}
 }
 \value{
-A tibble containing the cleaned and joined data.
+A tibble containing the cleaned and joined EMBRACE-II data
 }
 \description{
-This function loads data from EMBRACE-II website exports,
-processes them, and joins them by the `embrace_id` column.
+Loads data from EMBRACE-II website exports, processes them, and joins them 
+by the `embrace_id` column. The function handles multiple data sheets including
+patient information, registration, diagnosis status, baseline morbidity,
+treatment data, and vital status.
 }
 \examples{
 \dontrun{
-  df <- load_embrace_ii(file_path = "/path/to/xlsx", file_path_eqd2 = "/path/to/eqd2_xlsx")
+  # Load with default settings
+  df <- load_embrace_ii()
+  
+  # Load all patients, including those excluded from the study
+  df <- load_embrace_ii(include_only_study_patients = FALSE)
+  
+  # Load with custom file paths
+  df <- load_embrace_ii(
+    file_path = "path/to/emii.xlsx", 
+    file_path_eqd2 = "path/to/emii_eqd2.xlsx"
+  )
 }
 }

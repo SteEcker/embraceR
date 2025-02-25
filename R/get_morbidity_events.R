@@ -1,28 +1,17 @@
-# library(tidyverse)
-# library(tidyr)
-# library(dplyr)
-# library(openxlsx)
-# library(lubridate)
-
-#' Apply Threshold to Data
+#' Apply Threshold to CTCAE Grade
 #'
-#' This function applies a threshold to a given data set to determine if the grade
-#' is above a specified level.
+#' Determines if a CTCAE grade value meets or exceeds a specified threshold.
 #'
-#' @param x Numeric, the value to be checked against the threshold.
-#' @param grade_threshold Numeric, the threshold value to compare against.
-#' @return Logical, TRUE if the value is above the threshold, otherwise FALSE.
+#' @param x Numeric, the CTCAE grade value to check
+#' @param grade_threshold Numeric, the threshold value to compare against
+#' @return Logical, TRUE if the value equals the threshold, otherwise FALSE
 #' @examples
-#' threshold(5, grade_threshold = 4)
-#' threshold(NA, grade_threshold = 4)
-#' @export
+#' threshold(3, grade_threshold = 3)  # TRUE
+#' threshold(2, grade_threshold = 3)  # FALSE
+#' threshold(NA, grade_threshold = 3) # FALSE
+#' @keywords internal
 threshold <- function(x, grade_threshold) {
-
   if (!is.na(x) && !is.character(x) && x != 9) {
-
-    if (x == grade_threshold) {
-      print(x)
-    }
     return(x == grade_threshold)
   } else {
     return(FALSE)
@@ -31,20 +20,18 @@ threshold <- function(x, grade_threshold) {
 
 
 
-#' Filter Data Based on Grade Threshold
+#' Filter Data for Specific CTCAE Grade Events
 #'
-#' Filters a dataframe based on specified side effect columns and a grade threshold,
-#' retaining rows that meet the threshold criteria.
+#' Filters a dataframe to identify rows with side effect values meeting a specified 
+#' grade threshold, retaining relevant clinical information for analysis.
 #'
-#' @param df DataFrame containing the data to be filtered.
-#' @param side_effect_cols Character vector specifying the columns to check against the threshold.
-#' @return DataFrame filtered based on the grade threshold.
-#' @export
-#' @import tidyr
-#' @import dplyr
-#' @import stringr
-#' @import lubridate
-filter_grade_threshold <- function(df, side_effect_cols,  grade_threshold = 4) {
+#' @param df DataFrame containing the patient data
+#' @param side_effect_cols Character vector specifying the side effect columns to check
+#' @param grade_threshold Numeric, the CTCAE grade threshold to filter by (default: 4)
+#' @return DataFrame containing only rows with events meeting the threshold criteria
+#' @keywords internal
+#' @import tidyr dplyr stringr lubridate
+filter_grade_threshold <- function(df, side_effect_cols, grade_threshold = 4) {
 
   message(glue::glue("Filtering for CTCAE grade greater than: {grade_threshold}"))
 
@@ -161,30 +148,12 @@ filter_grade_threshold <- function(df, side_effect_cols,  grade_threshold = 4) {
 
 #' Reorder Columns Based on Assessment Dates
 #'
-#' This function reorders all columns in a dataframe after the third column
-#' based on their corresponding assessment dates.
+#' Reorders columns in a dataframe chronologically based on their corresponding 
+#' assessment dates, facilitating temporal analysis of side effects.
 #'
-#' @param df A dataframe containing the data to be reordered. The first three
-#' columns should be `embrace_id`, `side_effect`, and `Diagnosis & Treatment`.
-#' The subsequent columns should be named with time points (e.g., `3m`, `6m`).
-#' @return A dataframe with the columns reordered based on the assessment dates.
-#' @details The function assumes that there is a row in the dataframe where the
-#' `side_effect` column is "assessment_date" and the subsequent columns contain
-#' the corresponding assessment dates. The function extracts these dates, sorts
-#' the columns accordingly, and returns the reordered dataframe.
-#' @examples
-#' \dontrun{
-#' df <- tibble::tibble(
-#'   embrace_id = c("AAR2005", "AAR2005"),
-#'   side_effect = c("general_comments", "assessment_date"),
-#'   `Diagnosis & Treatment` = c(NA, NA),
-#'   `3m` = c(NA, "2017-01-01"),
-#'   `6m` = c(NA, "2017-07-01"),
-#'   `9m` = c(NA, "2017-10-01")
-#' )
-#' reordered_df <- reorder_columns_based_on_date(df)
-#' }
-#' @export
+#' @param df DataFrame with columns to be reordered
+#' @return DataFrame with columns reordered chronologically
+#' @keywords internal
 reorder_columns_based_on_date <- function(df) {
   # Extract the column names to be reordered
   columns_to_reorder <- colnames(df)[4:ncol(df)]
@@ -226,7 +195,7 @@ reorder_columns_based_on_date <- function(df) {
 #' new_df <- move_row(df, 5, 2)
 #' print(new_df)
 #' }
-#' @export
+#' @keywords internal
 move_row <- function(df, row_from, row_to) {
   if (row_from < 1 || row_from > nrow(df) || row_to < 1 || row_to > nrow(df)) {
     stop("Invalid row indices.")
@@ -251,7 +220,7 @@ move_row <- function(df, row_from, row_to) {
 #'
 #' @param df DataFrame, the data to be reshaped.
 #' @return DataFrame in long format with separated side effect names and time points.
-#' @export
+#' @keywords internal
 reshape_side_effects <- function(df) {
   # Convert all columns except 'embrace_id' to character
   df <- df %>%
@@ -301,14 +270,14 @@ reshape_side_effects <- function(df) {
 
 
 
-#' Create Styled Excel Sheet
+#' Create Styled Excel Report for Patient Side Effects
 #'
-#' Creates an Excel sheet with styled cells based on the data provided.
+#' Generates a formatted Excel report with conditional formatting based on side effect 
+#' grades, highlighting severe events for easy identification.
 #'
-#' @param data DataFrame to be written to the Excel sheet.
-#' @param filePath Character, path where the Excel file will be saved.
-#' @param sheetName Character, name of the sheet within the Excel file.
-#' @export
+#' @param data DataFrame containing the patient side effect data
+#' @param filePath Character, the path where the Excel file will be saved
+#' @keywords internal
 #' @import openxlsx
 createStyledExcelSheet <- function(data, filePath, sheetName = "Side Effects") {
 
@@ -369,11 +338,12 @@ createStyledExcelSheet <- function(data, filePath, sheetName = "Side Effects") {
 
 #' Generate Patient Excel Reports
 #'
-#' For each row in the filtered dataframe, generates an Excel report with a filename based on the patient ID.
+#' Creates individual Excel reports for each patient in the filtered dataset,
+#' organizing files by center ID in appropriate subfolders.
 #'
-#' @param df_filtered DataFrame, the filtered data for which reports will be generated.
-#' @param root_folder Character, the root folder where subfolders and Excel files will be saved.
-#' @export
+#' @param df_filtered DataFrame containing filtered patient data
+#' @param root_folder Character, the root directory for saving reports
+#' @keywords internal
 generatePatientExcelReports <- function(df_filtered, root_folder) {
 
   # Get the current date to prefix the filenames
@@ -408,15 +378,15 @@ generatePatientExcelReports <- function(df_filtered, root_folder) {
 
 
 
-#' Generate Excel Reports for Patients
+#' Generate Excel Reports for Patients with Grade-Specific Events
 #'
-#' Cleans side effect names, filters the data based on a grade threshold, and generates Excel reports for each patient.
+#' Processes patient data to identify those with side effects meeting a specified 
+#' grade threshold, then generates formatted Excel reports for clinical review.
 #'
-#' @param data DataFrame, the data to be processed.
-#' @param outputDir Character, the output directory for the Excel reports.
-#' @param grade_threshold Grade threshold
-#'
-#' @export
+#' @param data DataFrame containing the complete patient dataset
+#' @param outputDir Character, the output directory for Excel reports
+#' @param grade_threshold Numeric, the CTCAE grade threshold to filter by
+#' @keywords internal
 generateExcelReportsForPatients <- function(data, outputDir, grade_threshold) {
 
   # Clean side effect names
@@ -469,19 +439,16 @@ generateExcelReportsForPatients <- function(data, outputDir, grade_threshold) {
 
 
 
-#' Add a Column for Grade XX CTCAE Event
+#' Add Grade-Specific CTCAE Event Indicator
 #'
-#' This function selects all outcome columns and adds a new column named dynamically
-#' based on the grade threshold (e.g., "grade4_ctcae_event").
+#' Adds a binary indicator column showing whether each patient has experienced
+#' any side effect meeting the specified grade threshold.
 #'
-#' @param df DataFrame containing the data.
-#' @param grade_threshold Numeric, the threshold value to compare against.
-#' @return DataFrame with an additional column "has_gradeX_ctcae_event" where X is the grade threshold.
-#' @export
-#' @import dplyr
-#' @import purrr
-#' @import stringr
-#' @import glue
+#' @param df DataFrame containing patient data
+#' @param grade_threshold Numeric, the CTCAE grade threshold to check for
+#' @return DataFrame with an additional indicator column for grade-specific events
+#' @keywords internal
+#' @import dplyr purrr stringr glue
 add_grade_ctcae_event_column <- function(df, grade_threshold) {
 
   threshold_cols <- embraceR::clean_side_effect_names(df, "_3m")
@@ -504,126 +471,38 @@ add_grade_ctcae_event_column <- function(df, grade_threshold) {
   return(df)
 }
 
-# # Example usage
-# emii <- emii %>% recode_and_convert_all_columns() %>% emii_add_number_common_iliac_ln_stat_d() %>% add_number_paraaortic_ln_stat_d() %>% replace_neg_one_with_NA()
 
-# generateExcelReportsForPatients(emii, "Grade4/", 4)
+#' Generate Excel Reports for Grade-Specific Morbidity Events
+#'
+#' Processes EMBRACE-II data to identify patients with side effects meeting a specified 
+#' grade threshold, then generates formatted Excel reports for clinical review.
+#'
+#' @param grade_threshold Numeric, the CTCAE grade threshold to filter by (default: 4)
+#' @param output_dir Character, the output directory for Excel reports (default: "Grade{threshold}/")
+#'
+#' @return Invisible NULL, called for its side effect of generating Excel reports
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # Generate reports for Grade 4 events
+#' generate_morbidity_reports(4)
+#' 
+#' # Generate reports for Grade 3 events with custom output directory
+#' generate_morbidity_reports(3, "Grade3_Reports/")
+#' }
+generate_morbidity_reports <- function(grade_threshold = 4, 
+                                       output_dir = paste0("Grade", grade_threshold, "/")) {
+  # Load and prepare EMBRACE-II data
+  emii <- embraceR::load_embrace_ii() %>% 
+    embraceR::recode_and_convert_all_columns()
+  
+  # Generate Excel reports for patients with events at the specified grade threshold
+  generateExcelReportsForPatients(emii, output_dir, grade_threshold)
+  
+}
 
 
-
-
-#
-#
-# #
-# get_morbidity_completeness <- function(df, side_effect_cols, group_name) {
-#   side_effect_cols <- c(
-#     "assessment_date",
-#     "planned_followup",
-#     "disease_local_status",
-#     "disease_nodal_status",
-#     "disease_systemic_status",
-#     side_effect_cols)
-#
-#   # Determine outcome columns
-#   outcome_columns <- names(df) %>%
-#     purrr::keep(~any(str_detect(., paste0("^", side_effect_cols, ".*")))) %>%
-#     purrr::discard(~str_detect(., "text_"))
-#
-#   outcome_columns <- outcome_columns[!sapply(df[outcome_columns], is.character)]
-#
-#   # Select relevant columns
-#   df <- df %>% select(embrace_id, any_of(outcome_columns))
-#
-#   # Pivot and filter the dataframe
-#   df_long <- df %>%
-#     pivot_longer(
-#       -embrace_id,
-#       names_to = c(".value", "Timepoint"),
-#       names_pattern = "^(.*?)(?:_baseline_morbidity|_bm_eort|_bm_4w|_([0-9]+m))$"
-#     ) %>%
-#     filter(Timepoint != "") %>%
-#     filter(!(is.na(assessment_date) & is.na(planned_followup))) %>%
-#     filter(!if_any(c("disease_local_status", "disease_nodal_status", "disease_systemic_status"), ~ (. == 2) & !is.na(.)))
-#
-#   # Calculate column completeness and filter by mandatory threshold
-#   column_completeness <- colSums(!is.na(df_long)) / nrow(df_long) * 100
-#   mandatory_threshold <- 90
-#   essential_cols <- names(column_completeness[column_completeness >= mandatory_threshold])
-#
-#   df_filtered <- df_long %>%
-#     select(all_of(essential_cols), -assessment_date) %>%
-#     embraceR::replace_neg_one_with_NA()
-#
-#   # Calculate completeness for each row
-#   df_completeness <- df_filtered %>%
-#     rowwise() %>%
-#     mutate(completeness = mean(!is.na(c_across(starts_with(side_effect_cols))), na.rm = TRUE) * 100) %>%
-#     ungroup()
-#
-#   # Summarize to get the average completeness per patient across all follow-ups
-#   average_completeness <- df_completeness %>%
-#     group_by(embrace_id) %>%
-#     summarise(average_completeness = mean(completeness, na.rm = TRUE)) %>%
-#     mutate(group = group_name)
-#
-#   return(average_completeness)
-# }
-#
-#
-# # USAGE
-# #
-# #
-# df <- emii
-#
-# side_effect_cols <- embraceR::clean_side_effect_names(df, "_3m")
-# average_completeness_ctcae <- get_morbidity_completeness(df, side_effect_cols, "CTCAE")
-#
-# side_effect_cols <- embraceR::clean_eortc_names(df, "_3m")
-# average_completeness_eortc <- get_morbidity_completeness(df, side_effect_cols, "EORTC")
-#
-#
-# openxlsx::write.xlsx(rbind(average_completeness_ctcae, average_completeness_eortc), file = "2024_ctcae_eortc_comlpeteness.xlsx")
-#
-#
-# avg_completeness_ctcae <- emii %>%
-#   select(embrace_id, centre_id) %>%
-#   left_join(average_completeness_ctcae) %>%
-#   group_by(centre_id) %>%
-#   summarise(average_completeness = mean(average_completeness, na.rm = TRUE)) %>%
-#   ungroup() %>%
-#   mutate(group = "CTCAE")
-#
-# avg_completeness_eortc <- emii %>%
-#   select(embrace_id, centre_id) %>%
-#   left_join(average_completeness_eortc) %>%
-#   group_by(centre_id) %>%
-#   summarise(average_completeness = mean(average_completeness, na.rm = TRUE)) %>%
-#   ungroup() %>%
-#   mutate(group = "EORTC")
-#
-# avg_completeness <- rbind(avg_completeness_ctcae, avg_completeness_eortc) %>%
-#   mutate(centre_id = as.factor(centre_id))
-#
-#
-#
-#
-# library(ggplot2)
-#
-# # Adjusting the ggplot function as per your requirements
-# ggplot(avg_completeness, aes(x = centre_id, y = group, fill = average_completeness)) +
-#   geom_tile(color = "white", size = 0.1) +  # Adds a white border for better tile distinction
-#   scale_fill_gradientn(colors = c("red", "darkorange", "green"),
-#                        values = scales::rescale(c(0, 50, 100)),
-#                        name = "Avg Completeness (%)",
-#                        limits = c(0, 100)) +
-#   labs(title = "",
-#        x = "Centre ID",
-#        y = "Category") +
-#   theme_minimal(base_size = 18) +
-#   theme(axis.text.x = element_text(angle = 45, hjust = 1),
-#         axis.title.y = element_blank()) +
-#   coord_fixed(ratio = 2)
-#
-#
 
 

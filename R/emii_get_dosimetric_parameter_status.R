@@ -1,8 +1,22 @@
-#' Get Status of Dosimetric Parameters and Compare with EMBRACE-I
+#' Compare Dosimetric Parameters Between EMBRACE-I and EMBRACE-II
 #'
-#' @return A gtsummary object containing the comparative summary table.
+#' Generates a summary table comparing dosimetric parameters between EMBRACE-I and 
+#' EMBRACE-II datasets. The function selects relevant dosimetric parameters from both 
+#' studies, combines them, and performs statistical comparisons to identify significant 
+#' differences between the two cohorts.
 #'
-#' @export
+#' @return A gtsummary object containing the comparative summary table with p-values
+#'
+#' @keywords internal
+#'
+#' @import dplyr
+#' @importFrom gtsummary tbl_summary add_p modify_header modify_spanning_header modify_caption
+#'
+#' @examples
+#' \dontrun{
+#' # Generate dosimetric parameter comparison table
+#' summary_table <- emii_get_dosimetric_parameter_status()
+#' }
 emii_get_dosimetric_parameter_status <- function() {
   
   emi <- embraceR::load_embrace_i()
@@ -17,7 +31,7 @@ emii_get_dosimetric_parameter_status <- function() {
     embraceR::recode_and_convert_all_columns() %>%
     dplyr::mutate(study = "EMBRACE-II")
 
-selected_cols <- emii_data %>% select(-embrace_id) %>% colnames()
+  selected_cols <- emii_data %>% select(-embrace_id) %>% colnames()
 
   emi_data <- emi %>%
     dplyr::select(
