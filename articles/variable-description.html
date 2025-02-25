@@ -73,271 +73,417 @@
 <div class="section level3">
 <h3 id="quick-reference-all-added-variables-embrace-ii">Quick Reference: All Added Variables EMBRACE-II<a class="anchor" aria-label="anchor" href="#quick-reference-all-added-variables-embrace-ii"></a>
 </h3>
-<ul>
+<table class="table">
+<colgroup>
+<col width="36%">
+<col width="63%">
+</colgroup>
+<thead><tr class="header">
+<th>Variable</th>
+<th>Details</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>age</code></td>
+<td><ul>
+<li>Patient age at diagnosis</li>
 <li>
-<code>age</code>: Patient age at diagnosis (EMBRACE-II)
+<strong>Calculation:</strong> <code>histology_assessment_date</code>
 <ul>
-<li>Calculation: <code>histology_assessment_date</code> -
-<code>year_of_birth</code>
-</li>
-<li>Implementation: <code><a href="../reference/add_age.html">add_age()</a></code> function</li>
-<li>Unit: Years</li>
+<li><code>year_of_birth</code></li>
 </ul>
 </li>
 <li>
-<code>icis</code>: Intracavitary/Interstitial classification
-<ul>
-<li>Calculation: Based on <code>fraction_*_technique_tdvh</code>
-columns</li>
-<li>Values: Binary indicator (1 = ICIS, 0 = IC)</li>
-<li>Implementation: <code><a href="../reference/add_icis.html">add_icis()</a></code> function</li>
-<li>Note: Derived from technique values across all fractions</li>
-</ul>
+<strong>Implementation:</strong> <code><a href="../reference/add_age.html">add_age()</a></code>
 </li>
 <li>
-<code>icis_parallel_oblique</code>: Detailed ICIS needle
-classification
-<ul>
-<li>Calculation: Based on <code>fraction_*_technique_tdvh</code>
-columns</li>
-<li>Values:
-<ul>
-<li>“no needles”</li>
-<li>“parallel needles”</li>
-<li>“oblique needles”</li>
-<li>“other”</li>
-</ul>
-</li>
-<li>Implementation: <code><a href="../reference/add_parallel_oblique_needles.html">add_parallel_oblique_needles()</a></code>
-function</li>
-</ul>
+<strong>Unit:</strong> Years</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>icis</code></td>
+<td><ul>
+<li>Intracavitary/Interstitial classification</li>
+<li>
+<strong>Calculation:</strong> Based on
+<code>fraction_*_technique_tdvh</code> columns</li>
+<li>
+<strong>Implementation:</strong> <code><a href="../reference/add_icis.html">add_icis()</a></code>
 </li>
 <li>
-<code>average_nr_active_needles</code>: Average number of active
-needles across fractions
-<ul>
-<li>Calculation: Mean of <code>fraction_*_active_needles</code> columns,
-rounded to nearest integer</li>
-<li>Implementation: <code><a href="../reference/add_average_active_needles.html">add_average_active_needles()</a></code>
-function</li>
-<li>Unit: Number of needles</li>
-</ul>
+<strong>Values:</strong> Binary (1 = ICIS, 0 = IC)</li>
+<li>
+<strong>Note:</strong> Derived from technique values across
+fractions</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>icis_parallel_oblique</code></td>
+<td><ul>
+<li>Detailed ICIS needle classification</li>
+<li>
+<strong>Calculation:</strong> Based on
+<code>fraction_*_technique_tdvh</code> columns</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_parallel_oblique_needles.html">add_parallel_oblique_needles()</a></code>
 </li>
 <li>
-<code>time_to_bt</code>: Time from EBRT start to first brachytherapy
-fraction
-<ul>
-<li>Calculation: <code>fraction01date_tdvh</code> -
-<code>ebrt_start_date_tdvh</code>, rounded to nearest day</li>
-<li>Implementation: <code><a href="../reference/add_time_to_bt.html">add_time_to_bt()</a></code> function</li>
-<li>Unit: Days</li>
-</ul>
+<strong>Values:</strong> “no needles”, “parallel needles”, “oblique
+needles”, “other”</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>
+<code>average_nr_active_</code> <code>needles</code>
+</td>
+<td><ul>
+<li>Average number of active needles</li>
+<li>
+<strong>Calculation:</strong> Mean of
+<code>fraction_*_active_needles</code> columns</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_average_active_needles.html">add_average_active_needles()</a></code>
 </li>
 <li>
-<code>parametrial_involvement</code>: Maximum parametrial
-involvement indicators
-<ul>
-<li>Implementation: <code><a href="../reference/add_parametrial_involvement.html">add_parametrial_involvement()</a></code>
-function</li>
-<li>Derived columns:
-<ul>
+<strong>Unit:</strong> Number of needles</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>time_to_bt</code></td>
+<td><ul>
+<li>Time from EBRT start to first BT fraction</li>
 <li>
-<code>imp1image_max_parametrium_sta_b</code>: Maximum of left/right
-parametrium from imaging at BT</li>
-<li>
-<code>imp1gyn_max_parametrium_sta_b</code>: Maximum of left/right
-parametrium from gynecological exam at BT</li>
-<li>
-<code>mri_max_parametrium_sta_d</code>: Maximum of left/right
-parametrium from MRI at diagnosis</li>
-<li>
-<code>gyn_max_parametrium_sta_d</code>: Maximum of left/right
-parametrium from gynecological exam at diagnosis</li>
-</ul>
-</li>
-<li>Source pairs:
-<ul>
-<li>BT imaging: <code>imp1image_left_parametrium_sta_b</code> and
-<code>imp1imaging_right_parametrium_sta_b</code>
-</li>
-<li>BT exam: <code>imp1gyn_left_parametrium_sta_b</code> and
-<code>imp1gyn_right_parametrium_sta_b</code>
-</li>
-<li>Diagnostic MRI: <code>mri_left_parametrium_sta_d</code> and
-<code>mri_right_parametrium_sta_d</code>
-</li>
-<li>Diagnostic exam: <code>gyn_left_parametrium_sta_d</code> and
-<code>gyn_right_parametrium_sta_d</code>
-</li>
-</ul>
-</li>
-</ul>
+<strong>Calculation:</strong> <code>fraction01date_tdvh</code> -
+<code>ebrt_start_date_tdvh</code>
 </li>
 <li>
-<code>trak_absolute</code>: Total Reference Air Kerma (TRAK) values
-<ul>
-<li>Implementation: <code><a href="../reference/emii_add_trak_absolute.html">emii_add_trak_absolute()</a></code> function</li>
-<li>Unit: cGy at 1m</li>
-<li>Components:
-<ul>
-<li>
-<code>trak_tandem_applicator_sum</code>: Total TRAK from tandem
-applicator</li>
-<li>
-<code>trak_vaginal_applicator_sum</code>: Total TRAK from vaginal
-applicator</li>
-<li>
-<code>trak_needles_sum</code>: Total TRAK from needles</li>
-<li>
-<code>trak_total_sum</code>: Sum of all TRAK components</li>
-</ul>
-</li>
-<li>Calculation:
-<ul>
-<li>Per-fraction absolute values = fraction TRAK × component
-percentage</li>
-<li>Component sums = Sum of component values across all fractions</li>
-</ul>
-</li>
-<li>Notes:
-<ul>
-<li>Zero values converted to NA</li>
-<li>Calculated for up to 7 fractions by default</li>
-</ul>
-</li>
-</ul>
+<strong>Implementation:</strong> <code><a href="../reference/add_time_to_bt.html">add_time_to_bt()</a></code>
 </li>
 <li>
-<code>ott</code>: Overall Treatment Time
-<ul>
-<li>Implementation: <code><a href="../reference/emii_add_ott.html">emii_add_ott()</a></code> function</li>
-<li>Unit: Days</li>
-</ul>
+<strong>Unit:</strong> Days</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>parametrial_involvement</code></td>
+<td><ul>
+<li>Maximum parametrial involvement indicators</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_parametrial_involvement.html">add_parametrial_involvement()</a></code>
 </li>
 <li>
-<code>ott_ebrt</code>: Overall treatment time of external beam
-radiotherapy
-<ul>
-<li>Calculation: <code>ebrt_end_date_tdvh</code> -
-<code>ebrt_start_date_tdvh</code>, rounded to nearest day</li>
-<li>Implementation: <code><a href="../reference/add_time_to_bt.html">add_time_to_bt()</a></code> function</li>
-<li>Unit: Days</li>
-</ul>
+<strong>Derived columns:</strong> Maximum values from paired
+measurements</li>
+<li>
+<strong>Source pairs:</strong> BT imaging, BT exam, Diagnostic MRI,
+Diagnostic exam</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>trak_absolute</code></td>
+<td><ul>
+<li>Total Reference Air Kerma (TRAK) values</li>
+<li>
+<strong>Calculation:</strong> Component-wise calculation from TRAK
+percentages</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/emii_add_trak_absolute.html">emii_add_trak_absolute()</a></code>
 </li>
 <li>
-<code>event_localfailure</code>: Local failure event indicator
-<ul>
-<li>Calculation: Based on <code>disease_local_status_*</code> columns
-for all follow-up timepoints</li>
-<li>Implementation: <code><a href="../reference/add_local_failure_event.html">add_local_failure_event()</a></code> function</li>
-<li>Values:
-<ul>
-<li>1: Local failure occurred (any status = 2)</li>
-<li>0: No local failure</li>
-<li>NA: All status values are missing</li>
-</ul>
-</li>
-<li>Source status codes in follow-up:
-<ul>
-<li>0: No evidence of disease</li>
-<li>1: Uncertain evidence of disease</li>
-<li>2: Certain evidence of disease</li>
-</ul>
-</li>
-<li>Note: Event is triggered only by certain evidence (status = 2) at
-any timepoint</li>
-</ul>
+<strong>Unit:</strong> cGy at 1m</li>
+<li>
+<strong>Note:</strong> Zero values converted to NA</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>ott</code></td>
+<td><ul>
+<li>Overall Treatment Time</li>
+<li>
+<strong>Implementation:</strong> <code><a href="../reference/emii_add_ott.html">emii_add_ott()</a></code>
 </li>
 <li>
-<code>event_nodalfailure</code>: Nodal failure event indicator
-(EMBRACE-II)
-<ul>
-<li>Calculation: Based on <code>disease_nodal_status_*</code> columns
-for all follow-up timepoints</li>
-<li>Implementation: <code><a href="../reference/add_nodal_failure_event.html">add_nodal_failure_event()</a></code> function</li>
-<li>Values:
-<ul>
-<li>1: Nodal failure occurred (any status = 2)</li>
-<li>0: No nodal failure</li>
-<li>NA: All status values are missing or non-EMBRACE-II study</li>
-</ul>
-</li>
-<li>Source status codes in follow-up:
-<ul>
-<li>0: No evidence of disease</li>
-<li>1: Uncertain evidence of disease</li>
-<li>2: Certain evidence of disease</li>
-</ul>
-</li>
-<li>Note: Event is triggered only by certain evidence (status = 2) at
-any timepoint</li>
-</ul>
+<strong>Unit:</strong> Days</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>ott_ebrt</code></td>
+<td><ul>
+<li>Overall treatment time of EBRT</li>
+<li>
+<strong>Calculation:</strong> <code>ebrt_end_date_tdvh</code> -
+<code>ebrt_start_date_tdvh</code>
 </li>
 <li>
-<code>event_systemicfailure</code>: Systemic failure indicator</li>
-<li>
-<code>event_vitalstatus</code>: Vital status event</li>
-<li>
-<code>timetoevent_disease</code>: Time to disease event</li>
-<li>
-<code>timetoevent_vitalstatus</code>: Time to vital status
-update</li>
-<li>
-<code>time_to_bt_percent</code>: Relative timing of brachytherapy
-<ul>
-<li>Calculation: <code>time_to_bt</code> / <code>ott_ebrt</code>
-</li>
-<li>Implementation: <code><a href="../reference/add_time_to_bt.html">add_time_to_bt()</a></code> function</li>
-</ul>
+<strong>Implementation:</strong> <code><a href="../reference/add_time_to_bt.html">add_time_to_bt()</a></code>
 </li>
 <li>
-<code>fraction01hrctv_volume_bins</code>: High-Risk CTV volume
-categories at first fraction
-<ul>
-<li>Calculation: Based on <code>fraction01hrctv_volume_tdvh</code>
-</li>
-<li>Implementation: <code><a href="../reference/add_hrctv_volume_bins.html">add_hrctv_volume_bins()</a></code> function</li>
-<li>Values:
-<ul>
-<li>0: &lt; 30 cm³</li>
-<li>1: 30-45 cm³</li>
-<li>2: &gt; 45 cm³</li>
-<li>NA: Missing volume data</li>
-</ul>
-</li>
-</ul>
+<strong>Unit:</strong> Days</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>event_localfailure</code></td>
+<td><ul>
+<li>Local failure event indicator</li>
+<li>
+<strong>Calculation:</strong> Based on
+<code>disease_local_status_*</code> columns</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_local_failure_event.html">add_local_failure_event()</a></code>
 </li>
 <li>
-<code>max_tumor_dimension_sta_d</code>: Maximum tumor dimension at
-diagnosis
-<ul>
-<li>Calculation: Maximum value across all tumor measurements</li>
-<li>Implementation: <code><a href="../reference/add_max_tumor_dimension.html">add_max_tumor_dimension()</a></code> function</li>
-<li>Unit: Millimeters</li>
-<li>Derived from:
-<ul>
+<strong>Values:</strong> 1 = failure, 0 = no failure, NA =
+missing</li>
 <li>
-<code>mri_max_tumor_dimension_sta_d</code>: Maximum of MRI
-measurements (width, height)</li>
+<strong>Note:</strong> Event triggered by status = 2 at any
+timepoint</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>event_nodalfailure</code></td>
+<td><ul>
+<li>Nodal failure event indicator</li>
 <li>
-<code>gyn_max_tumor_dimension_sta_d</code>: Maximum of gynecological
-exam measurements (width, thickness)</li>
-</ul>
-</li>
-<li>Note: Infinite values are converted to NA</li>
-</ul>
+<strong>Calculation:</strong> Based on
+<code>disease_nodal_status_*</code> columns</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_nodal_failure_event.html">add_nodal_failure_event()</a></code>
 </li>
 <li>
-<code>event_nodalcontrol_incl_pao</code>: Nodal failure event
-indicator (EMBRACE-I)
-<ul>
-<li>Calculation: Same as <code>event_nodalfailure</code>
+<strong>Values:</strong> 1 = failure, 0 = no failure, NA =
+missing</li>
+<li>
+<strong>Note:</strong> Event triggered by status = 2 at any
+timepoint</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>event_systemicfailure</code></td>
+<td><ul>
+<li>Systemic failure event indicator (EMBRACE-II)</li>
+<li>
+<strong>Calculation:</strong> Based on
+<code>disease_systemic_status_*</code> columns</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_systemic_failure_event.html">add_systemic_failure_event()</a></code>
 </li>
-<li>Values: Same coding (1/0/NA)</li>
-<li>Note: NA for non-EMBRACE-I study</li>
-</ul>
+<li>
+<strong>Values:</strong> 1 = failure, 0 = no failure, NA =
+missing</li>
+<li>
+<strong>Note:</strong> Event triggered by status = 2 at any
+timepoint</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>event_systemic_excl_pao</code></td>
+<td><ul>
+<li>Systemic failure event indicator (EMBRACE-I)</li>
+<li>
+<strong>Calculation:</strong> Based on
+<code>disease_systemic_status_*</code> columns</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_systemic_failure_event.html">add_systemic_failure_event()</a></code>
 </li>
-</ul>
+<li>
+<strong>Values:</strong> 1 = failure, 0 = no failure, NA =
+missing</li>
+<li>
+<strong>Note:</strong> Event triggered by status = 1 or 2 at any
+timepoint</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>event_vitalstatus</code></td>
+<td><ul>
+<li>Vital status event indicator</li>
+<li>
+<strong>Calculation:</strong> Based on <code>vital_status</code> and
+<code>latest_assessment_date_disease</code>
+</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_vitalstatus_event.html">add_vitalstatus_event()</a></code>
+</li>
+<li>
+<strong>Values:</strong> 1 = death, 0 = alive, NA = missing</li>
+<li>
+<strong>Note:</strong> If vital status missing but assessment date
+exists, considered alive</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>timetoevent_disease</code></td>
+<td><ul>
+<li>Time to disease event</li>
+<li>
+<strong>Calculation:</strong> Time between
+<code>histology_assesment_date</code> and latest assessment</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_time_to_diseaseevent.html">add_time_to_diseaseevent()</a></code>
+</li>
+<li>
+<strong>Unit:</strong> Months</li>
+<li>
+<strong>Note:</strong> Creates columns
+<code>latest_assessment_date_disease</code>,
+<code>latest_followup_id</code>
+</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>timetoevent_vitalstatus</code></td>
+<td><ul>
+<li>Time to vital status update</li>
+<li>
+<strong>Calculation:</strong> Time between
+<code>histology_assesment_date</code> and latest vital status</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_time_to_last_vitalstatus.html">add_time_to_last_vitalstatus()</a></code>
+</li>
+<li>
+<strong>Unit:</strong> Months</li>
+<li>
+<strong>Note:</strong> Uses maximum date from all available vital
+status sources</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>time_to_bt_percent</code></td>
+<td><ul>
+<li>Relative timing of brachytherapy</li>
+<li>
+<strong>Calculation:</strong> <code>time_to_bt</code> /
+<code>ott_ebrt</code>
+</li>
+<li>
+<strong>Implementation:</strong> <code><a href="../reference/add_time_to_bt.html">add_time_to_bt()</a></code>
+</li>
+<li>
+<strong>Unit:</strong> Proportion</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>
+<code>fraction01hrctv_</code> <code>volume_bins</code>
+</td>
+<td><ul>
+<li>High-Risk CTV volume categories</li>
+<li>
+<strong>Calculation:</strong> Based on
+<code>fraction01hrctv_volume_tdvh</code>
+</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_hrctv_volume_bins.html">add_hrctv_volume_bins()</a></code>
+</li>
+<li>
+<strong>Values:</strong> 0: &lt; 30 cm³, 1: 30-45 cm³, 2: &gt; 45
+cm³, NA: missing</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>
+<code>max_tumor_dimension_</code> <code>sta_d</code>
+</td>
+<td><ul>
+<li>Maximum tumor dimension at diagnosis</li>
+<li>
+<strong>Calculation:</strong> Maximum value across all tumor
+measurements</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_max_tumor_dimension.html">add_max_tumor_dimension()</a></code>
+</li>
+<li>
+<strong>Unit:</strong> Millimeters</li>
+<li>
+<strong>Note:</strong> Infinite values converted to NA</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
 </div>
   </main>
 </div>
