@@ -482,6 +482,96 @@ measurements</li>
 <strong>Note:</strong> Infinite values converted to NA</li>
 </ul></td>
 </tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>is_lost_to_fu</code></td>
+<td><ul>
+<li>Lost to follow-up indicator</li>
+<li>
+<strong>Calculation:</strong> Based on <code>followup_*m</code>
+columns</li>
+<li>
+<strong>Implementation:</strong> <code><a href="../reference/add_lost_to_fu.html">add_lost_to_fu()</a></code>
+</li>
+<li>
+<strong>Values:</strong> TRUE/FALSE</li>
+<li>
+<strong>Note:</strong> TRUE if any followup value = 2 at any
+timepoint</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>withdrew_consent</code></td>
+<td><ul>
+<li>Consent withdrawal indicator</li>
+<li>
+<strong>Calculation:</strong> Based on <code>followup_*m</code>
+columns</li>
+<li>
+<strong>Implementation:</strong> <code><a href="../reference/add_lost_to_fu.html">add_lost_to_fu()</a></code>
+</li>
+<li>
+<strong>Values:</strong> TRUE/FALSE</li>
+<li>
+<strong>Note:</strong> TRUE if any followup value = 3 at any
+timepoint</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>
+<code>number_common_iliac_ln_</code> <code>stat_d</code>
+</td>
+<td><ul>
+<li>Count of common iliac lymph nodes at diag.</li>
+<li>
+<strong>Calculation:</strong> Sum of left and right common iliac
+lymph nodes from staging data</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/emii_add_number_common_iliac_ln_stat_d.html">emii_add_number_common_iliac_ln_stat_d()</a></code>
+</li>
+<li>
+<strong>Unit:</strong> Count</li>
+<li>
+<strong>Note:</strong> Includes both “L com iliac” and “R com iliac”
+anatomical positions</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>
+<code>number_paraaortic_ln_</code> <code>stat_d</code>
+</td>
+<td><ul>
+<li>Count of para-aortic lymph nodes at diag.</li>
+<li>
+<strong>Calculation:</strong> Count of lymph nodes with “Para
+Aortic” anatomical position from staging data</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_number_paraaortic_ln_stat_d.html">add_number_paraaortic_ln_stat_d()</a></code>
+</li>
+<li>
+<strong>Unit:</strong> Count</li>
+<li>
+<strong>Note:</strong> Identifies nodes specifically labeled as
+“Para Aortic”</li>
+</ul></td>
+</tr>
 </tbody>
 </table>
 </div>

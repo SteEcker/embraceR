@@ -64,6 +64,7 @@
 <url><loc>https://steecker.github.io/embraceR/reference/emii_add_systemic_excl_pao.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/reference/emii_add_systemic_excl_pao_with_verification.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/reference/emii_add_trak_absolute.html</loc></url>
+<url><loc>https://steecker.github.io/embraceR/reference/emii_create_elective_targets_table.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/reference/emii_find_outliers.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/reference/emii_get_clean_data.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/reference/emii_get_critical_parameter_status.html</loc></url>
@@ -76,8 +77,8 @@
 <url><loc>https://steecker.github.io/embraceR/reference/filter_grade_threshold.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/reference/generateExcelReportsForPatients.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/reference/generatePatientExcelReports.html</loc></url>
+<url><loc>https://steecker.github.io/embraceR/reference/generate_morbidity_reports.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/reference/get_combined_outcomes.html</loc></url>
-<url><loc>https://steecker.github.io/embraceR/reference/get_followup_events.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/reference/get_latest_side_effects.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/reference/get_max_of_two_columns.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/reference/get_max_side_effects.html</loc></url>
@@ -106,5 +107,6 @@
 <url><loc>https://steecker.github.io/embraceR/reference/save_eviguide_data.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/reference/threshold.html</loc></url>
 <url><loc>https://steecker.github.io/embraceR/reference/transpose_sheet_to_wide.html</loc></url>
+<url><loc>https://steecker.github.io/embraceR/reference/update_record.html</loc></url>
 </urlset>
 
