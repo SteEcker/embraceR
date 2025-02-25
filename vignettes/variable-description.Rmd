@@ -1,0 +1,120 @@
+---
+title: "Variable Description"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Variable Description}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+### Quick Reference: All Added Variables EMBRACE-II
+
+- `age`: Patient age at diagnosis (EMBRACE-II)
+  - Calculation: `histology_assessment_date` - `year_of_birth`
+  - Implementation: `add_age()` function
+  - Unit: Years
+- `icis`: Intracavitary/Interstitial classification
+  - Calculation: Based on `fraction_*_technique_tdvh` columns
+  - Values: Binary indicator (1 = ICIS, 0 = IC)
+  - Implementation: `add_icis()` function
+  - Note: Derived from technique values across all fractions
+- `icis_parallel_oblique`: Detailed ICIS needle classification
+  - Calculation: Based on `fraction_*_technique_tdvh` columns
+  - Values: 
+    - "no needles"
+    - "parallel needles"
+    - "oblique needles"
+    - "other"
+  - Implementation: `add_parallel_oblique_needles()` function
+- `average_nr_active_needles`: Average number of active needles across fractions
+  - Calculation: Mean of `fraction_*_active_needles` columns, rounded to nearest integer
+  - Implementation: `add_average_active_needles()` function
+  - Unit: Number of needles
+- `time_to_bt`: Time from EBRT start to first brachytherapy fraction
+  - Calculation: `fraction01date_tdvh` - `ebrt_start_date_tdvh`, rounded to nearest day
+  - Implementation: `add_time_to_bt()` function
+  - Unit: Days
+- `parametrial_involvement`: Maximum parametrial involvement indicators
+  - Implementation: `add_parametrial_involvement()` function
+  - Derived columns:
+    - `imp1image_max_parametrium_sta_b`: Maximum of left/right parametrium from imaging at BT
+    - `imp1gyn_max_parametrium_sta_b`: Maximum of left/right parametrium from gynecological exam at BT
+    - `mri_max_parametrium_sta_d`: Maximum of left/right parametrium from MRI at diagnosis
+    - `gyn_max_parametrium_sta_d`: Maximum of left/right parametrium from gynecological exam at diagnosis
+  - Source pairs:
+    - BT imaging: `imp1image_left_parametrium_sta_b` and `imp1imaging_right_parametrium_sta_b`
+    - BT exam: `imp1gyn_left_parametrium_sta_b` and `imp1gyn_right_parametrium_sta_b`
+    - Diagnostic MRI: `mri_left_parametrium_sta_d` and `mri_right_parametrium_sta_d`
+    - Diagnostic exam: `gyn_left_parametrium_sta_d` and `gyn_right_parametrium_sta_d`
+- `trak_absolute`: Total Reference Air Kerma (TRAK) values
+  - Implementation: `emii_add_trak_absolute()` function
+  - Unit: cGy at 1m
+  - Components:
+    - `trak_tandem_applicator_sum`: Total TRAK from tandem applicator
+    - `trak_vaginal_applicator_sum`: Total TRAK from vaginal applicator
+    - `trak_needles_sum`: Total TRAK from needles
+    - `trak_total_sum`: Sum of all TRAK components
+  - Calculation:
+    - Per-fraction absolute values = fraction TRAK × component percentage
+    - Component sums = Sum of component values across all fractions
+  - Notes:
+    - Zero values converted to NA
+    - Calculated for up to 7 fractions by default
+- `ott`: Overall Treatment Time
+  - Implementation: `emii_add_ott()` function
+  - Unit: Days
+- `ott_ebrt`: Overall treatment time of external beam radiotherapy
+  - Calculation: `ebrt_end_date_tdvh` - `ebrt_start_date_tdvh`, rounded to nearest day
+  - Implementation: `add_time_to_bt()` function
+  - Unit: Days
+- `event_localfailure`: Local failure event indicator
+  - Calculation: Based on `disease_local_status_*` columns for all follow-up timepoints
+  - Implementation: `add_local_failure_event()` function
+  - Values:
+    - 1: Local failure occurred (any status = 2)
+    - 0: No local failure
+    - NA: All status values are missing
+  - Source status codes in follow-up:
+    - 0: No evidence of disease
+    - 1: Uncertain evidence of disease
+    - 2: Certain evidence of disease
+  - Note: Event is triggered only by certain evidence (status = 2) at any timepoint
+- `event_nodalfailure`: Nodal failure event indicator (EMBRACE-II)
+  - Calculation: Based on `disease_nodal_status_*` columns for all follow-up timepoints
+  - Implementation: `add_nodal_failure_event()` function
+  - Values:
+    - 1: Nodal failure occurred (any status = 2)
+    - 0: No nodal failure
+    - NA: All status values are missing or non-EMBRACE-II study
+  - Source status codes in follow-up:
+    - 0: No evidence of disease
+    - 1: Uncertain evidence of disease
+    - 2: Certain evidence of disease
+  - Note: Event is triggered only by certain evidence (status = 2) at any timepoint
+- `event_systemicfailure`: Systemic failure indicator
+- `event_vitalstatus`: Vital status event
+- `timetoevent_disease`: Time to disease event
+- `timetoevent_vitalstatus`: Time to vital status update
+- `time_to_bt_percent`: Relative timing of brachytherapy
+  - Calculation: `time_to_bt` / `ott_ebrt`
+  - Implementation: `add_time_to_bt()` function
+- `fraction01hrctv_volume_bins`: High-Risk CTV volume categories at first fraction
+  - Calculation: Based on `fraction01hrctv_volume_tdvh`
+  - Implementation: `add_hrctv_volume_bins()` function
+  - Values:
+    - 0: < 30 cm³
+    - 1: 30-45 cm³
+    - 2: > 45 cm³
+    - NA: Missing volume data
+- `max_tumor_dimension_sta_d`: Maximum tumor dimension at diagnosis
+  - Calculation: Maximum value across all tumor measurements
+  - Implementation: `add_max_tumor_dimension()` function
+  - Unit: Millimeters
+  - Derived from:
+    - `mri_max_tumor_dimension_sta_d`: Maximum of MRI measurements (width, height)
+    - `gyn_max_tumor_dimension_sta_d`: Maximum of gynecological exam measurements (width, thickness)
+  - Note: Infinite values are converted to NA
+- `event_nodalcontrol_incl_pao`: Nodal failure event indicator (EMBRACE-I)
+  - Calculation: Same as `event_nodalfailure`
+  - Values: Same coding (1/0/NA)
+  - Note: NA for non-EMBRACE-I study

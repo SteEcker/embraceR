@@ -99,9 +99,6 @@ load_embrace_ii <- function(file_path = here::here("data_raw/embrace_II/emii.xls
   # Add study name
   all_data <- all_data %>% mutate(study = 'embrace_ii')
 
-  # Preprocessing steps
-  all_data <- all_data %>% process_emii_data()
-
   # Add new columns if necessary
   if (add_new_columns) {
     # Read the mapping file

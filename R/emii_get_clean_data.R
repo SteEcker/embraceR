@@ -18,28 +18,18 @@
 #'   clean_data <- emii_get_clean_data(save_excel = TRUE)
 #'   clean_data <- emii_get_clean_data(save_excel = TRUE, excel_path = "my_data.xlsx")
 #' }
-emii_get_clean_data <- function(save_excel = FALSE, 
+emii_get_clean_data <- function(save_excel = FALSE,
                                excel_path = NULL) {
   # Set default excel_path with current date if not provided
   if (is.null(excel_path)) {
     current_date <- format(Sys.Date(), "%Y-%m-%d")
     excel_path <- glue::glue("{current_date}_clean_emii_data.xlsx")
   }
-  
+
   # Load EMBRACE-II data using the existing load function
-  data <- load_embrace_ii(
-    file_path = here::here("data_raw/embrace_II/emii.xlsx"),
-    file_path_eqd2 = here::here("data_raw/embrace_II/emii_eqd2.xlsx"),
-    add_new_columns = TRUE,
-    mapping_file = here::here("data_raw/mapping_table/mapping_table.xlsx"),
-    include_only_study_patients = TRUE,
-    replace_minusone_with_na = TRUE
-  ) %>%
-    embraceR::emii_add_trak_absolute() %>%
-    embraceR::emii_add_ott() %>%
-    embraceR::emii_add_elective_targets() %>%
-    embraceR::add_disease_events() 
-  
+  data <- load_embrace_ii() %>%
+    process_emii_data()
+
   # Select columns from the provided list
   selected_columns <- c(
     # Identifiers and administrative
@@ -48,7 +38,22 @@ emii_get_clean_data <- function(save_excel = FALSE,
     "registration_date",
     "birth_date_sta_d",
     "year_of_birth_sta_d",
-    
+    "age",
+
+    # Custom calculated variables
+    "icis",
+    "average_active_needles",
+    "time_to_bt",
+    "parametrial_involvement",
+    "hrctv_volume_bins",
+    "max_tumor_dimension",
+
+    # T-Score variables
+    "t_imaging",
+    "ts_mri",
+    "ts_clin",
+    "ts_diagnosis",
+
     # Patient characteristics
     "who_score_sta_d",
     "height_sta_d",
@@ -58,12 +63,12 @@ emii_get_clean_data <- function(save_excel = FALSE,
     "partner_sta_d",
     "menopause_sta_d",
     "previous_pelvic_abd_surgery_sta_d",
-    
+
     # Symptoms
     "vaginal_bleeding_sta_d",
     "pain_sta_d",
     "other_symptoms_sta_d",
-    
+
     # Comorbidities
     "co_morbidity_sta_d",
     "myocardial_infarction_sta_d",
@@ -82,7 +87,7 @@ emii_get_clean_data <- function(save_excel = FALSE,
     "moderate_severe_liver_disease_sta_d",
     "aidshiv_sta_d",
     "charlson_comorbidity_index_sta_d",
-    
+
     # Disease characteristics
     "histopathological_type_sta_d",
     "degree_of_differentiation_sta_d",
@@ -91,7 +96,7 @@ emii_get_clean_data <- function(save_excel = FALSE,
     "tnmt_stage_sta_d",
     "tnmn_stage_sta_d",
     "tnmm_stage_sta_d",
-    
+
     # Clinical findings
     "gyn_tumor_width_sta_d",
     "gyn_tumor_height_sta_d",
@@ -109,7 +114,7 @@ emii_get_clean_data <- function(save_excel = FALSE,
     "gyn_rectum_endoscopy_sta_d",
     "gyn_max_parametrium_sta_d",
     "gyn_max_tumor_dimension_sta_d",
-    
+
     # MRI findings
     "mri_tumor_width_sta_d",
     "mri_tumor_height_sta_d",
@@ -126,18 +131,18 @@ emii_get_clean_data <- function(save_excel = FALSE,
     "mri_rectum_sta_d",
     "mri_max_parametrium_sta_d",
     "mri_max_tumor_dimension_sta_d",
-    
+
     # Diagnostic procedures
     "biopsy_sta_d",
     "cone_sta_d",
     "laparascopic_staging_sta_d",
     "fdgpetct_whole_body_sta_d",
     "c_talone_sta_d",
-    
+
     # Pathological findings
     "pathological_nodes_sta_d",
     "hydronephrosis_sta_d",
-    
+
     # Blood tests
     "blood_test_hgb_unit_sta_d",
     "blood_test_hgb_mmol_l_sta_d",
@@ -195,7 +200,7 @@ emii_get_clean_data <- function(save_excel = FALSE,
     "adjuvant_chemo_courses_lt100pct_tdvh",
     "adjuvant_chemo_courses0pct_tdvh",
     "bt_fractions_tdvh",
-    
+
     # All fraction-specific variables (fraction01 through fraction07)
     paste0("fraction", sprintf("%02d", 1:7), "date_tdvh"),
     paste0("fraction", sprintf("%02d", 1:7), "applicator_tdvh"),
@@ -235,7 +240,7 @@ emii_get_clean_data <- function(save_excel = FALSE,
     paste0("fraction", sprintf("%02d", 1:7), "pibs_tdvh"),
     paste0("fraction", sprintf("%02d", 1:7), "pibs_minus2_tdvh"),
     paste0("fraction", sprintf("%02d", 1:7), "vaginal_reference_length_tdvh"),
-    
+
     #TRAK
     "trak_total_sum",
     "trak_needles_sum",
@@ -265,7 +270,7 @@ emii_get_clean_data <- function(save_excel = FALSE,
     # Histology and Disease Status
     "histology_assesment_date",
     "pathological_nodes_present",
-    
+
     # Total DVH Parameters
     "total_hrctv_d90",
     "total_hrctv_d98",
@@ -284,105 +289,39 @@ emii_get_clean_data <- function(save_excel = FALSE,
     "total_icru_rectum",
     "total_icru_bladder",
 
-    
-    
     # Events
     "event_localfailure",
     "event_nodalfailure",
     "event_systemicfailure",
     "event_vitalstatus",
-    
+
     # Time to Event
     "timetoevent_disease",
     "timetoevent_vitalstatus"
   )
-  
+
   # Return only selected columns, with a warning for any missing columns
   existing_columns <- intersect(selected_columns, names(data))
   missing_columns <- setdiff(selected_columns, names(data))
-  
+
   if (length(missing_columns) > 0) {
-    warning("The following columns were not found in the dataset: ", 
+    warning("The following columns were not found in the dataset: ",
             paste(missing_columns, collapse = ", "))
   }
-  
-  clean_data <- data %>% 
+
+  clean_data <- data %>%
     select(all_of(existing_columns)) %>%
     recode_and_convert_all_columns()
-  
+
   # Save as Excel if requested
   if (save_excel) {
     message(glue::glue("Saving data to {excel_path}"))
     openxlsx::write.xlsx(clean_data, excel_path)
   }
-  
+
   clean_data
 }
 
-#' Create Data Dictionary for Clean EMBRACE-II Data
-#'
-#' This function takes a clean EMBRACE-II data frame and creates a data dictionary
-#' that maps variable names to their corresponding sections based on suffixes.
-#'
-#' @param data A tibble containing clean EMBRACE-II data (output from emii_get_clean_data)
-#' @param save_excel Logical; if TRUE, saves the dictionary as an Excel file
-#' @param excel_path Character; path where to save the Excel file (default: NULL)
-#' @return A tibble containing variable names and their corresponding sections
-#' @export
-#'
-#' @import dplyr
-#' @importFrom openxlsx write.xlsx
-#'
-#' @examples
-#' \dontrun{
-#'   clean_data <- emii_get_clean_data()
-#'   dict <- emii_get_data_dictionary(clean_data)
-#'   dict <- emii_get_data_dictionary(clean_data, save_excel = TRUE)
-#' }
-emii_get_data_dictionary <- function(data, 
-                                   save_excel = FALSE,
-                                   excel_path = NULL) {
-  # Set default excel_path with current date if not provided
-  if (is.null(excel_path)) {
-    current_date <- format(Sys.Date(), "%Y-%m-%d")
-    excel_path <- glue::glue("{current_date}_emii_data_dictionary.xlsx")
-  }
-  
-  # Define suffix mapping
-  suffix_mapping <- c(
-    "sta_d" = "Status at Diagnosis",
-    "tdvh" = "Treatment and DVH",
-    "sta_b" = "Status at Brachytherapy",
-    "pat" = "Patient",
-    "reg" = "Registration",
-    "vital_status" = "Vital Status"
-  )
-  
-  # Create dictionary
-  dictionary <- tibble(
-    Variable = names(data),
-    Section = character(length(names(data)))
-  ) %>%
-    mutate(
-      # Extract suffix using regex
-      Suffix = str_extract(Variable, paste0("(", paste(names(suffix_mapping), collapse = "|"), ")$")),
-      # Map suffix to section name
-      Section = case_when(
-        !is.na(Suffix) ~ suffix_mapping[Suffix],
-        TRUE ~ ""
-      )
-    ) %>%
-    select(-Suffix) %>%  # Remove temporary suffix column
-    arrange(Section, Variable)  # Sort by section and variable name
-  
-  # Save as Excel if requested
-  if (save_excel) {
-    message(glue::glue("Saving data dictionary to {excel_path}"))
-    openxlsx::write.xlsx(dictionary, excel_path)
-  }
-  
-  dictionary
-}
 
 #' Create Summary Statistics Table for EMBRACE-II Data
 #'
@@ -406,7 +345,7 @@ emii_get_data_dictionary <- function(data,
 #'   summary_stats <- emii_get_summary_statistics(clean_data)
 #'   summary_stats <- emii_get_summary_statistics(clean_data, save_excel = TRUE)
 #' }
-emii_get_summary_statistics <- function(data, 
+emii_get_summary_statistics <- function(data,
                                       save_excel = FALSE,
                                       excel_path = NULL) {
   # Set default excel_path with current date if not provided
@@ -414,7 +353,7 @@ emii_get_summary_statistics <- function(data,
     current_date <- format(Sys.Date(), "%Y-%m-%d")
     excel_path <- glue::glue("{current_date}_emii_summary_statistics.xlsx")
   }
-  
+
   # Define suffix mapping
   suffix_mapping <- c(
     "sta_d" = "Status at Diagnosis",
@@ -424,9 +363,9 @@ emii_get_summary_statistics <- function(data,
     "reg" = "Registration",
     "vital_status" = "Vital Status"
   )
-  
+
   # Create initial summary table
-  summary_tbl <- data %>% 
+  summary_tbl <- data %>%
     gtsummary::tbl_summary(
       type = all_continuous() ~ "continuous2",
       statistic = all_continuous() ~ c(
@@ -434,9 +373,9 @@ emii_get_summary_statistics <- function(data,
         "{median} ({p25}, {p75})",
         "{min}, {max}"
       )
-    ) %>% 
+    ) %>%
     gtsummary::as_gt()
-  
+
   # Transform to single row format and add section information
   result <- summary_tbl$`_data` %>%
     group_by(variable, var_type, var_label) %>%
@@ -453,8 +392,8 @@ emii_get_summary_statistics <- function(data,
         ),
         var_type == "categorical" ~ paste(
           str_c(
-            label[row_type == "level"], 
-            ": ", 
+            label[row_type == "level"],
+            ": ",
             stat_0[row_type == "level"],
             collapse = "\n"
           )
@@ -477,78 +416,14 @@ emii_get_summary_statistics <- function(data,
     select(-Suffix) %>%  # Remove temporary suffix column
     distinct() %>%
     arrange(Section, variable)  # Sort by section and variable name
-  
+
   # Save as Excel if requested
   if (save_excel) {
     message(glue::glue("Saving summary statistics to {excel_path}"))
     openxlsx::write.xlsx(result, excel_path)
   }
-  
-  result
-}
 
-#' Select Key Variables for Summary Statistics
-#'
-#' This function selects a predefined set of key variables from the EMBRACE-II dataset
-#' that are commonly used in summary statistics.
-#'
-#' @param data A tibble containing EMBRACE-II data
-#' @return A tibble containing only the selected variables
-#' @export
-#'
-#' @import dplyr
-#'
-#' @examples
-#' \dontrun{
-#'   clean_data <- emii_get_clean_data()
-#'   key_vars <- emii_select_key_variables(clean_data)
-#'   summary_stats <- emii_get_summary_statistics(key_vars)
-#' }
-emii_select_key_variables <- function(data) {
-  # Define key variables to keep
-  key_variables <- c(
-    # Patient characteristics
-    "who_score_sta_d",
-    "height_sta_d",
-    "weight_sta_d",
-    "bmi_sta_d",
-    "smoker_sta_d",
-    
-    # Disease characteristics
-    "histopathological_type_sta_d",
-    "degree_of_differentiation_sta_d",
-    "figo_stage_sta_d",
-    
-    # Clinical findings
-    "gyn_tumor_width_sta_d",
-    "gyn_tumor_height_sta_d",
-    "gyn_tumor_thickness_sta_d",
-    "gyn_max_tumor_dimension_sta_d",
-    
-    # MRI findings
-    "mri_tumor_width_sta_d",
-    "mri_tumor_height_sta_d",
-    "mri_tumor_thickness_sta_d",
-    "mri_max_tumor_dimension_sta_d",
-    
-    # Blood tests
-    "blood_test_hgb_mmol_l_sta_d",
-    "blood_test_wbc_sta_d",
-    "blood_test_lymphocytes_sta_d",
-    "blood_test_creatinine_umol_l_sta_d"
-  )
-  
-  # Return only selected columns, with a warning for any missing columns
-  existing_columns <- intersect(key_variables, names(data))
-  missing_columns <- setdiff(key_variables, names(data))
-  
-  if (length(missing_columns) > 0) {
-    warning("The following columns were not found in the dataset: ", 
-            paste(missing_columns, collapse = ", "))
-  }
-  
-  data %>% 
-    select(all_of(existing_columns))
+  result
 }
 
 #' Identify Extreme Outliers in EMBRACE-II Data
@@ -575,7 +450,7 @@ emii_select_key_variables <- function(data) {
 #'   outliers <- emii_find_outliers(clean_data)
 #'   outliers <- emii_find_outliers(clean_data, save_excel = TRUE)
 #' }
-emii_find_outliers <- function(data, 
+emii_find_outliers <- function(data,
                               iqr_multiplier = 3,
                               save_excel = FALSE,
                               excel_path = NULL) {
@@ -584,39 +459,39 @@ emii_find_outliers <- function(data,
     current_date <- format(Sys.Date(), "%Y-%m-%d")
     excel_path <- glue::glue("{current_date}_emii_outliers.xlsx")
   }
-  
+
   # Ensure embrace_id is present
   if (!"embrace_id" %in% names(data)) {
     stop("Data must contain 'embrace_id' column")
   }
-  
+
   # Get numeric columns
   numeric_cols <- names(data)[sapply(data, is.numeric)]
-  
+
   # Initialize empty list to store outliers
   outliers_list <- list()
-  
+
   # Process each numeric column
   for (col in numeric_cols) {
     # Get column values
     values <- data[[col]]
-    
+
     # Skip if all values are NA
     if (all(is.na(values))) next
-    
+
     # Calculate quartiles, IQR, and median
     q1 <- quantile(values, 0.25, na.rm = TRUE)
     q3 <- quantile(values, 0.75, na.rm = TRUE)
     iqr <- IQR(values, na.rm = TRUE)
     med <- median(values, na.rm = TRUE)
-    
+
     # Define outlier thresholds
     lower_bound <- q1 - iqr_multiplier * iqr
     upper_bound <- q3 + iqr_multiplier * iqr
-    
+
     # Find outliers
     outlier_indices <- which(values < lower_bound | values > upper_bound)
-    
+
     # If outliers found, add to list
     if (length(outlier_indices) > 0) {
       outliers_list[[col]] <- tibble(
@@ -632,16 +507,16 @@ emii_find_outliers <- function(data,
       )
     }
   }
-  
+
   # Combine all outliers into one tibble
   result <- bind_rows(outliers_list) %>%
     arrange(variable, embrace_id)
-  
+
   # Save as Excel if requested
   if (save_excel && nrow(result) > 0) {
     message(glue::glue("Saving outliers to {excel_path}"))
     openxlsx::write.xlsx(result, excel_path)
   }
-  
+
   result
 }

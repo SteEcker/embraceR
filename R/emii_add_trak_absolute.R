@@ -1,6 +1,4 @@
 
-# df <- emii %>% select(embrace_id, contains("trak"), fraction01hrctv_volume_tdvh) %>%
-#   filter(fraction01dose_rate_tdvh == 1)
 
 # Helper function to calculate absolute contribution
 trak_calculate_absolute_contribution <- function(df, fraction_num) {
@@ -50,13 +48,6 @@ trak_calculate_totals <- function(df, num_fractions) {
 # Helper function to clean data based on conditions
 trak_clean_data <- function(df) {
   df <- df %>%
-    mutate(
-      # Set sums to NA if volume > 150
-      across(
-        c(trak_tandem_applicator_sum, trak_vaginal_applicator_sum, trak_needles_sum, trak_total_sum),
-        ~ ifelse(fraction01hrctv_volume_tdvh > 150 , NA, .)
-      )
-    ) %>%
     mutate(trak_tandem_applicator_sum = if_else(trak_tandem_applicator_sum == 0, NA, trak_tandem_applicator_sum)) %>%
     mutate(trak_vaginal_applicator_sum = if_else(trak_vaginal_applicator_sum == 0, NA, trak_vaginal_applicator_sum)) %>%
     mutate(trak_needles_sum = if_else(trak_needles_sum == 0, NA, trak_needles_sum)) %>%
@@ -92,21 +83,5 @@ emii_add_trak_absolute <- function(df, num_fractions = 7) {
     trak_clean_data()
 }
 
-# # View the dataframe with totals
-# df_with_totals %>% select(fraction01hrctv_volume_tdvh, contains("sum"))
-#
-#
-#
-# # Reshape data to long format for ggplot
-# df_long <- df_with_totals %>%
-#   pivot_longer(cols = c(tandem_applicator_sum, vaginal_applicator_sum, needles_sum, total_trak_sum),
-#                names_to = "component", values_to = "value")
-#
-# # Create the plot
-# ggplot(df_long, aes(x = fraction01hrctv_volume_tdvh, y = value, color = component)) +
-#   geom_point(size = 1, alpha=0.2) + geom_smooth() +
-#   labs(x = "Volume (fraction01hrctv_volume_tdvh)", y = "Trak Components and Total Trak",
-#        title = "Trak Components and Total Trak vs Volume") +
-#   theme_minimal() +
-#   xlim(c(0, 150))
+
 

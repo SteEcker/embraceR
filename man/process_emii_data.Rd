@@ -18,7 +18,8 @@ process_emii_data(
 A tibble or dataframe
 }
 \description{
-Preprocessing for EMBRACE-II
+Preprocessing for EMBRACE-II. This function adds EMBRACE-II specific columns
+after the common columns have been added via process_combined_data.
 }
 \examples{
 \dontrun{
