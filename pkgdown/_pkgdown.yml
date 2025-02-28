@@ -17,4 +17,15 @@ navbar:
 development:
   mode: auto
 
+figures:
+  dev: ragg::agg_png
+  dpi: 300
+  dev.args: []
+  fig.ext: png
+  fig.width: 12 # default width in inches
+  fig.height: ~ 
+  fig.retina: 0.5
+  fig.asp: ~
+  bg: NA
+  other.parameters: []
 

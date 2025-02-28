@@ -34,22 +34,23 @@
 #' }
 process_emii_data <- function(data,
                               file_path = here::here("data_raw/embrace_II/2023-01-18_emii_masterdump.Rds")) {
+  
+  # TODO: Verify T-Score source is correct
+  # # Step 1. Add T-Score from official datadump
+  # path_t_stage <- file_path
+  # t_stage <- readRDS(path_t_stage)
+  # t_stage <- sjlabelled::remove_all_labels(t_stage) %>%
+  #   as_tibble() %>%
+  #   janitor::clean_names() %>%
+  #   select(
+  #     embrace_id = "embrace_id_pat",
+  #     't_score_mri_diagnosis' = 't_score_mri_diagnosis',
+  #     't_score_clinical_diagnosis' = 't_score_clinical_diagnosis',
+  #     't_score_mri_diagnosis' = 't_score_mri_diagnosis'
+  #   )
 
-  # Step 1. Add T-Score from official datadump
-  path_t_stage <- file_path
-  t_stage <- readRDS(path_t_stage)
-  t_stage <- sjlabelled::remove_all_labels(t_stage) %>%
-    as_tibble() %>%
-    janitor::clean_names() %>%
-    select(
-      embrace_id = "embrace_id_pat",
-      't_score_mri_diagnosis' = 't_score_mri_diagnosis',
-      't_score_clinical_diagnosis' = 't_score_clinical_diagnosis',
-      't_score_mri_diagnosis' = 't_score_mri_diagnosis'
-    )
-
-  data <- data %>%
-    left_join(t_stage, by = "embrace_id")
+  # data <- data %>%
+  #   left_join(t_stage, by = "embrace_id")
 
   data %>%
     embraceR::emii_add_trak_absolute() %>%

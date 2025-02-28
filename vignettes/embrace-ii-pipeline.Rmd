@@ -1,0 +1,37 @@
+---
+title: "EMBRACE-II Data Processing Pipeline"
+# pkgdown:
+#   as_is: true
+#   extension: pdf
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{EMBRACE-II Data Processing Pipeline}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Overview
+
+The `embraceR` package provides a comprehensive data processing pipeline for the EMBRACE-II study data. This article explains the data flow from raw input files to the final clean dataset ready for analysis.
+
+## Data Processing Pipeline
+
+![EMBRACE-II Data Processing Pipeline](embraceR-emii_flow.png)
+
+
+
+```r
+# Example of getting the final clean dataset
+clean_data <- emii_get_clean_data()
+
+# With Excel export
+clean_data <- emii_get_clean_data(save_excel = TRUE)
+```
+
