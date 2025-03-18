@@ -40,7 +40,7 @@ add_max_tumor_dimension <- function(.data) {
 
   # Replace Infinite values with NA across specific columns
   .data <- .data %>%
-    mutate(across(contains("max_tumor_"), embraceR::replace_infinite_with_NA))
+    mutate(across(contains("max_tumor_"), replace_infinite_with_NA))
 
   return(.data)
 }

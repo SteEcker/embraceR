@@ -5,7 +5,7 @@
 #' @param df A dataframe containing patient data with required columns for failure events
 #'
 #' @return A dataframe with added columns for failure events and time measurements
-#' @keywords internal
+#' @export
 #'
 #' @importFrom dplyr "%>%"
 #'

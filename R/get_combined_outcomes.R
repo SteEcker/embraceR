@@ -53,12 +53,12 @@ get_combined_outcomes <- function() {
 
   # Select standardized outcome variables for both datasets
   emi_outcomes <- emi %>%
-    select(any_of(outcome_cols)) %>%
+    select(embrace_id, any_of(outcome_cols)) %>%
     mutate(study = "EMBRACE-I")
 
   emii_outcomes <- df %>%
     emii_add_outcome() %>%
-    select(all_of(outcome_cols)) %>%
+    select(embrace_id, all_of(outcome_cols)) %>%
     mutate(study = "EMBRACE-II")
 
   # Combine datasets

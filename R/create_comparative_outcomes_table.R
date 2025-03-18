@@ -15,7 +15,8 @@
 #' }
 create_comparative_outcomes_table <- function() {
   # Get combined outcomes data
-  combined_outcomes <- get_combined_outcomes()
+  combined_outcomes <- get_combined_outcomes() %>%
+    select(-embrace_id)
 
   # Create comparative table
   combined_outcomes %>%

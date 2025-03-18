@@ -125,5 +125,33 @@ emii_add_trak_absolute <- function(df, num_fractions = 7) {
     trak_clean_data()
 }
 
-
+# emii %>%
+#   select(embrace_id, fraction01dose_rate_tdvh, ends_with('_sum'), fraction01hrctv_volume_tdvh) %>%
+#   filter(fraction01dose_rate_tdvh == 1, trak_vaginal_applicator_sum < 2) %>%
+#   select(-fraction01dose_rate_tdvh) %>%
+#   pivot_longer(-c(embrace_id, fraction01hrctv_volume_tdvh)) %>%
+#   # Create a named vector for better labels
+#   mutate(name = factor(name,
+#                        levels = c("trak_tandem_applicator_sum",
+#                                   "trak_vaginal_applicator_sum",
+#                                   "trak_needles_sum",
+#                                   "trak_total_sum"),
+#                        labels = c("Tandem",
+#                                   "Vaginal",
+#                                   "Needles",
+#                                   "Total"))) %>%
+#   ggplot(aes(x = fraction01hrctv_volume_tdvh, y = value, color = name)) +
+#   geom_point(alpha = 0.2) +
+#   xlim(0, 150) +
+#   ylim(0, 3) +
+#   geom_smooth(method = 'lm') +
+#   # Add better axis labels and title
+#   labs(
+#     x = "CTV-HR Volume (cm3)",
+#     y = "TRAK [cGy]",
+#     color = "",
+#     title = "Relationship Between CTV-HR Volume and total TRAK",
+#     subtitle = "EMBRACE-II (HDR)"
+#   ) +
+#   theme_bw()
 

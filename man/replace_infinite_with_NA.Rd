@@ -15,4 +15,3 @@ A data frame where Infinite values in numeric columns are replaced with NA.
 \description{
 Replace Infinite values in numeric columns with NA
 }
-\keyword{internal}

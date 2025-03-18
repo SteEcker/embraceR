@@ -21,4 +21,3 @@ patient_data <- data.frame(...)
 enhanced_data <- add_disease_events(patient_data)
 }
 }
-\keyword{internal}
