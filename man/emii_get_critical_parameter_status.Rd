@@ -27,4 +27,3 @@ summary_table <- emii_get_critical_parameter_status()
 summary_table <- emii_get_critical_parameter_status(save_excel = TRUE)
 }
 }
-\keyword{internal}

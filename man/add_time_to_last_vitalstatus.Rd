@@ -29,4 +29,3 @@ df <- data.frame(
 result <- add_time_to_last_vitalstatus(df)
 }
 }
-\keyword{internal}

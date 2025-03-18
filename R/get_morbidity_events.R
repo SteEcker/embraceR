@@ -9,7 +9,7 @@
 #' threshold(3, grade_threshold = 3)  # TRUE
 #' threshold(2, grade_threshold = 3)  # FALSE
 #' threshold(NA, grade_threshold = 3) # FALSE
-#' @keywords internal
+#' @export
 threshold <- function(x, grade_threshold) {
   if (!is.na(x) && !is.character(x) && x != 9) {
     return(x == grade_threshold)
@@ -29,7 +29,7 @@ threshold <- function(x, grade_threshold) {
 #' @param side_effect_cols Character vector specifying the side effect columns to check
 #' @param grade_threshold Numeric, the CTCAE grade threshold to filter by (default: 4)
 #' @return DataFrame containing only rows with events meeting the threshold criteria
-#' @keywords internal
+#' @export
 #' @import tidyr dplyr stringr lubridate
 filter_grade_threshold <- function(df, side_effect_cols, grade_threshold = 4) {
 
@@ -153,7 +153,7 @@ filter_grade_threshold <- function(df, side_effect_cols, grade_threshold = 4) {
 #'
 #' @param df DataFrame with columns to be reordered
 #' @return DataFrame with columns reordered chronologically
-#' @keywords internal
+#' @export
 reorder_columns_based_on_date <- function(df) {
   # Extract the column names to be reordered
   columns_to_reorder <- colnames(df)[4:ncol(df)]
@@ -195,7 +195,7 @@ reorder_columns_based_on_date <- function(df) {
 #' new_df <- move_row(df, 5, 2)
 #' print(new_df)
 #' }
-#' @keywords internal
+#' @export
 move_row <- function(df, row_from, row_to) {
   if (row_from < 1 || row_from > nrow(df) || row_to < 1 || row_to > nrow(df)) {
     stop("Invalid row indices.")
@@ -220,7 +220,7 @@ move_row <- function(df, row_from, row_to) {
 #'
 #' @param df DataFrame, the data to be reshaped.
 #' @return DataFrame in long format with separated side effect names and time points.
-#' @keywords internal
+#' @export
 reshape_side_effects <- function(df) {
   # Convert all columns except 'embrace_id' to character
   df <- df %>%
@@ -277,7 +277,7 @@ reshape_side_effects <- function(df) {
 #'
 #' @param data DataFrame containing the patient side effect data
 #' @param filePath Character, the path where the Excel file will be saved
-#' @keywords internal
+#' @export
 #' @import openxlsx
 createStyledExcelSheet <- function(data, filePath, sheetName = "Side Effects") {
 
@@ -343,7 +343,7 @@ createStyledExcelSheet <- function(data, filePath, sheetName = "Side Effects") {
 #'
 #' @param df_filtered DataFrame containing filtered patient data
 #' @param root_folder Character, the root directory for saving reports
-#' @keywords internal
+#' @export
 generatePatientExcelReports <- function(df_filtered, root_folder) {
 
   # Get the current date to prefix the filenames
@@ -386,7 +386,7 @@ generatePatientExcelReports <- function(df_filtered, root_folder) {
 #' @param data DataFrame containing the complete patient dataset
 #' @param outputDir Character, the output directory for Excel reports
 #' @param grade_threshold Numeric, the CTCAE grade threshold to filter by
-#' @keywords internal
+#' @export
 generateExcelReportsForPatients <- function(data, outputDir, grade_threshold) {
 
   # Clean side effect names
@@ -447,7 +447,7 @@ generateExcelReportsForPatients <- function(data, outputDir, grade_threshold) {
 #' @param df DataFrame containing patient data
 #' @param grade_threshold Numeric, the CTCAE grade threshold to check for
 #' @return DataFrame with an additional indicator column for grade-specific events
-#' @keywords internal
+#' @export
 #' @import dplyr purrr stringr glue
 add_grade_ctcae_event_column <- function(df, grade_threshold) {
 

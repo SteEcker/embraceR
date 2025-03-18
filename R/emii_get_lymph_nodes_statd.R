@@ -9,7 +9,7 @@
 #' @return A dataframe in long-format with one row per positive lymph node,
 #'   including recoded anatomical position descriptions
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -77,7 +77,7 @@ emii_get_lymph_nodes_statd <- function(df) {
 #' 
 #' @return A gt table object showing the distribution of lymph node locations
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -114,7 +114,7 @@ get_nodal_location_summary <- function(df) {
 #' 
 #' @return A gt table object showing the distribution of patients with lymph nodes by location
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{

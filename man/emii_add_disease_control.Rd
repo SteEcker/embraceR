@@ -16,4 +16,3 @@ Original dataframe with an additional boolean column 'event_disease_control'
 This function adds a column indicating disease control events,
 defined as either local failure, nodal failure, or systemic failure.
 }
-\keyword{internal}

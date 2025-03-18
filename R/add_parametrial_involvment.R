@@ -7,7 +7,7 @@
 #'
 #' @return A data frame with added maximum parametrial involvement columns
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{

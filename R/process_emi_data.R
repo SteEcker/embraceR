@@ -6,7 +6,7 @@
 #' @param data A tibble or dataframe containing the EMBRACE-I data
 #'
 #' @return A tibble with standardized column names
-#' @keywords internal
+#' @export
 #' @import dplyr
 #'
 #' @examples

@@ -22,4 +22,3 @@ emii_data <- load_embrace_ii()
 result <- add_number_paraaortic_ln_stat_d(emii_data)
 }
 }
-\keyword{internal}

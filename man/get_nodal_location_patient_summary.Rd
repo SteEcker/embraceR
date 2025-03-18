@@ -22,4 +22,3 @@ emii_data <- load_embrace_ii()
 patient_summary <- get_nodal_location_patient_summary(emii_data)
 }
 }
-\keyword{internal}

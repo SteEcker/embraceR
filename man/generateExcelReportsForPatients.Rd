@@ -17,4 +17,3 @@ generateExcelReportsForPatients(data, outputDir, grade_threshold)
 Processes patient data to identify those with side effects meeting a specified 
 grade threshold, then generates formatted Excel reports for clinical review.
 }
-\keyword{internal}

@@ -344,7 +344,7 @@ recode_elective_targets <- function(df) {
 #' @return Data frame with added columns for risk classification and recommended 
 #'   elective target volumes
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -388,7 +388,7 @@ emii_add_elective_targets <- function(.data){
 #'
 #' @return A gt table object comparing algorithm-recommended vs. selected elective targets
 #'
-#' @keywords internal
+#' @export
 #'
 #' @importFrom gtsummary tbl_cross bold_labels as_gt
 #' @importFrom gt tab_options

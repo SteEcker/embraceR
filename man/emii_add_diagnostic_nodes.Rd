@@ -22,4 +22,3 @@ emii_data <- load_embrace_ii()
 result <- emii_add_diagnostic_nodes(emii_data)
 }
 }
-\keyword{internal}

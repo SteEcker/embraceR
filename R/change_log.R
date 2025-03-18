@@ -25,7 +25,7 @@
 #'
 #' @return An updated change log data frame with the new entry
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -84,7 +84,7 @@ update_record <- function(data, log, record_id, field, new_value, reason) {
 #'
 #' @return A data frame with all changes from the change log applied
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{

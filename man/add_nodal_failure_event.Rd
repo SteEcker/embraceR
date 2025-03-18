@@ -27,4 +27,3 @@ test_data <- tibble(
 result <- add_nodal_failure_event(test_data)
 }
 }
-\keyword{internal}

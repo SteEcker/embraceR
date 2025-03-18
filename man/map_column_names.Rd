@@ -32,4 +32,3 @@ that they should be mapped to.
   new_data <- map_columns_based_on_mapping(data, mapping)
 }
 }
-\keyword{internal}

@@ -31,4 +31,3 @@ diagnosis_nodes <- check_nodal_location(patient_data, "R int iliac",
                                        time_point = "diagnosis")
 }
 }
-\keyword{internal}

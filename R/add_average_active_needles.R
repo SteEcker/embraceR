@@ -10,7 +10,7 @@
 #' @return The input data frame with an additional column `average_nr_active_needles`
 #'         containing the rounded average. NaN values are converted to NA.
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{

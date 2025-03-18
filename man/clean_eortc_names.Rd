@@ -23,4 +23,3 @@ df <- data.frame(eortc_q1_3m = c(1,2,3), eortc_q2_3m = c(3,4,5))
 clean_names <- clean_eortc_names(df, "_3m")
 }
 }
-\keyword{internal}

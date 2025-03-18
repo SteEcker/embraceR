@@ -8,7 +8,7 @@
 #' @param quote Logical, whether to quote strings in the CSV output (default: TRUE)
 #'
 #' @return Invisibly returns the processed data frame
-#' @keywords internal
+#' @export
 #' @import dplyr
 #'
 #' @examples

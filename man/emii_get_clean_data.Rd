@@ -4,15 +4,17 @@
 \alias{emii_get_clean_data}
 \title{Get Clean EMBRACE-II Data for Analysis}
 \usage{
-emii_get_clean_data(save_excel = FALSE, excel_path = NULL)
+emii_get_clean_data(minimal = TRUE, save_excel = FALSE, excel_path = NULL)
 }
 \arguments{
+\item{minimal}{Logical; if TRUE, returns only essential columns, if FALSE returns all columns}
+
 \item{save_excel}{Logical; if TRUE, saves the data frame as an Excel file}
 
 \item{excel_path}{Character; path where to save the Excel file (default: NULL)}
 }
 \value{
-A tibble containing the cleaned EMBRACE-II data with selected columns
+A tibble containing the cleaned EMBRACE-II data
 }
 \description{
 This function loads EMBRACE-II data and processes it to create a clean dataset

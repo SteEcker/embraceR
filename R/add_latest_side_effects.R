@@ -6,7 +6,7 @@
 #' @param time_suffix The suffix indicating the time point (e.g., "_3m")
 #'
 #' @return A vector of cleaned side effect column names
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -55,7 +55,7 @@ clean_side_effect_names <- function(df, time_suffix = "_3m") {
 #' @param time_suffix The suffix indicating the time point (e.g., "_3m")
 #'
 #' @return A vector of cleaned EORTC column names
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -84,7 +84,7 @@ clean_eortc_names <- function(df, time_suffix) {
 #' @param df The data frame containing side effect and follow-up columns
 #'
 #' @return A data frame with new columns for the latest side effects
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -141,7 +141,7 @@ get_latest_side_effects <- function(df) {
 #' @param file_name Name of the Excel file if exporting
 #'
 #' @return A data frame with maximum side effect values and timepoints
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -226,4 +226,43 @@ get_max_side_effects <- function(df, endpoints, max_grade=0,
   }
 
   return(result_df)
+}
+
+#' Add Maximum Side Effects to Original Data
+#'
+#' Adds columns with maximum side effect values and their corresponding timepoints
+#' to the original data frame.
+#'
+#' @param df The original data frame containing side effect columns
+#' @param max_grade Numeric threshold for filtering results (default: 0)
+#' @param export_to_excel Whether to export intermediate results to Excel (default: FALSE)
+#' @param file_name Name of the Excel file if exporting (default: "max_side_effects.xlsx")
+#'
+#' @return A data frame with added columns for maximum side effect values and timepoints
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' result <- emii_add_max_morbidity(patient_data)
+#' }
+emii_add_max_morbidity <- function(df, max_grade = 0, 
+                                   export_to_excel = FALSE,
+                                   file_name = "max_side_effects.xlsx") {
+
+  message("Adding maximum side effects to original data...")
+  
+  # Get side effect endpoints
+  endpoints <- clean_side_effect_names(df, "_3m")
+  
+  # Get maximum side effects data
+  max_side_effects <- get_max_side_effects(df, endpoints, 
+                                           max_grade = max_grade,
+                                           export_to_excel = export_to_excel,
+                                           file_name = file_name)
+  
+  # Join the maximum side effects data to the original dataframe
+  result <- df %>%
+    dplyr::left_join(max_side_effects, by = "embrace_id")
+  
+  return(result)
 }

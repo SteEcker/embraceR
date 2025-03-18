@@ -3,9 +3,10 @@
 #' This function loads EMBRACE-II data and processes it to create a clean dataset
 #' ready for final analysis. It applies all necessary transformations and filters.
 #'
+#' @param minimal Logical; if TRUE, returns only essential columns, if FALSE returns all columns
 #' @param save_excel Logical; if TRUE, saves the data frame as an Excel file
 #' @param excel_path Character; path where to save the Excel file (default: NULL)
-#' @return A tibble containing the cleaned EMBRACE-II data with selected columns
+#' @return A tibble containing the cleaned EMBRACE-II data
 #' @export
 #'
 #' @import dplyr
@@ -18,7 +19,8 @@
 #'   clean_data <- emii_get_clean_data(save_excel = TRUE)
 #'   clean_data <- emii_get_clean_data(save_excel = TRUE, excel_path = "my_data.xlsx")
 #' }
-emii_get_clean_data <- function(save_excel = FALSE,
+emii_get_clean_data <- function(minimal = TRUE,
+                               save_excel = FALSE,
                                excel_path = NULL) {
   # Set default excel_path with current date if not provided
   if (is.null(excel_path)) {
@@ -30,29 +32,25 @@ emii_get_clean_data <- function(save_excel = FALSE,
   data <- load_embrace_ii() %>%
     process_emii_data()
 
-  # Select columns from the provided list
+  # Define selected columns for minimal dataset
   selected_columns <- c(
     # Identifiers and administrative
     "embrace_id",
     "centre_id",
     "registration_date",
-    "birth_date_sta_d",
     "year_of_birth_sta_d",
     "age",
 
-    # Custom calculated variables
-    "icis",
-    "average_active_needles",
-    "time_to_bt",
-    "parametrial_involvement",
-    "hrctv_volume_bins",
-    "max_tumor_dimension",
+
+    
 
     # T-Score variables
-    "t_imaging",
-    "ts_mri",
-    "ts_clin",
-    "ts_diagnosis",
+    "tnmt_stage_sta_d",
+    "tnmn_stage_sta_d",
+    "tnmm_stage_sta_d",
+    "figo_stage_sta_d",
+
+
 
     # Patient characteristics
     "who_score_sta_d",
@@ -64,38 +62,9 @@ emii_get_clean_data <- function(save_excel = FALSE,
     "menopause_sta_d",
     "previous_pelvic_abd_surgery_sta_d",
 
-    # Symptoms
-    "vaginal_bleeding_sta_d",
-    "pain_sta_d",
-    "other_symptoms_sta_d",
-
-    # Comorbidities
-    "co_morbidity_sta_d",
-    "myocardial_infarction_sta_d",
-    "congestive_cardiac_failure_sta_d",
-    "peripheral_vascular_disease_sta_d",
-    "cerebrovascular_disease_sta_d",
-    "dementia_sta_d",
-    "chronic_obtructive_pulm_disease_sta_d",
-    "rheumatologic_disease_sta_d",
-    "peptic_ulcer_disease_sta_d",
-    "mild_liver_disease_sta_d",
-    "diabetes_without_chronic_complications_sta_d",
-    "diabetes_with_chronic_complications_sta_d",
-    "hemiplegia_or_paraplegia_sta_d",
-    "renal_disease_sta_d",
-    "moderate_severe_liver_disease_sta_d",
-    "aidshiv_sta_d",
-    "charlson_comorbidity_index_sta_d",
-
     # Disease characteristics
     "histopathological_type_sta_d",
-    "degree_of_differentiation_sta_d",
-    "lvi_sta_d",
-    "figo_stage_sta_d",
-    "tnmt_stage_sta_d",
-    "tnmn_stage_sta_d",
-    "tnmm_stage_sta_d",
+    "histology_assesment_date",
 
     # Clinical findings
     "gyn_tumor_width_sta_d",
@@ -112,8 +81,7 @@ emii_get_clean_data <- function(save_excel = FALSE,
     "gyn_bladder_cystoscopy_sta_d",
     "gyn_rectum_exploration_sta_d",
     "gyn_rectum_endoscopy_sta_d",
-    "gyn_max_parametrium_sta_d",
-    "gyn_max_tumor_dimension_sta_d",
+
 
     # MRI findings
     "mri_tumor_width_sta_d",
@@ -129,8 +97,7 @@ emii_get_clean_data <- function(save_excel = FALSE,
     "mri_vagina_sta_d",
     "mri_bladder_sta_d",
     "mri_rectum_sta_d",
-    "mri_max_parametrium_sta_d",
-    "mri_max_tumor_dimension_sta_d",
+
 
     # Diagnostic procedures
     "biopsy_sta_d",
@@ -141,6 +108,7 @@ emii_get_clean_data <- function(save_excel = FALSE,
 
     # Pathological findings
     "pathological_nodes_sta_d",
+    "pathological_nodes_present",
     "hydronephrosis_sta_d",
 
     # Blood tests
@@ -181,6 +149,7 @@ emii_get_clean_data <- function(save_excel = FALSE,
     "ebrt_sigmoid_v40gy_relative_volume_tdvh",
     "ebrt_body_v43gy_absolute_volume_tdvh",
     "ebrt_body_v50gy_absolute_volume_tdvh",
+    "ebrt_body_v36_tdvh",
     "ebrt_pibs_tdvh",
     "ebrt_pibs_minus2_tdvh",
     "ebrt_duodenum_tdvh",
@@ -188,6 +157,10 @@ emii_get_clean_data <- function(save_excel = FALSE,
     "ebrt_liver_tdvh",
     "ebrt_pancreas_tdvh",
     "ebrt_adaptive_protocol_tdvh",
+    "ebrt_elective_target_selected",
+
+
+    # Chemotherapy
     "conc_chemo_given_tdvh",
     "conc_chemo_not_given_tdvh",
     "conc_chemo_schedule_tdvh",
@@ -216,6 +189,9 @@ emii_get_clean_data <- function(save_excel = FALSE,
     paste0("fraction", sprintf("%02d", 1:7), "trak_tandem_applicator_pct_tdvh"),
     paste0("fraction", sprintf("%02d", 1:7), "trak_vaginal_applicator_pct_tdvh"),
     paste0("fraction", sprintf("%02d", 1:7), "trak_needles_pct_tdvh"),
+    paste0("fraction", sprintf("%02d", 1:7), "_tandem_applicator_abs"),
+    paste0("fraction", sprintf("%02d", 1:7), "_vaginal_applicator_abs"),
+    paste0("fraction", sprintf("%02d", 1:7), "_needles_abs"),
     paste0("fraction", sprintf("%02d", 1:7), "residual_gtv_present_tdvh"),
     paste0("fraction", sprintf("%02d", 1:7), "residual_gtv_volume_tdvh"),
     paste0("fraction", sprintf("%02d", 1:7), "gtvd98_tdvh"),
@@ -241,37 +217,22 @@ emii_get_clean_data <- function(save_excel = FALSE,
     paste0("fraction", sprintf("%02d", 1:7), "pibs_minus2_tdvh"),
     paste0("fraction", sprintf("%02d", 1:7), "vaginal_reference_length_tdvh"),
 
-    #TRAK
-    "trak_total_sum",
-    "trak_needles_sum",
-    "trak_vaginal_applicator_sum",
-    "trak_tandem_applicator_sum",
 
-    # Additional treatment parameters
-    "erbt_ptv_treatment01_tdvh",
-    "erbt_ptv_treatment02_tdvh",
-    "erbt_ptv_treatment03_tdvh",
-    "erbt_ptv_treatment04_tdvh",
-    "erbt_ptv_treatment05_tdvh",
-    "erbt_ptv_treatment06_tdvh",
-    "erbt_ptv_treatment07_tdvh",
-    "erbt_ptv_treatment08_tdvh",
-    "erbt_ptv_treatment09_tdvh",
-    "erbt_ptv_treatment10_tdvh",
-    "ebrt_body_v36_tdvh",
+
+    # Status at brachytherapy implants
+    "bt_implants_sta_b",
+
 
     # Vital Status
     "vital_status",
     "vital_status_last_info_date",
     "vital_status_date_of_death_vital_status",
     "vital_status_cause_of_death_vital_status",
-    "vital_status_cause_of_death_text_vital_status",
+    
 
-    # Histology and Disease Status
-    "histology_assesment_date",
-    "pathological_nodes_present",
 
-    # Total DVH Parameters
+
+    # Total DVH Parameters in EQD2
     "total_hrctv_d90",
     "total_hrctv_d98",
     "total_irctv_d98",
@@ -285,25 +246,262 @@ emii_get_clean_data <- function(save_excel = FALSE,
     "total_sigmoid_d2cc",
     "total_sigmoid_d01cc",
     "total_bowel_d2cc",
-    "total_bowel_d01cc",
     "total_icru_rectum",
     "total_icru_bladder",
+    "hr_ctv_d50_eqd2",
+    "vagina_lateral_5mm_left_eqd2",
+    "vagina_lateral_5mm_right_eqd2",
+    "pibs_2cm_eqd2",
+    "pibs_eqd2",
+    "pibs_2cm_2_eqd2",
 
-    # Events
+    # Custom calculated variables
+    "included_in_study",
+    "withdrew_consent",
+    "is_lost_to_fu",
+    ## Diagnostic
+    "max_tumor_dimension_sta_d",
+    "gyn_max_parametrium_sta_d",
+    "gyn_max_tumor_dimension_sta_d",
+    "mri_max_parametrium_sta_d",
+    "mri_max_tumor_dimension_sta_d",
+    ## BT Treatment and Technique
+    "icis",
+    "icis_parallel_oblique",
+    "average_nr_active_needles",
+    "time_to_bt",
+    "time_to_bt_percent",
+    "ott_ebrt",
+    "ott",
+    "last_treatment_date",
+    "fraction01hrctv_volume_bins",
+    "trak_total_sum",
+    "trak_needles_sum",
+    "trak_vaginal_applicator_sum",
+    "trak_tandem_applicator_sum",
+    "imp1gyn_max_parametrium_sta_b",
+    "imp1image_max_parametrium_sta_b",
+    ## EBRT
+    "ebrt_elective_target_algorithm",
+    "elective_high_risk",
+    "elective_inguinal",
+    "elective_low_risk",
+    ## Lymph Nodes & Metastases
+    "nodal_classification",
+    "number_common_iliac_ln_stat_d",
+    "number_paraaortic_ln_stat_d",
+    "has_L.ext.iliac_followup",
+    "has_L.int.iliac_followup",
+    "has_L.com.iliac_followup",
+    "has_R.ext.iliac_followup",
+    "has_R.int.iliac_followup",
+    "has_R.com.iliac_followup",
+    "has_Para.Aortic_followup",
+    "has_L.groin_followup",
+    "has_R.groin_followup",
+    "has_R.parame.paracervix_followup",
+    "has_L.parame.paracervix_followup",
+    "has_other_followup",
+    "has_L.ext.iliac_diagnosis",
+    "has_L.int.iliac_diagnosis",
+    "has_L.com.iliac_diagnosis",
+    "has_R.ext.iliac_diagnosis",
+    "has_R.int.iliac_diagnosis",
+    "has_R.com.iliac_diagnosis",
+    "has_Para.Aortic_diagnosis",
+    "has_L.groin_diagnosis",
+    "has_R.groin_diagnosis",
+    "has_R.parame.paracervix_diagnosis",
+    "has_L.parame.paracervix_diagnosis",
+    "has_other_diagnosis",
+    "any_node_ci_pa",
+    "has_paraaortic_nodes_above_l2",
+    "has_supraclavicular_nodes",
+    "has_mediastinal_nodes",
+    "has_liver_metastases",
+    "has_bone_metastases",
+    "has_brain_metastases",
+    "has_lung_metastases",
+    "has_abdominal_carcinomatosis",
+    "has_other_metastases",
+    ## Event Variables
+    "timetoevent_disease",
+    "timetoevent_vitalstatus",
+    "latest_vital_status_date",
     "event_localfailure",
     "event_nodalfailure",
+    "event_nodalcontrol_incl_pao",
     "event_systemicfailure",
+    "event_systemic_excl_pao",
     "event_vitalstatus",
-
-    # Time to Event
-    "timetoevent_disease",
-    "timetoevent_vitalstatus"
+    "event_pelvic_nodal",
+    "event_pelvic",
+    "event_paraaortic_nodal",
+    "event_locoregional",
+    "event_locoregional_alone",
+    "event_cancer_specific",
+    "event_disease_control",
+    "event_progression_free",
+    "event_distant_alone",
+    "latest_assessment_date_disease",
+    "latest_followup_id",
+    
+    # Toxicity and morbidity variables - values
+    "max_value_bladder_cystitis",
+    "max_value_bladder_frequency",
+    "max_value_bladder_incontinence",
+    "max_value_bladder_other",
+    "max_value_bladder_urgency",
+    "max_value_fistula",
+    "max_value_gastro_abdominal_pain_or_cramping",
+    "max_value_gastro_constipation",
+    "max_value_gastro_diarrhea",
+    "max_value_gastro_incontinence",
+    "max_value_gastro_intestinal_other",
+    "max_value_gastro_proctitis",
+    "max_value_lymphatics_edema_limb",
+    "max_value_lymphatics_edema_trunk_genital",
+    "max_value_lymphatics_lymphocele",
+    "max_value_lymphatics_thromboembolic_event",
+    "max_value_muscle_fibrosis_left",
+    "max_value_muscle_fibrosis_other",
+    "max_value_muscle_fibrosis_right",
+    "max_value_muscle_fracture_back_pain",
+    "max_value_muscle_fracture_femoral_head",
+    "max_value_muscle_fracture_pelvic_pain",
+    "max_value_muscle_fracture_pelvic_ring",
+    "max_value_other1",
+    "max_value_other_fatigue",
+    "max_value_other_hot_flashes",
+    "max_value_other_insomnia",
+    "max_value_vagina_bleeding",
+    "max_value_vagina_discharge",
+    "max_value_vagina_dryness",
+    "max_value_vagina_mucositis",
+    "max_value_vagina_other",
+    "max_value_vagina_stenosis",
+    "max_value_gastro_bleeding_anus",
+    "max_value_gastro_bleeding_colon",
+    "max_value_gastro_bleeding_other",
+    "max_value_gastro_bleeding_rectum",
+    "max_value_gastro_bleeding_sigmoid",
+    "max_value_gastro_bleeding_small_bowel",
+    "max_value_gastro_bleeding_unknown",
+    "max_value_fistula_grading",
+    "max_value_fistula_localization_anus",
+    "max_value_fistula_localization_bladder",
+    "max_value_fistula_localization_colon",
+    "max_value_fistula_localization_other",
+    "max_value_fistula_localization_rectum",
+    "max_value_fistula_localization_sigmoid",
+    "max_value_fistula_localization_small_bowel",
+    "max_value_fistula_localization_ureter",
+    "max_value_fistula_localization_urethra",
+    "max_value_fistula_localization_vagina",
+    "max_value_other2",
+    "max_value_bladder_stenosis_stricture",
+    "max_value_bladder_stenosis_stricture_ureter",
+    "max_value_bladder_stenosis_stricture_urethra",
+    "max_value_bladder_bleeding",
+    "max_value_bladder_bleeding_ureter",
+    "max_value_bladder_bleeding_urethra",
+    "max_value_gastro_stenosis_stricture_anus",
+    "max_value_gastro_stenosis_stricture_colon",
+    "max_value_gastro_stenosis_stricture_other",
+    "max_value_gastro_stenosis_stricture_rectum",
+    "max_value_gastro_stenosis_stricture_sigmoid",
+    "max_value_gastro_stenosis_stricture_small_bowel",
+    "max_value_gastro_stenosis_stricture_unknown",
+    "max_value_other3",
+    "max_value_other4",
+    "max_value_other5",
+    
+    # Toxicity and morbidity variables - timepoints
+    "max_timepoint_bladder_cystitis",
+    "max_timepoint_bladder_frequency",
+    "max_timepoint_bladder_incontinence",
+    "max_timepoint_bladder_other",
+    "max_timepoint_bladder_urgency",
+    "max_timepoint_fistula",
+    "max_timepoint_gastro_abdominal_pain_or_cramping",
+    "max_timepoint_gastro_constipation",
+    "max_timepoint_gastro_diarrhea",
+    "max_timepoint_gastro_incontinence",
+    "max_timepoint_gastro_intestinal_other",
+    "max_timepoint_gastro_proctitis",
+    "max_timepoint_lymphatics_edema_limb",
+    "max_timepoint_lymphatics_edema_trunk_genital",
+    "max_timepoint_lymphatics_lymphocele",
+    "max_timepoint_lymphatics_thromboembolic_event",
+    "max_timepoint_muscle_fibrosis_left",
+    "max_timepoint_muscle_fibrosis_other",
+    "max_timepoint_muscle_fibrosis_right",
+    "max_timepoint_muscle_fracture_back_pain",
+    "max_timepoint_muscle_fracture_femoral_head",
+    "max_timepoint_muscle_fracture_pelvic_pain",
+    "max_timepoint_muscle_fracture_pelvic_ring",
+    "max_timepoint_other1",
+    "max_timepoint_other_fatigue",
+    "max_timepoint_other_hot_flashes",
+    "max_timepoint_other_insomnia",
+    "max_timepoint_vagina_bleeding",
+    "max_timepoint_vagina_discharge",
+    "max_timepoint_vagina_dryness",
+    "max_timepoint_vagina_mucositis",
+    "max_timepoint_vagina_other",
+    "max_timepoint_vagina_stenosis",
+    "max_timepoint_gastro_bleeding_anus",
+    "max_timepoint_gastro_bleeding_colon",
+    "max_timepoint_gastro_bleeding_other",
+    "max_timepoint_gastro_bleeding_rectum",
+    "max_timepoint_gastro_bleeding_sigmoid",
+    "max_timepoint_gastro_bleeding_small_bowel",
+    "max_timepoint_gastro_bleeding_unknown",
+    "max_timepoint_fistula_grading",
+    "max_timepoint_fistula_localization_anus",
+    "max_timepoint_fistula_localization_bladder",
+    "max_timepoint_fistula_localization_colon",
+    "max_timepoint_fistula_localization_other",
+    "max_timepoint_fistula_localization_rectum",
+    "max_timepoint_fistula_localization_sigmoid",
+    "max_timepoint_fistula_localization_small_bowel",
+    "max_timepoint_fistula_localization_ureter",
+    "max_timepoint_fistula_localization_urethra",
+    "max_timepoint_fistula_localization_vagina",
+    "max_timepoint_other2",
+    "max_timepoint_bladder_stenosis_stricture",
+    "max_timepoint_bladder_stenosis_stricture_ureter",
+    "max_timepoint_bladder_stenosis_stricture_urethra",
+    "max_timepoint_bladder_bleeding",
+    "max_timepoint_bladder_bleeding_ureter",
+    "max_timepoint_bladder_bleeding_urethra",
+    "max_timepoint_gastro_stenosis_stricture_anus",
+    "max_timepoint_gastro_stenosis_stricture_colon",
+    "max_timepoint_gastro_stenosis_stricture_other",
+    "max_timepoint_gastro_stenosis_stricture_rectum",
+    "max_timepoint_gastro_stenosis_stricture_sigmoid",
+    "max_timepoint_gastro_stenosis_stricture_small_bowel",
+    "max_timepoint_gastro_stenosis_stricture_unknown",
+    "max_timepoint_other3",
+    "max_timepoint_other4",
+    "max_timepoint_other5",
+    
+    # Overall maximum morbidity grade
+    "overall_max_morbidity_grade"
   )
 
-  # Return only selected columns, with a warning for any missing columns
-  existing_columns <- intersect(selected_columns, names(data))
-  missing_columns <- setdiff(selected_columns, names(data))
+  # Select columns based on minimal flag
+  if (minimal) {
+    # Return only selected columns
+    existing_columns <- intersect(selected_columns, names(data))
+    missing_columns <- setdiff(selected_columns, names(data))
+  } else {
+    # Return all columns from the dataset
+    existing_columns <- names(data)
+    missing_columns <- character(0)
+  }
 
+  # Warning for missing columns
   if (length(missing_columns) > 0) {
     warning("The following columns were not found in the dataset: ",
             paste(missing_columns, collapse = ", "))
@@ -315,6 +513,11 @@ emii_get_clean_data <- function(save_excel = FALSE,
 
   # Save as Excel if requested
   if (save_excel) {
+    file_suffix <- if(minimal) "preset" else "full"
+    if (is.null(excel_path)) {
+      current_date <- format(Sys.Date(), "%Y-%m-%d")
+      excel_path <- glue::glue("{current_date}_clean_emii_data_{file_suffix}.xlsx")
+    }
     message(glue::glue("Saving data to {excel_path}"))
     openxlsx::write.xlsx(clean_data, excel_path)
   }
@@ -437,7 +640,7 @@ emii_get_summary_statistics <- function(data,
 #' @param save_excel Logical; if TRUE, saves the outliers as an Excel file
 #' @param excel_path Character; path where to save the Excel file (default: NULL)
 #' @return A tibble containing outlier information (embrace_id, variable, value, threshold, median)
-#' @keywords internal
+#' @export
 #'
 #' @import dplyr
 #' @import tidyr

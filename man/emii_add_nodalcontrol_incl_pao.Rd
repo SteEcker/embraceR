@@ -29,4 +29,3 @@ data <- tibble(
 result <- emii_add_nodalcontrol_incl_pao(data)
 print(result)
 }
-\keyword{internal}

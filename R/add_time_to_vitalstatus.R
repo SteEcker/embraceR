@@ -8,7 +8,7 @@
 #'
 #' @return A data frame with added `timetoevent_vitalstatus` column
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{

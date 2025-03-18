@@ -31,4 +31,3 @@ df <- data.frame(
 df_with_age <- add_age(df)
 }
 }
-\keyword{internal}

@@ -6,7 +6,7 @@
 #'
 #' @param .data The input dataframe containing patient failure data
 #' @return Original dataframe with an additional boolean column 'event_paraaortic_nodal'
-#' @keywords internal
+#' @export
 #'
 #' @import dplyr
 emii_add_paraaortic_nodal <- function(.data) {
@@ -26,7 +26,7 @@ emii_add_paraaortic_nodal <- function(.data) {
 #' @param save_excel Logical indicating whether to save results as Excel file (default: FALSE)
 #'
 #' @return A tibble with the para-aortic nodal control variable and relevant columns
-#' @keywords internal
+#' @export
 #'
 #' @import dplyr
 #' @importFrom openxlsx write.xlsx

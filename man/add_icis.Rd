@@ -24,4 +24,3 @@ df <- data.frame(embrace_id = c(1, 2, 3),
 add_icis(df)
 }
 }
-\keyword{internal}

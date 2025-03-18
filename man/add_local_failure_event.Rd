@@ -24,4 +24,3 @@ df <- data.frame(
 result <- add_local_failure_event(df)
 }
 }
-\keyword{internal}

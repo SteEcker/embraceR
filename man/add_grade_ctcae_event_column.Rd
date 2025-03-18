@@ -18,4 +18,3 @@ DataFrame with an additional indicator column for grade-specific events
 Adds a binary indicator column showing whether each patient has experienced
 any side effect meeting the specified grade threshold.
 }
-\keyword{internal}

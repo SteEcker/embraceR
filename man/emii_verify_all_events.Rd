@@ -24,4 +24,3 @@ results <- emii_verify_all_events()
 results <- emii_verify_all_events(save_excel = FALSE)
 }
 }
-\keyword{internal}

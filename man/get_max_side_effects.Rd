@@ -35,4 +35,3 @@ endpoints <- c("bladder_pain", "gastro_diarrhea")
 result <- get_max_side_effects(patient_data, endpoints, max_grade=2)
 }
 }
-\keyword{internal}

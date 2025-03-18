@@ -22,4 +22,3 @@ emii_data <- load_embrace_ii()
 result <- emii_add_recurrent_nodes(emii_data)
 }
 }
-\keyword{internal}

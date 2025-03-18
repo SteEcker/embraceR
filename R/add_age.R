@@ -10,7 +10,7 @@
 #'   - year_of_birth: Birth year for non-EMBRACE-I subjects
 #'
 #' @return The input data frame with an additional 'age' column
-#' @keywords internal
+#' @export
 #'
 #' @importFrom dplyr mutate
 #' @importFrom lubridate year

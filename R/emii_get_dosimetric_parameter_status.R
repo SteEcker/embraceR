@@ -7,7 +7,7 @@
 #'
 #' @return A gtsummary object containing the comparative summary table with p-values
 #'
-#' @keywords internal
+#' @export
 #'
 #' @import dplyr
 #' @importFrom gtsummary tbl_summary add_p modify_header modify_spanning_header modify_caption

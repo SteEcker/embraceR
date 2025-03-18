@@ -7,7 +7,7 @@
 #'
 #' @return A data frame with added `number_common_iliac_ln_stat_d` column
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{

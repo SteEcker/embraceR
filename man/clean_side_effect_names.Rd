@@ -23,4 +23,3 @@ df <- data.frame(bladder_pain_3m = c(1,2,3), gastro_diarrhea_3m = c(0,1,2))
 clean_names <- clean_side_effect_names(df, "_3m")
 }
 }
-\keyword{internal}

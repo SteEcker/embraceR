@@ -21,4 +21,3 @@ sample_df <- data.frame(fraction01hrctv_volume_tdvh = c(10, 35, 50, 22, 40, NA))
 binned_df <- add_hrctv_volume_bins(sample_df)
 }
 }
-\keyword{internal}

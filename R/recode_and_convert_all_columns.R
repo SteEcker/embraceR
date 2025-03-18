@@ -7,7 +7,7 @@
 #' @param stop_on_missing_col Logical, if TRUE, stops if a column is missing; if FALSE, skips missing columns (default: FALSE)
 #'
 #' @return A data frame with the specified columns recoded and converted to factors
-#' @keywords internal
+#' @export
 #' @import here
 #' @importFrom jsonlite fromJSON
 #'
@@ -51,7 +51,7 @@ recode_and_convert_all_columns <- function(df, stop_on_missing_col = FALSE) {
 #' @param mapping A list containing the old and new levels for the column
 #'
 #' @return The data frame with the specified column recoded and converted to factor
-#' @keywords internal
+#' @export
 recode_and_convert_column <- function(df, col_name, mapping) {
   if (col_name %in% names(df)) {
     # cat("Recoding and converting column:", col_name, "\n")

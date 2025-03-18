@@ -32,4 +32,3 @@ df <- add_max_tumor_dimension(df)
 print(df)
 }
 }
-\keyword{internal}

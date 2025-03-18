@@ -19,4 +19,3 @@ The files are saved in a folder named 'data', and the filenames include the curr
   save_embrace_data(data)
 }
 }
-\keyword{internal}

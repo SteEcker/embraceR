@@ -166,7 +166,7 @@ load_embrace_ii <- function(file_path = here::here("data_raw/embrace_II/emii.xls
 #'
 #' @return A tibble in wide format.
 #'
-#' @keywords internal
+#' @export
 transpose_sheet_to_wide <- function(file_path, sheet_name, id_col, key_col) {
   # Read the sheet
   long_data <- readxl::read_excel(file_path, sheet = sheet_name, guess_max = 15000)

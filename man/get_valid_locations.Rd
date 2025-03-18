@@ -12,4 +12,3 @@ Character vector of valid anatomical locations
 \description{
 Returns a vector of valid anatomical locations
 }
-\keyword{internal}

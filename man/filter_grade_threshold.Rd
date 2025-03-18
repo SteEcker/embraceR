@@ -20,4 +20,3 @@ DataFrame containing only rows with events meeting the threshold criteria
 Filters a dataframe to identify rows with side effect values meeting a specified 
 grade threshold, retaining relevant clinical information for analysis.
 }
-\keyword{internal}

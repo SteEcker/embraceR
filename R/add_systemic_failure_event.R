@@ -8,7 +8,7 @@
 #'
 #' @return A data frame with added systemic failure event columns
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{

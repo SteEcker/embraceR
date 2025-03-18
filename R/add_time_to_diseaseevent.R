@@ -10,7 +10,7 @@
 #' @return A data frame with added columns: `latest_assessment_date_disease`,
 #'   `timetoevent_disease`, and `latest_followup_id`
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{

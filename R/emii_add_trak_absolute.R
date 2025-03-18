@@ -8,7 +8,7 @@
 #'
 #' @return A data frame with added absolute TRAK component columns
 #'
-#' @keywords internal
+#' @export
 #' @noRd
 trak_calculate_absolute_contribution <- function(df, fraction_num) {
   # Create the column names dynamically
@@ -35,7 +35,7 @@ trak_calculate_absolute_contribution <- function(df, fraction_num) {
 #'
 #' @return A data frame with absolute TRAK values for all fractions
 #'
-#' @keywords internal
+#' @export
 #' @noRd
 trak_calculate_all_fractions <- function(df, num_fractions) {
   for (i in 1:num_fractions) {
@@ -54,7 +54,7 @@ trak_calculate_all_fractions <- function(df, num_fractions) {
 #'
 #' @return A data frame with added total TRAK columns
 #'
-#' @keywords internal
+#' @export
 #' @noRd
 trak_calculate_totals <- function(df, num_fractions) {
   # Generate column names for absolute values of each component across all fractions
@@ -83,7 +83,7 @@ trak_calculate_totals <- function(df, num_fractions) {
 #'
 #' @return A data frame with cleaned TRAK values
 #'
-#' @keywords internal
+#' @export
 #' @noRd
 trak_clean_data <- function(df) {
   df <- df %>%
@@ -111,7 +111,7 @@ trak_clean_data <- function(df) {
 #'   - Total sum columns: trak_tandem_applicator_sum, trak_vaginal_applicator_sum,
 #'     trak_needles_sum, and trak_total_sum
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{

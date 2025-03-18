@@ -11,7 +11,7 @@
 #' @param study name of study
 #'
 #' @return A dataframe with columns renamed based on the mapping table.
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{

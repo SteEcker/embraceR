@@ -17,4 +17,3 @@ A tibble with all metastases indicators and relevant columns
 \description{
 Add Metastases Variables with Verification
 }
-\keyword{internal}

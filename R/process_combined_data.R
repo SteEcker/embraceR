@@ -15,7 +15,7 @@
 #' @param data A tibble or dataframe containing the combined EMBRACE data to be processed
 #'
 #' @return A tibble with additional derived columns for analysis
-#' @keywords internal
+#' @export
 #' @import dplyr
 #'
 #' @examples

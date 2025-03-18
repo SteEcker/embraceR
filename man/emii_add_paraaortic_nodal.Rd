@@ -16,4 +16,3 @@ Original dataframe with an additional boolean column 'event_paraaortic_nodal'
 This function adds a column indicating whether a patient had para-aortic nodal involvement,
 defined as either having para-aortic metastases or para-aortic nodal failure during follow-up.
 }
-\keyword{internal}

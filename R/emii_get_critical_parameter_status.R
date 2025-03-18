@@ -9,7 +9,7 @@
 #'
 #' @return A gtsummary object containing the combined summary table with p-values
 #'
-#' @keywords internal
+#' @export
 #'
 #' @import dplyr
 #' @importFrom gtsummary tbl_summary modify_header modify_caption bold_labels add_p

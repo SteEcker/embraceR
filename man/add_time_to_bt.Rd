@@ -28,4 +28,3 @@ df <- data.frame(
 add_time_to_bt(df)
 }
 }
-\keyword{internal}

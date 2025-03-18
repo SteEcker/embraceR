@@ -18,4 +18,3 @@ defined as either a local failure or nodal control including para-aortic, and
 whether the event was locoregional alone, defined as locoregional and not systemic
 excluding para-aortic.
 }
-\keyword{internal}

@@ -19,4 +19,3 @@ The data frame with the specified column recoded and converted to factor
 \description{
 Recode and convert a single column based on the mapping
 }
-\keyword{internal}

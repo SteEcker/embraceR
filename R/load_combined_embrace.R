@@ -14,7 +14,7 @@
 #' @import dplyr
 #' @import here
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{

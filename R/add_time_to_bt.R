@@ -8,7 +8,7 @@
 #'
 #' @return Data frame with added columns: `time_to_bt`, `ott_ebrt`, and `time_to_bt_percent`
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{

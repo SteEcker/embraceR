@@ -22,4 +22,3 @@ fraction numbers to ensure consistent two-digit representation.
   processed_data <- process_emi_data(emi_data)
 }
 }
-\keyword{internal}

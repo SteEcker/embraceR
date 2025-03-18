@@ -35,4 +35,3 @@ log <- data.frame(ChangeID = integer(), RecordID = character(),
 log <- update_record(data, log, "001", "value", 15, "Correction")
 }
 }
-\keyword{internal}

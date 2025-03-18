@@ -29,4 +29,3 @@ result <- emii_add_cancer_specific_with_verification(data)
 result <- emii_add_cancer_specific_with_verification(data, save_excel = TRUE)
 }
 }
-\keyword{internal}

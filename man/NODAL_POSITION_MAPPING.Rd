@@ -14,4 +14,4 @@ NODAL_POSITION_MAPPING
 Defines the standard mapping between numeric codes and anatomical positions
 for lymph nodes in the EMBRACE studies.
 }
-\keyword{internal}
+\keyword{datasets}

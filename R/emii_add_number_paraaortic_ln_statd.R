@@ -7,7 +7,7 @@
 #'
 #' @return A data frame with added `number_paraaortic_ln_stat_d` column
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{

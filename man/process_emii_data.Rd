@@ -18,8 +18,8 @@ process_emii_data(
 A tibble with additional EMBRACE-II specific columns
 }
 \description{
-Performs comprehensive preprocessing for EMBRACE-II data. This function adds 
-EMBRACE-II specific columns after the common columns have been added via 
+Performs comprehensive preprocessing for EMBRACE-II data. This function adds
+EMBRACE-II specific columns after the common columns have been added via
 process_combined_data. The processing includes:
 }
 \details{
@@ -36,12 +36,11 @@ process_combined_data. The processing includes:
 \dontrun{
   # Load raw data
   raw_data <- load_combined_embrace()
-  
+
   # Process with common transformations
   common_data <- process_combined_data(raw_data)
-  
+
   # Add EMBRACE-II specific transformations
   processed_data <- process_emii_data(common_data)
 }
 }
-\keyword{internal}

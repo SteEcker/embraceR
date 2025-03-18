@@ -22,4 +22,3 @@ emii_data <- load_embrace_ii()
 summary_table <- get_recurrence_and_metastases_summary(emii_data)
 }
 }
-\keyword{internal}

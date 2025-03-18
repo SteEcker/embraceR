@@ -18,4 +18,3 @@ studies, including local control, nodal control, survival metrics, and time-to-e
 outcomes_table <- create_comparative_outcomes_table()
 }
 }
-\keyword{internal}

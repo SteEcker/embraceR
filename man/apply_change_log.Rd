@@ -22,4 +22,3 @@ data <- data.frame(embrace_id = c("001", "002"), value = c(10, 20))
 updated_data <- apply_change_log(data)
 }
 }
-\keyword{internal}

@@ -1,4 +1,4 @@
-#' @keywords internal
+#' @export
 #' @import dplyr
 guess_factor <- function(x) {
   if (readr::guess_parser(x, guess_integer = TRUE) == "integer") {
@@ -9,7 +9,7 @@ guess_factor <- function(x) {
 }
 
 
-#' @keywords internal
+#' @export
 #' @import dplyr
 apply_guess_factor <- function(data) {
   message('Guessing factors')

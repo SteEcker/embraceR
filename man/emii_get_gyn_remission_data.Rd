@@ -23,4 +23,3 @@ gynecological measurements from other variables at that timepoint.
   gyn_remission_data <- emii_get_gyn_remission_data(followup_data)
 }
 }
-\keyword{internal}

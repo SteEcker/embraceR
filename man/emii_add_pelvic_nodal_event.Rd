@@ -18,4 +18,3 @@ A pelvic nodal event is defined as having event_nodalfailure AND at least one po
 node in any of the following locations: external iliac, internal iliac, common iliac,
 or parametrial/paracervical regions (left or right).
 }
-\keyword{internal}

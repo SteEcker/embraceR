@@ -22,4 +22,3 @@ emii_data <- load_embrace_ii()
 result <- emii_add_number_common_iliac_ln_stat_d(emii_data)
 }
 }
-\keyword{internal}

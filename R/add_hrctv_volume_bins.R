@@ -4,7 +4,7 @@
 #'
 #' @param df A dataframe containing the 'fraction01hrctv_volume_tdvh' column
 #' @return A dataframe with an additional 'fraction01hrctv_volume_bins' column (0, 1, or 2)
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{

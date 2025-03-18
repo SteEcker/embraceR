@@ -24,4 +24,3 @@ emii_data <- load_embrace_ii()
 ln_data <- emii_get_lymph_nodes_statd(emii_data)
 }
 }
-\keyword{internal}

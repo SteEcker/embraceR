@@ -10,7 +10,7 @@
 #'
 #' @return A tibble with patient IDs and boolean indicators for the specified location
 #'
-#' @keywords internal
+#' @export
 #'
 #' @import dplyr
 #' @importFrom tidyr pivot_longer
@@ -80,7 +80,7 @@ check_nodal_location <- function(.data, location, time_point = "any") {
 #'
 #' @return Original data frame with additional boolean columns for each location
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -126,7 +126,7 @@ check_multiple_locations <- function(.data, locations, time_point = "any") {
 #'
 #' @return A tibble with processed follow-up node data
 #'
-#' @keywords internal
+#' @export
 process_followup_nodes <- function(.data, diagnosis_nodes) {
   followup_data <- .data %>%
     select(
@@ -189,7 +189,7 @@ process_followup_nodes <- function(.data, diagnosis_nodes) {
 #'
 #' @return Data frame with additional boolean columns for each nodal location at follow-up
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -213,7 +213,7 @@ emii_add_recurrent_nodes <- function(.data) {
 #'
 #' @return Data frame with additional boolean columns for each nodal location at diagnosis
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -237,7 +237,7 @@ emii_add_diagnostic_nodes <- function(.data) {
 #'
 #' @return Data frame with an additional 'nodal_classification' column
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -271,7 +271,7 @@ emii_add_nodal_classification <- function(.data) {
 #'
 #' @return A gt table object showing the distribution of recurrences and metastases
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -325,7 +325,7 @@ get_recurrence_and_metastases_summary <- function(df) {
 #'
 #' @return A named list of labels for gtsummary
 #'
-#' @keywords internal
+#' @export
 create_combined_labels <- function() {
     # Node labels
     node_locations <- get_valid_locations()

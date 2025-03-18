@@ -33,4 +33,3 @@ comparison_table <- emii_create_elective_targets_table(emii_data)
 comparison_table <- emii_create_elective_targets_table(emii_data, save_excel = TRUE)
 }
 }
-\keyword{internal}

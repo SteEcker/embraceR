@@ -4,7 +4,7 @@
 #' The files are saved in a folder named 'data', and the filenames include the current date.
 #'
 #' @param df The dataframe to be saved.
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{

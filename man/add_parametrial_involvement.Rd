@@ -25,4 +25,3 @@ df <- data.frame(
 result <- add_parametrial_involvement(df)
 }
 }
-\keyword{internal}

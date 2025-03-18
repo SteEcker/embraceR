@@ -5,7 +5,7 @@
 #'
 #' @return A gtsummary table with outcome comparisons and p-values
 #'
-#' @keywords internal
+#' @export
 #'
 #' @importFrom gtsummary tbl_summary add_overall add_p modify_header modify_spanning_header modify_caption bold_p
 #'

@@ -15,4 +15,3 @@ generatePatientExcelReports(df_filtered, root_folder)
 Creates individual Excel reports for each patient in the filtered dataset,
 organizing files by center ID in appropriate subfolders.
 }
-\keyword{internal}

@@ -26,4 +26,3 @@ df <- data.frame(
 result <- add_vitalstatus_event(df)
 }
 }
-\keyword{internal}

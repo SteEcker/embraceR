@@ -36,4 +36,3 @@ df <- data.frame(
 result <- add_time_to_diseaseevent(df)
 }
 }
-\keyword{internal}

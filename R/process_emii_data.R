@@ -1,9 +1,9 @@
 #' Process and Transform EMBRACE-II Data
 #'
-#' Performs comprehensive preprocessing for EMBRACE-II data. This function adds 
-#' EMBRACE-II specific columns after the common columns have been added via 
+#' Performs comprehensive preprocessing for EMBRACE-II data. This function adds
+#' EMBRACE-II specific columns after the common columns have been added via
 #' process_combined_data. The processing includes:
-#' 
+#'
 #' 1. Adding T-Score data
 #' 2. Calculating TRAK (Total Reference Air Kerma) absolute values
 #' 3. Classifying needle arrangements (parallel/oblique)
@@ -17,7 +17,7 @@
 #' @param file_path Path to the EMBRACE-II master dump file (default uses here::here)
 #'
 #' @return A tibble with additional EMBRACE-II specific columns
-#' @keywords internal
+#' @export
 #' @import dplyr
 #' @import here
 #'
@@ -25,16 +25,16 @@
 #' \dontrun{
 #'   # Load raw data
 #'   raw_data <- load_combined_embrace()
-#'   
+#'
 #'   # Process with common transformations
 #'   common_data <- process_combined_data(raw_data)
-#'   
+#'
 #'   # Add EMBRACE-II specific transformations
 #'   processed_data <- process_emii_data(common_data)
 #' }
 process_emii_data <- function(data,
                               file_path = here::here("data_raw/embrace_II/2023-01-18_emii_masterdump.Rds")) {
-  
+
   # TODO: Verify T-Score source is correct
   # # Step 1. Add T-Score from official datadump
   # path_t_stage <- file_path
@@ -60,5 +60,7 @@ process_emii_data <- function(data,
     embraceR::add_lost_to_fu() %>%
     embraceR::add_disease_events() %>%
     embraceR::emii_add_number_common_iliac_ln_stat_d() %>%
-    embraceR::add_number_paraaortic_ln_stat_d()
+    embraceR::add_number_paraaortic_ln_stat_d() %>%
+    embraceR::emii_add_outcome() %>%
+    embraceR::emii_add_max_morbidity()
 }

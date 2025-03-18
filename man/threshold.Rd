@@ -22,4 +22,3 @@ threshold(3, grade_threshold = 3)  # TRUE
 threshold(2, grade_threshold = 3)  # FALSE
 threshold(NA, grade_threshold = 3) # FALSE
 }
-\keyword{internal}

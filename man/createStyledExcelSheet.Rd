@@ -15,4 +15,3 @@ createStyledExcelSheet(data, filePath, sheetName = "Side Effects")
 Generates a formatted Excel report with conditional formatting based on side effect 
 grades, highlighting severe events for easy identification.
 }
-\keyword{internal}

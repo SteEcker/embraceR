@@ -9,7 +9,7 @@
 #' @return A list containing all verification results with each element representing
 #'   a different event verification dataset
 #'
-#' @keywords internal
+#' @export
 #'
 #' @import dplyr
 #' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook

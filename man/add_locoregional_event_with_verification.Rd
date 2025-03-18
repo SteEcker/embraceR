@@ -31,4 +31,3 @@ result <- add_locoregional_event_with_verification(data)
 result <- add_locoregional_event_with_verification(data, save_excel = TRUE)
 }
 }
-\keyword{internal}

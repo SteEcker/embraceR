@@ -38,4 +38,3 @@ sequentially applies multiple data processing functions to:
   names(processed_data)[!names(processed_data) \%in\% names(combined_data)]
 }
 }
-\keyword{internal}

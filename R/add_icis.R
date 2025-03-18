@@ -6,7 +6,7 @@
 #' @param .data A data frame with embrace_id and fraction technique columns
 #'
 #' @return A data frame with an additional 'icis' column (1 or 0)
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -42,7 +42,7 @@ add_icis <- function(.data) {
 #' @param .data A data frame with embrace_id and fraction technique columns
 #'
 #' @return A data frame with an additional 'icis_parallel_oblique' column
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{

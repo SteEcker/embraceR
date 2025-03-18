@@ -5,7 +5,7 @@
 #' @param df A data frame containing columns starting with 'disease_local_status_'
 #'
 #' @return A data frame with an additional 'event_localfailure' column (1=failure, 0=no failure)
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{

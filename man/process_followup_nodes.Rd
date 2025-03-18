@@ -18,4 +18,3 @@ A tibble with processed follow-up node data
 Internal helper function to efficiently process follow-up node data by
 extracting and transforming node information from multiple follow-up visits.
 }
-\keyword{internal}

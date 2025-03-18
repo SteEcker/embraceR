@@ -6,7 +6,7 @@
 #'
 #' @param .data The input dataframe containing patient disease control data
 #' @return Original dataframe with an additional boolean column 'event_disease_control'
-#' @keywords internal
+#' @export
 #'
 #' @import dplyr
 emii_add_disease_control <- function(.data) {
@@ -28,7 +28,7 @@ emii_add_disease_control <- function(.data) {
 #' @param save_excel Logical indicating whether to save results as Excel file (default: FALSE)
 #'
 #' @return A tibble with the disease control variable and relevant columns
-#' @keywords internal
+#' @export
 #'
 #' @import dplyr
 #' @importFrom openxlsx write.xlsx
@@ -85,7 +85,7 @@ emii_add_disease_control_with_verification <- function(.data, save_excel = FALSE
 #'
 #' @param .data The input dataframe containing patient disease control data
 #' @return Original dataframe with an additional boolean column 'event_disease_control'
-#' @keywords internal
+#' @export
 #'
 #' @import dplyr
 emi_add_disease_control <- function(.data) {

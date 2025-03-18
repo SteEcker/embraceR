@@ -21,4 +21,3 @@ This function computes the maximum of two numeric columns for each observation.
 NA values are handled such that if one value is NA and the other is not, the non-NA value is returned.
 If both values are NA, NA is returned.
 }
-\keyword{internal}

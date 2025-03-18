@@ -21,4 +21,3 @@ differences between the two cohorts.
 summary_table <- emii_get_dosimetric_parameter_status()
 }
 }
-\keyword{internal}

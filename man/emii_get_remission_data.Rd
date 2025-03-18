@@ -23,4 +23,3 @@ from other variables at that timepoint.
   remission_data <- emii_get_remission_data(followup_data)
 }
 }
-\keyword{internal}

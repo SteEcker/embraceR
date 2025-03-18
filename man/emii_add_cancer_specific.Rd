@@ -17,4 +17,3 @@ This function adds a column indicating cancer-specific death events,
 defined as death (Vital Status = 1) where the main cause of death
 was primary cancer (codes 1 or 3).
 }
-\keyword{internal}

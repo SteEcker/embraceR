@@ -27,4 +27,3 @@ df <- data.frame(
 result <- get_latest_side_effects(df)
 }
 }
-\keyword{internal}

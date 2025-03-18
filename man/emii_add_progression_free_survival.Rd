@@ -17,4 +17,3 @@ This function adds a column indicating progression-free survival events,
 defined as either any disease event (local failure, nodal control including PAO,
 or systemic excluding PAO) OR death.
 }
-\keyword{internal}

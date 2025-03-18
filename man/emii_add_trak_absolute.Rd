@@ -29,4 +29,3 @@ emii_data <- load_embrace_ii()
 result <- emii_add_trak_absolute(emii_data)
 }
 }
-\keyword{internal}

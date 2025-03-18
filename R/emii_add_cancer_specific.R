@@ -7,7 +7,7 @@
 #'
 #' @param .data The input dataframe containing patient vital status data
 #' @return Original dataframe with an additional boolean column 'event_cancer_specific'
-#' @keywords internal
+#' @export
 #'
 #' @import dplyr
 emii_add_cancer_specific <- function(.data) {
@@ -28,7 +28,7 @@ emii_add_cancer_specific <- function(.data) {
 #' @param save_excel Logical indicating whether to save results as Excel file (default: FALSE)
 #'
 #' @return A tibble with the cancer-specific survival variable and relevant columns
-#' @keywords internal
+#' @export
 #'
 #' @import dplyr
 #' @importFrom openxlsx write.xlsx

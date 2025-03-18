@@ -18,4 +18,3 @@ defined as having systemic failure AND at least one of the following:
 supraclavicular nodes, mediastinal nodes, liver metastases, bone metastases,
 brain metastases, lung metastases, abdominal carcinomatosis, or other metastases.
 }
-\keyword{internal}

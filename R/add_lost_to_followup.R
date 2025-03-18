@@ -16,7 +16,7 @@
 #' @return A data frame with two additional logical columns:
 #'   - is_lost_to_fu: TRUE if patient was lost to follow-up
 #'   - withdrew_consent: TRUE if patient withdrew consent
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' df <- tibble::tibble(

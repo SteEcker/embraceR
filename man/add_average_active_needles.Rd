@@ -27,4 +27,3 @@ df <- data.frame(fraction_1_active_needles = c(1, 2, 3),
 average_active_needles(df)
 }
 }
-\keyword{internal}

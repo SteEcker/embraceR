@@ -16,7 +16,7 @@
 #'   - Progression-free survival
 #'   - Distant metastasis
 #'
-#' @keywords internal
+#' @export
 #'
 #' @import dplyr
 #'
@@ -46,6 +46,7 @@ emii_add_outcome <- function(.data) {
 
   .data %>%
     emii_add_recurrent_nodes() %>%
+    emii_add_diagnostic_nodes() %>%
     emii_add_nodal_classification() %>%
     emii_add_pelvic_nodal_event() %>%
     emii_add_pelvic_event() %>%

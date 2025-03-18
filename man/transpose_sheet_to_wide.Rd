@@ -21,4 +21,3 @@ A tibble in wide format.
 \description{
 Transpose a long-format sheet to wide-format
 }
-\keyword{internal}

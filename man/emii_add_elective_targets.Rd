@@ -25,4 +25,3 @@ emii_data <- load_embrace_ii()
 result <- emii_add_elective_targets(emii_data)
 }
 }
-\keyword{internal}

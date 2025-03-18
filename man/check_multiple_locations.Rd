@@ -27,4 +27,3 @@ locations <- c("R int iliac", "L int iliac", "Para Aortic")
 result <- check_multiple_locations(patient_data, locations)
 }
 }
-\keyword{internal}

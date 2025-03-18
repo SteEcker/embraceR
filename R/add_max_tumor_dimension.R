@@ -11,7 +11,7 @@
 #'
 #' @importFrom dplyr select mutate across
 #' @importFrom tidyr replace_na
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{

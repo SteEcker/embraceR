@@ -4,7 +4,7 @@
 #' Defines the standard mapping between numeric codes and anatomical positions
 #' for lymph nodes in the EMBRACE studies.
 #'
-#' @keywords internal
+#' @export
 NODAL_POSITION_MAPPING <- c(
   "1" = "L ext iliac",
   "2" = "L int iliac",
@@ -27,7 +27,7 @@ NODAL_POSITION_MAPPING <- c(
 #' Returns a vector of valid anatomical locations
 #'
 #' @return Character vector of valid anatomical locations
-#' @keywords internal
+#' @export
 get_valid_locations <- function() {
   unique(NODAL_POSITION_MAPPING[!is.na(NODAL_POSITION_MAPPING)])
 }

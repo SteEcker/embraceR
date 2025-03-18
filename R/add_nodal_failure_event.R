@@ -8,7 +8,7 @@
 #'
 #' @return A data frame with an added nodal failure event column (1=failure, 0=no failure)
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{

@@ -16,4 +16,3 @@ Original dataframe with an additional boolean column 'event_disease_control'
 This function adds a column indicating disease control events for Embrace I data,
 defined as either local failure, regional events, or systemic events.
 }
-\keyword{internal}

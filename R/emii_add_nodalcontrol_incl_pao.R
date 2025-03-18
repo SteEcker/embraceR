@@ -10,7 +10,7 @@
 #' @import dplyr
 #' @importFrom rlang sym
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' library(dplyr)
@@ -68,7 +68,7 @@ validate_input <- function(data) {
 #' @import dplyr
 #' @importFrom openxlsx write.xlsx
 #'
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -119,14 +119,14 @@ emii_add_nodalcontrol_incl_pao_with_verification <- function(data, save_excel = 
 #'
 #' @param .data The input dataframe containing patient event data
 #' @return Original dataframe with additional boolean columns 'event_locoregional' and 'event_locoregional_alone'
-#' @keywords internal
+#' @export
 #'
 #' @import dplyr
 add_locoregional_event <- function(.data) {
   .data %>%
     mutate(
       event_locoregional = event_localfailure | event_nodalcontrol_incl_pao,
-      event_locoregional_alone = event_locoregional & (!event_systemic_excl_pao)  # New column
+      event_locoregional_alone = event_locoregional & (!event_systemic_excl_pao)
     )
 }
 
@@ -141,7 +141,7 @@ add_locoregional_event <- function(.data) {
 #' @param save_excel Logical indicating whether to save results as Excel file (default: FALSE)
 #'
 #' @return A tibble with the locoregional event variables and relevant columns
-#' @keywords internal
+#' @export
 #'
 #' @import dplyr
 #' @importFrom openxlsx write.xlsx

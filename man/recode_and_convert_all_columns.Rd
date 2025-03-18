@@ -30,4 +30,3 @@ It can process both specific column names and columns with common base names.
   recoded_data <- recode_and_convert_all_columns(data, stop_on_missing_col = TRUE)
 }
 }
-\keyword{internal}

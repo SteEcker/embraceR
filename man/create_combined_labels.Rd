@@ -13,4 +13,3 @@ A named list of labels for gtsummary
 Helper function to create formatted labels for the recurrence and metastases
 summary table.
 }
-\keyword{internal}

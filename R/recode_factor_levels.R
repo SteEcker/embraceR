@@ -9,7 +9,7 @@
 #' @param new_levels A character vector of new factor levels
 #' @return The factor vector with recoded factor levels
 #'
-#' @keywords internal
+#' @export
 #'
 recode_factor_levels <- function(x, old_levels, new_levels) {
   if (is.factor(x) || is.character(x)) {
