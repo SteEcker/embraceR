@@ -39,8 +39,10 @@ library(embraceR)
 # Load EMBRACE I data
 data <- load_embrace_i()
 
-# Load EMBRACE II data
-data <- load_embrace_ii()
+# Get a clean version of EMBRACE II data with essential columns
+clean_emii <- emii_get_clean_data()
+# Get full dataset with all columns
+clean_emii_full <- emii_get_clean_data(minimal = FALSE)
 
 # Load combined data
 data <- load_combined_embrace()

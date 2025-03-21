@@ -14,8 +14,8 @@ A gtsummary object containing the combined summary table with p-values
 }
 \description{
 Generates a summary table comparing critical parameters between EMBRACE I and II datasets.
-The function analyzes key clinical and treatment parameters, calculates the proportion 
-of missing data for each parameter, and performs statistical comparisons between the 
+The function analyzes key clinical and treatment parameters, calculates the proportion
+of missing data for each parameter, and performs statistical comparisons between the
 two study cohorts.
 }
 \examples{

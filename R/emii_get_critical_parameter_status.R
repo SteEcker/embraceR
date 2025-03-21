@@ -1,8 +1,8 @@
 #' Get Status of Critical Parameters
 #'
 #' Generates a summary table comparing critical parameters between EMBRACE I and II datasets.
-#' The function analyzes key clinical and treatment parameters, calculates the proportion 
-#' of missing data for each parameter, and performs statistical comparisons between the 
+#' The function analyzes key clinical and treatment parameters, calculates the proportion
+#' of missing data for each parameter, and performs statistical comparisons between the
 #' two study cohorts.
 #'
 #' @param save_excel Logical; if TRUE, saves the summary table as an Excel file (default: FALSE)
@@ -19,14 +19,15 @@
 #' \dontrun{
 #' # Generate summary table
 #' summary_table <- emii_get_critical_parameter_status()
-#' 
+#'
 #' # Generate and save to Excel
 #' summary_table <- emii_get_critical_parameter_status(save_excel = TRUE)
 #' }
 emii_get_critical_parameter_status <- function(save_excel = FALSE) {
 
   # Load both datasets
-  data_ii <- embraceR::load_embrace_ii()
+  data_ii <- embraceR::load_embrace_ii() %>%
+    emii_add_ott()
   data_i <- embraceR::load_embrace_i()
 
   # Load required libraries within the function

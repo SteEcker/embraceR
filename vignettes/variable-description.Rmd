@@ -1,13 +1,13 @@
 ---
 title: "EMBRACE-II Variable Description"
-pkgdown:
-  as_is: true
-  extension: pdf
-# output: rmarkdown::html_vignette
-# vignette: >
-#   %\VignetteIndexEntry{Variable Description}
-#   %\VignetteEngine{knitr::rmarkdown}
-#   %\VignetteEncoding{UTF-8}
+# pkgdown:
+#   as_is: true
+#   extension: pdf
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Variable Description}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
