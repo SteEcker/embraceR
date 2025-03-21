@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Variable Description • embraceR</title>
+<title>EMBRACE-II Variable Description • embraceR</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -16,7 +16,7 @@
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Variable Description">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="EMBRACE-II Variable Description">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -41,7 +41,7 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/01_getting-started.html">Getting Started</a></li>
     <li><a class="dropdown-item" href="../articles/embrace-ii-pipeline.html">EMBRACE-II Data Processing Pipeline</a></li>
-    <li><a class="dropdown-item" href="../articles/variable-description.html">Variable Description</a></li>
+    <li><a class="dropdown-item" href="../articles/variable-description.html">EMBRACE-II Variable Description</a></li>
   </ul>
 </li>
       </ul>
@@ -62,7 +62,7 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Variable Description</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>EMBRACE-II Variable Description</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/SteEcker/embraceR/blob/main/vignettes/variable-description.Rmd" class="external-link"><code>vignettes/variable-description.Rmd</code></a></small>
@@ -71,8 +71,15 @@
 
     
     
+<p><strong>Version Date:</strong> March 21, 2025<br><strong>Author:</strong> Stefan Ecker, PhD</p>
+<div class="section level2">
+<h2 id="quick-reference-all-added-variables-embrace-ii">Quick Reference: All Added Variables EMBRACE-II<a class="anchor" aria-label="anchor" href="#quick-reference-all-added-variables-embrace-ii"></a>
+</h2>
+<p>This document describes the custom variables added to the EMBRACE-II
+dataset during data processing. Variables are organized by functional
+categories.</p>
 <div class="section level3">
-<h3 id="quick-reference-all-added-variables-embrace-ii">Quick Reference: All Added Variables EMBRACE-II<a class="anchor" aria-label="anchor" href="#quick-reference-all-added-variables-embrace-ii"></a>
+<h3 id="patient-and-study-information">1. Patient and Study Information<a class="anchor" aria-label="anchor" href="#patient-and-study-information"></a>
 </h3>
 <table class="table">
 <colgroup>
@@ -105,6 +112,202 @@
 <td></td>
 <td></td>
 </tr>
+<tr class="odd">
+<td><code>included_in_study</code></td>
+<td><ul>
+<li>Indicates whether a patient is included in the final study
+cohort</li>
+<li>
+<strong>Calculation:</strong> Based on the study’s
+inclusion/exclusion criteria documented in the official study
+flowchart</li>
+<li>
+<strong>Implementation:</strong> <code><a href="../reference/load_embrace_ii.html">load_embrace_ii()</a></code>
+</li>
+<li>
+<strong>Values:</strong> TRUE = included in study, FALSE = excluded
+from study</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>withdrew_consent</code></td>
+<td><ul>
+<li>Indicates if a patient withdrew consent from the study</li>
+<li>
+<strong>Calculation:</strong> Based on <code>followup_*m</code>
+columns</li>
+<li>
+<strong>Implementation:</strong> <code><a href="../reference/add_lost_to_fu.html">add_lost_to_fu()</a></code>
+</li>
+<li>
+<strong>Values:</strong> TRUE = consent withdrawn, FALSE = consent
+maintained</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>is_lost_to_fu</code></td>
+<td><ul>
+<li>Indicates if a patient was lost to follow-up during the study</li>
+<li>
+<strong>Calculation:</strong> Based on <code>followup_*m</code>
+columns</li>
+<li>
+<strong>Implementation:</strong> <code><a href="../reference/add_lost_to_fu.html">add_lost_to_fu()</a></code>
+</li>
+<li>
+<strong>Values:</strong> TRUE = patient lost to followup, FALSE =
+patient not lost to followup</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="section level3">
+<h3 id="diagnostic-measurements">2. Diagnostic Measurements<a class="anchor" aria-label="anchor" href="#diagnostic-measurements"></a>
+</h3>
+<table class="table">
+<colgroup>
+<col width="36%">
+<col width="63%">
+</colgroup>
+<thead><tr class="header">
+<th>Variable</th>
+<th>Details</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>
+<code>max_tumor_dimension_</code> <code>sta_d</code>
+</td>
+<td><ul>
+<li>Maximum tumor dimension at diagnosis</li>
+<li>
+<strong>Calculation:</strong> Overall maximum value across both MRI
+and gynecological exam measurements (<code>mri_tumor_*_sta_d</code> and
+<code>gyn_tumor_*_sta_d</code>)</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_max_tumor_dimension.html">add_max_tumor_dimension()</a></code>
+</li>
+<li>
+<strong>Unit:</strong> Millimeters</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>
+<code>gyn_max_parametrium_</code> <code>sta_d</code>
+</td>
+<td><ul>
+<li>Maximum parametrial involvement from gynecological examination at
+diagnosis</li>
+<li>
+<strong>Calculation:</strong> Maximum value between left and right
+parametrial involvement (<code>gyn_left_parametrium_sta_d</code> and
+<code>gyn_right_parametrium_sta_d</code>)</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_parametrial_involvement.html">add_parametrial_involvement()</a></code>
+</li>
+<li>
+<strong>Values:</strong> 0 = Not involved, 1 = Proximal, 2 = Distal,
+3 = To pelvic wall</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>
+<code>gyn_max_tumor_</code> <code>dimension_sta_d</code>
+</td>
+<td><ul>
+<li>Maximum tumor dimension from gynecological examination</li>
+<li>
+<strong>Calculation:</strong> Maximum value across all gynecological
+tumor measurements (width, height, thickness)</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_max_tumor_dimension.html">add_max_tumor_dimension()</a></code>
+</li>
+<li>
+<strong>Unit:</strong> Millimeters</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>
+<code>mri_max_parametrium_</code> <code>sta_d</code>
+</td>
+<td><ul>
+<li>Maximum parametrial involvement from MRI at diagnosis</li>
+<li>
+<strong>Calculation:</strong> Maximum value between left and right
+parametrial involvement (<code>mri_left_parametrium_sta_d</code> and
+<code>mri_right_parametrium_sta_d</code>)</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_parametrial_involvement.html">add_parametrial_involvement()</a></code>
+</li>
+<li>
+<strong>Values:</strong> 0 = Not involved, 1 = Proximal, 2 = Distal,
+3 = To pelvic wall</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>
+<code>mri_max_tumor_</code> <code>dimension_sta_d</code>
+</td>
+<td><ul>
+<li>Maximum tumor dimension from MRI</li>
+<li>
+<strong>Calculation:</strong> Maximum value across all MRI tumor
+measurements (width, height, thickness)</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_max_tumor_dimension.html">add_max_tumor_dimension()</a></code>
+</li>
+<li>
+<strong>Unit:</strong> Millimeters</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="section level3">
+<h3 id="brachytherapy-treatment-and-technique">3. Brachytherapy Treatment and Technique<a class="anchor" aria-label="anchor" href="#brachytherapy-treatment-and-technique"></a>
+</h3>
+<table class="table">
+<colgroup>
+<col width="36%">
+<col width="63%">
+</colgroup>
+<thead><tr class="header">
+<th>Variable</th>
+<th>Details</th>
+</tr></thead>
+<tbody>
 <tr class="odd">
 <td><code>icis</code></td>
 <td><ul>
@@ -187,55 +390,18 @@ needles”, “other”</li>
 <td></td>
 </tr>
 <tr class="odd">
-<td><code>parametrial_involvement</code></td>
+<td><code>time_to_bt_percent</code></td>
 <td><ul>
-<li>Maximum parametrial involvement indicators</li>
+<li>Relative timing of brachytherapy</li>
 <li>
-<strong>Implementation:</strong>
-<code><a href="../reference/add_parametrial_involvement.html">add_parametrial_involvement()</a></code>
+<strong>Calculation:</strong> <code>time_to_bt</code> /
+<code>ott_ebrt</code>
 </li>
 <li>
-<strong>Derived columns:</strong> Maximum values from paired
-measurements</li>
-<li>
-<strong>Source pairs:</strong> BT imaging, BT exam, Diagnostic MRI,
-Diagnostic exam</li>
-</ul></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code>trak_absolute</code></td>
-<td><ul>
-<li>Total Reference Air Kerma (TRAK) values</li>
-<li>
-<strong>Calculation:</strong> Component-wise calculation from TRAK
-percentages</li>
-<li>
-<strong>Implementation:</strong>
-<code><a href="../reference/emii_add_trak_absolute.html">emii_add_trak_absolute()</a></code>
+<strong>Implementation:</strong> <code><a href="../reference/add_time_to_bt.html">add_time_to_bt()</a></code>
 </li>
 <li>
-<strong>Unit:</strong> cGy at 1m</li>
-<li>
-<strong>Note:</strong> Zero values converted to NA</li>
-</ul></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code>ott</code></td>
-<td><ul>
-<li>Overall Treatment Time</li>
-<li>
-<strong>Implementation:</strong> <code><a href="../reference/emii_add_ott.html">emii_add_ott()</a></code>
-</li>
-<li>
-<strong>Unit:</strong> Days</li>
+<strong>Unit:</strong> Proportion</li>
 </ul></td>
 </tr>
 <tr class="even">
@@ -262,22 +428,18 @@ percentages</li>
 <td></td>
 </tr>
 <tr class="odd">
-<td><code>event_localfailure</code></td>
+<td><code>ott</code></td>
 <td><ul>
-<li>Local failure event indicator</li>
+<li>Overall Treatment Time from start of EBRT to last treatment</li>
 <li>
-<strong>Calculation:</strong> Based on
-<code>disease_local_status_*</code> columns</li>
+<strong>Calculation:</strong> Time interval between
+<code>ebrt_start_date_tdvh</code> and <code>last_treatment_date</code>
+(which is the latest of EBRT end date and all fraction dates)</li>
 <li>
-<strong>Implementation:</strong>
-<code><a href="../reference/add_local_failure_event.html">add_local_failure_event()</a></code>
+<strong>Implementation:</strong> <code><a href="../reference/emii_add_ott.html">emii_add_ott()</a></code>
 </li>
 <li>
-<strong>Values:</strong> 1 = failure, 0 = no failure, NA =
-missing</li>
-<li>
-<strong>Note:</strong> Event triggered by status = 2 at any
-timepoint</li>
+<strong>Unit:</strong> Days</li>
 </ul></td>
 </tr>
 <tr class="even">
@@ -285,156 +447,18 @@ timepoint</li>
 <td></td>
 </tr>
 <tr class="odd">
-<td><code>event_nodalfailure</code></td>
+<td><code>last_treatment_date</code></td>
 <td><ul>
-<li>Nodal failure event indicator</li>
+<li>Date of the last treatment received</li>
 <li>
-<strong>Calculation:</strong> Based on
-<code>disease_nodal_status_*</code> columns</li>
+<strong>Calculation:</strong> Maximum date among EBRT end date
+(<code>ebrt_end_date_tdvh</code>) and all brachytherapy fraction dates
+(<code>fraction*date_tdvh</code>)</li>
 <li>
-<strong>Implementation:</strong>
-<code><a href="../reference/add_nodal_failure_event.html">add_nodal_failure_event()</a></code>
+<strong>Implementation:</strong> <code><a href="../reference/emii_add_ott.html">emii_add_ott()</a></code>
 </li>
 <li>
-<strong>Values:</strong> 1 = failure, 0 = no failure, NA =
-missing</li>
-<li>
-<strong>Note:</strong> Event triggered by status = 2 at any
-timepoint</li>
-</ul></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code>event_systemicfailure</code></td>
-<td><ul>
-<li>Systemic failure event indicator (EMBRACE-II)</li>
-<li>
-<strong>Calculation:</strong> Based on
-<code>disease_systemic_status_*</code> columns</li>
-<li>
-<strong>Implementation:</strong>
-<code><a href="../reference/add_systemic_failure_event.html">add_systemic_failure_event()</a></code>
-</li>
-<li>
-<strong>Values:</strong> 1 = failure, 0 = no failure, NA =
-missing</li>
-<li>
-<strong>Note:</strong> Event triggered by status = 2 at any
-timepoint</li>
-</ul></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code>event_systemic_excl_pao</code></td>
-<td><ul>
-<li>Systemic failure event indicator (EMBRACE-I)</li>
-<li>
-<strong>Calculation:</strong> Based on
-<code>disease_systemic_status_*</code> columns</li>
-<li>
-<strong>Implementation:</strong>
-<code><a href="../reference/add_systemic_failure_event.html">add_systemic_failure_event()</a></code>
-</li>
-<li>
-<strong>Values:</strong> 1 = failure, 0 = no failure, NA =
-missing</li>
-<li>
-<strong>Note:</strong> Event triggered by status = 1 or 2 at any
-timepoint</li>
-</ul></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code>event_vitalstatus</code></td>
-<td><ul>
-<li>Vital status event indicator</li>
-<li>
-<strong>Calculation:</strong> Based on <code>vital_status</code> and
-<code>latest_assessment_date_disease</code>
-</li>
-<li>
-<strong>Implementation:</strong>
-<code><a href="../reference/add_vitalstatus_event.html">add_vitalstatus_event()</a></code>
-</li>
-<li>
-<strong>Values:</strong> 1 = death, 0 = alive, NA = missing</li>
-<li>
-<strong>Note:</strong> If vital status missing but assessment date
-exists, considered alive</li>
-</ul></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code>timetoevent_disease</code></td>
-<td><ul>
-<li>Time to disease event</li>
-<li>
-<strong>Calculation:</strong> Time between
-<code>histology_assesment_date</code> and latest assessment</li>
-<li>
-<strong>Implementation:</strong>
-<code><a href="../reference/add_time_to_diseaseevent.html">add_time_to_diseaseevent()</a></code>
-</li>
-<li>
-<strong>Unit:</strong> Months</li>
-<li>
-<strong>Note:</strong> Creates columns
-<code>latest_assessment_date_disease</code>,
-<code>latest_followup_id</code>
-</li>
-</ul></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code>timetoevent_vitalstatus</code></td>
-<td><ul>
-<li>Time to vital status update</li>
-<li>
-<strong>Calculation:</strong> Time between
-<code>histology_assesment_date</code> and latest vital status</li>
-<li>
-<strong>Implementation:</strong>
-<code><a href="../reference/add_time_to_last_vitalstatus.html">add_time_to_last_vitalstatus()</a></code>
-</li>
-<li>
-<strong>Unit:</strong> Months</li>
-<li>
-<strong>Note:</strong> Uses maximum date from all available vital
-status sources</li>
-</ul></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code>time_to_bt_percent</code></td>
-<td><ul>
-<li>Relative timing of brachytherapy</li>
-<li>
-<strong>Calculation:</strong> <code>time_to_bt</code> /
-<code>ott_ebrt</code>
-</li>
-<li>
-<strong>Implementation:</strong> <code><a href="../reference/add_time_to_bt.html">add_time_to_bt()</a></code>
-</li>
-<li>
-<strong>Unit:</strong> Proportion</li>
+<strong>Unit:</strong> Date</li>
 </ul></td>
 </tr>
 <tr class="even">
@@ -446,7 +470,7 @@ status sources</li>
 <code>fraction01hrctv_</code> <code>volume_bins</code>
 </td>
 <td><ul>
-<li>High-Risk CTV volume categories</li>
+<li>CTV-HR volume categories</li>
 <li>
 <strong>Calculation:</strong> Based on
 <code>fraction01hrctv_volume_tdvh</code>
@@ -465,22 +489,19 @@ cm³, NA: missing</li>
 <td></td>
 </tr>
 <tr class="odd">
-<td>
-<code>max_tumor_dimension_</code> <code>sta_d</code>
-</td>
+<td><code>trak_total_sum</code></td>
 <td><ul>
-<li>Maximum tumor dimension at diagnosis</li>
+<li>Total Reference Air Kerma (TRAK) summed across all brachytherapy
+fractions</li>
 <li>
-<strong>Calculation:</strong> Maximum value across all tumor
-measurements</li>
+<strong>Calculation:</strong> Sum of all
+<code>fraction*trak_tdvh</code> values</li>
 <li>
 <strong>Implementation:</strong>
-<code><a href="../reference/add_max_tumor_dimension.html">add_max_tumor_dimension()</a></code>
+<code><a href="../reference/emii_add_trak_absolute.html">emii_add_trak_absolute()</a></code>
 </li>
 <li>
-<strong>Unit:</strong> Millimeters</li>
-<li>
-<strong>Note:</strong> Infinite values converted to NA</li>
+<strong>Unit:</strong> cGy at 1m</li>
 </ul></td>
 </tr>
 <tr class="even">
@@ -488,20 +509,21 @@ measurements</li>
 <td></td>
 </tr>
 <tr class="odd">
-<td><code>is_lost_to_fu</code></td>
+<td><code>trak_needles_sum</code></td>
 <td><ul>
-<li>Lost to follow-up indicator</li>
+<li>Total TRAK contribution from needles across all brachytherapy
+fractions</li>
 <li>
-<strong>Calculation:</strong> Based on <code>followup_*m</code>
-columns</li>
+<strong>Calculation:</strong> Sum of
+<code>fraction*_needles_abs</code> values, which are derived from
+percentage contributions
+(<code>trak * trak_needles_pct / 100</code>)</li>
 <li>
-<strong>Implementation:</strong> <code><a href="../reference/add_lost_to_fu.html">add_lost_to_fu()</a></code>
+<strong>Implementation:</strong>
+<code><a href="../reference/emii_add_trak_absolute.html">emii_add_trak_absolute()</a></code>
 </li>
 <li>
-<strong>Values:</strong> TRUE/FALSE</li>
-<li>
-<strong>Note:</strong> TRUE if any followup value = 2 at any
-timepoint</li>
+<strong>Unit:</strong> cGy at 1m</li>
 </ul></td>
 </tr>
 <tr class="even">
@@ -509,20 +531,246 @@ timepoint</li>
 <td></td>
 </tr>
 <tr class="odd">
-<td><code>withdrew_consent</code></td>
+<td>
+<code>trak_vaginal_</code> <code>applicator_sum</code>
+</td>
 <td><ul>
-<li>Consent withdrawal indicator</li>
+<li>Total TRAK contribution from vaginal applicator across all
+fractions</li>
 <li>
-<strong>Calculation:</strong> Based on <code>followup_*m</code>
-columns</li>
+<strong>Calculation:</strong> Sum of
+<code>fraction*_vaginal_applicator_abs</code> values, which are derived
+from percentage contributions
+(<code>trak * trak_vaginal_applicator_pct / 100</code>)</li>
 <li>
-<strong>Implementation:</strong> <code><a href="../reference/add_lost_to_fu.html">add_lost_to_fu()</a></code>
+<strong>Implementation:</strong>
+<code><a href="../reference/emii_add_trak_absolute.html">emii_add_trak_absolute()</a></code>
+</li>
+<li>
+<strong>Unit:</strong> cGy at 1m</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>
+<code>trak_tandem_</code> <code>applicator_sum</code>
+</td>
+<td><ul>
+<li>Total TRAK contribution from tandem applicator across all
+fractions</li>
+<li>
+<strong>Calculation:</strong> Sum of
+<code>fraction*_tandem_applicator_abs</code> values, which are derived
+from percentage contributions
+(<code>trak * trak_tandem_applicator_pct / 100</code>)</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/emii_add_trak_absolute.html">emii_add_trak_absolute()</a></code>
+</li>
+<li>
+<strong>Unit:</strong> cGy at 1m</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>
+<code>imp1gyn_max_</code> <code>parametrium_sta_b</code>
+</td>
+<td><ul>
+<li>Maximum parametrial involvement from gynecological examination at
+first implant</li>
+<li>
+<strong>Calculation:</strong> Maximum value between left and right
+parametrial involvement (<code>imp1gyn_left_parametrium_sta_b</code> and
+<code>imp1gyn_right_parametrium_sta_b</code>)</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_parametrial_involvement.html">add_parametrial_involvement()</a></code>
+</li>
+<li>
+<strong>Values:</strong> 0 = Not involved, 1 = Proximal, 2 = Distal,
+3 = To pelvic wall</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>
+<code>imp1image_max_</code> <code>parametrium_sta_b</code>
+</td>
+<td><ul>
+<li>Maximum parametrial involvement from imaging at first implant</li>
+<li>
+<strong>Calculation:</strong> Maximum value between left and right
+parametrial involvement (<code>imp1image_left_parametrium_sta_b</code>
+and <code>imp1imaging_right_parametrium_sta_b</code>)</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_parametrial_involvement.html">add_parametrial_involvement()</a></code>
+</li>
+<li>
+<strong>Values:</strong> 0 = Not involved, 1 = Proximal, 2 = Distal,
+3 = To pelvic wall</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="section level3">
+<h3 id="external-beam-radiotherapy-ebrt">4. External Beam Radiotherapy (EBRT)<a class="anchor" aria-label="anchor" href="#external-beam-radiotherapy-ebrt"></a>
+</h3>
+<table class="table">
+<colgroup>
+<col width="36%">
+<col width="63%">
+</colgroup>
+<thead><tr class="header">
+<th>Variable</th>
+<th>Details</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>
+<code>ebrt_elective_target_</code> <code>algorithm</code>
+</td>
+<td><ul>
+<li>Algorithm-recommended treatment target volume for elective nodal
+irradiation</li>
+<li>
+<strong>Calculation:</strong> Determined based on EMBRACE-II
+protocol</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/emii_add_elective_targets.html">emii_add_elective_targets()</a></code>
+</li>
+<li>
+<strong>Values:</strong> ‘Small Pelvis’, ‘Large Pelvis’, ‘Large
+Pelvis + Para-aortic’, ‘Large Pelvis + Inguinal’, ‘Large Pelvis +
+Para-aortic + Inguinal’</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>elective_high_risk</code></td>
+<td><ul>
+<li>Indicates if high-risk criteria for nodal treatment are met</li>
+<li>
+<strong>Calculation:</strong> TRUE if pathological nodes present AND
+&gt;= 3 nodes found, OR if any common iliac or para-aortic nodes
+present</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/emii_add_elective_targets.html">emii_add_elective_targets()</a></code>
 </li>
 <li>
 <strong>Values:</strong> TRUE/FALSE</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>elective_inguinal</code></td>
+<td><ul>
+<li>Indicates if inguinal node irradiation criteria are met</li>
 <li>
-<strong>Note:</strong> TRUE if any followup value = 3 at any
-timepoint</li>
+<strong>Calculation:</strong> TRUE if maximum vaginal involvement =
+3 (distal third) OR any inguinal nodes present in right or left
+groin</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/emii_add_elective_targets.html">emii_add_elective_targets()</a></code>
+</li>
+<li>
+<strong>Values:</strong> TRUE/FALSE</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>elective_low_risk</code></td>
+<td><ul>
+<li>Indicates if low-risk criteria for nodal treatment are met</li>
+<li>
+<strong>Calculation:</strong> TRUE if NO pathological nodes, tumor
+&lt;= 40mm, TNM stage 1/2/3/5, squamous cell histology, and no corpus
+uteri involvement on MRI</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/emii_add_elective_targets.html">emii_add_elective_targets()</a></code>
+</li>
+<li>
+<strong>Values:</strong> TRUE/FALSE</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>any_node_ci_pa</code></td>
+<td><ul>
+<li>Indicates presence of any common iliac or para-aortic lymph nodes at
+diagnosis</li>
+<li>
+<strong>Calculation:</strong> TRUE if any node has anatomical
+position of “R com iliac”, “L com iliac”, or “Para Aortic”</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/emii_add_elective_targets.html">emii_add_elective_targets()</a></code>
+</li>
+<li>
+<strong>Values:</strong> TRUE/FALSE</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="section level3">
+<h3 id="lymph-nodes-and-metastases">5. Lymph Nodes and Metastases<a class="anchor" aria-label="anchor" href="#lymph-nodes-and-metastases"></a>
+</h3>
+<table class="table">
+<colgroup>
+<col width="36%">
+<col width="63%">
+</colgroup>
+<thead><tr class="header">
+<th>Variable</th>
+<th>Details</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>nodal_classification</code></td>
+<td><ul>
+<li>Classification of nodal involvement status</li>
+<li>
+<strong>Calculation:</strong> Based on pathological nodes present
+(<code>pathological_nodes_present</code>) and Para-Aortic lymph node
+involvement at diagnosis</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/emii_add_nodal_classification.html">emii_add_nodal_classification()</a></code>
+</li>
+<li>
+<strong>Values:</strong> ‘N0’ (no pathological nodes), ‘N1PAN’
+(pathological nodes with Para-Aortic involvement), ‘N1pelvic’
+(pathological nodes without Para-Aortic involvement)</li>
 </ul></td>
 </tr>
 <tr class="even">
@@ -544,9 +792,6 @@ lymph nodes from staging data</li>
 </li>
 <li>
 <strong>Unit:</strong> Count</li>
-<li>
-<strong>Note:</strong> Includes both “L com iliac” and “R com iliac”
-anatomical positions</li>
 </ul></td>
 </tr>
 <tr class="even">
@@ -568,15 +813,702 @@ Aortic” anatomical position from staging data</li>
 </li>
 <li>
 <strong>Unit:</strong> Count</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>has_*_followup</code></td>
+<td><ul>
+<li>Indicates lymph node involvement during follow-up by specific
+anatomical location</li>
 <li>
-<strong>Note:</strong> Identifies nodes specifically labeled as
-“Para Aortic”</li>
+<strong>Calculation:</strong> Checks if any lymph node documented
+during follow-up has this specific anatomical position</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/emii_add_recurrent_nodes.html">emii_add_recurrent_nodes()</a></code>
+</li>
+<li>
+<strong>Example variables:</strong>
+<code>has_L.ext.iliac_followup</code>,
+<code>has_Para.Aortic_followup</code>, etc.</li>
+<li>
+<strong>Values:</strong> TRUE/FALSE</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>has_*_diagnosis</code></td>
+<td><ul>
+<li>Indicates lymph node involvement at diagnosis by specific anatomical
+location</li>
+<li>
+<strong>Calculation:</strong> Checks if any lymph node documented at
+diagnosis has this specific anatomical position</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/emii_add_diagnostic_nodes.html">emii_add_diagnostic_nodes()</a></code>
+</li>
+<li>
+<strong>Example variables:</strong>
+<code>has_L.ext.iliac_diagnosis</code>,
+<code>has_Para.Aortic_diagnosis</code>, etc.</li>
+<li>
+<strong>Values:</strong> TRUE/FALSE</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>has_*_metastases</code></td>
+<td><ul>
+<li>Indicates presence of specific metastatic disease sites</li>
+<li>
+<strong>Calculation:</strong> Checks if any follow-up visit reports
+metastasis at this site</li>
+<li>
+<strong>Implementation:</strong> <code><a href="../reference/add_metastases.html">add_metastases()</a></code>
+</li>
+<li>
+<strong>Example variables:</strong>
+<code>has_liver_metastases</code>, <code>has_bone_metastases</code>,
+<code>has_brain_metastases</code>, <code>has_lung_metastases</code>,
+<code>has_other_metastases</code>
+</li>
+<li>
+<strong>Values:</strong> TRUE/FALSE</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>has_*_nodes</code></td>
+<td><ul>
+<li>Indicates presence of distant nodal metastases</li>
+<li>
+<strong>Calculation:</strong> Checks if any follow-up visit reports
+nodes at these sites</li>
+<li>
+<strong>Implementation:</strong> <code><a href="../reference/add_metastases.html">add_metastases()</a></code>
+</li>
+<li>
+<strong>Example variables:</strong>
+<code>has_paraaortic_nodes_above_l2</code>,
+<code>has_supraclavicular_nodes</code>,
+<code>has_mediastinal_nodes</code>
+</li>
+<li>
+<strong>Values:</strong> TRUE/FALSE</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>
+<code>has_abdominal_</code> <code>carcinomatosis</code>
+</td>
+<td><ul>
+<li>Indicates presence of abdominal carcinomatosis</li>
+<li>
+<strong>Calculation:</strong> Checks if any follow-up visit reports
+abdominal carcinomatosis</li>
+<li>
+<strong>Implementation:</strong> <code><a href="../reference/add_metastases.html">add_metastases()</a></code>
+</li>
+<li>
+<strong>Values:</strong> TRUE/FALSE</li>
 </ul></td>
 </tr>
 </tbody>
 </table>
+<div style="page-break-after: always;"></div>
 </div>
-  </main>
+<div class="section level3">
+<h3 id="event-endpoints">6. Event Endpoints<a class="anchor" aria-label="anchor" href="#event-endpoints"></a>
+</h3>
+<table style="width:99%;" class="table">
+<colgroup>
+<col width="27%">
+<col width="24%">
+<col width="47%">
+</colgroup>
+<thead><tr class="header">
+<th>Variable</th>
+<th>Endpoint</th>
+<th>Details</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>event_localfailure</code></td>
+<td>Local Control</td>
+<td><ul>
+<li>
+<strong>Calculation:</strong> Triggered when any followup
+<code>disease_local_status_*</code> column has a value of 2, indicating
+recurrence/progression</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_local_failure_event.html">add_local_failure_event()</a></code>
+</li>
+<li>
+<strong>Values:</strong> 1 = failure (event occurred), 0 = no
+failure (no event)</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>event_nodalfailure</code></td>
+<td>Nodal Control (lower PAO)</td>
+<td><ul>
+<li>
+<strong>Calculation:</strong> Triggered when any followup
+<code>disease_nodal_status_*</code> column has a value of 2, indicating
+nodal recurrence or progression</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_nodal_failure_event.html">add_nodal_failure_event()</a></code>
+</li>
+<li>
+<strong>Values:</strong> 1 = failure (event occurred), 0 = no
+failure (no event)</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>
+<code>event_nodalcontrol_</code> <code>incl_pao</code>
+</td>
+<td>Nodal control (incl. all PAO)</td>
+<td><ul>
+<li>
+<strong>Calculation:</strong> Triggered when either pelvic nodal
+failure (<code>event_pelvic_nodal</code>) OR para-aortic nodal failure
+(<code>event_paraaortic_nodal</code>) occurs</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/emii_add_nodalcontrol_incl_pao.html">emii_add_nodalcontrol_incl_pao()</a></code>
+</li>
+<li>
+<strong>Values:</strong> 1 = failure (event occurred), 0 = no
+failure (no event)</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>event_systemicfailure</code></td>
+<td>Systemic Control (incl. upper PAO)</td>
+<td><ul>
+<li>
+<strong>Calculation:</strong> Triggered when any followup
+<code>disease_systemic_status_*</code> column has a value of 2,
+indicating systemic recurrence or progression</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_systemic_failure_event.html">add_systemic_failure_event()</a></code>
+</li>
+<li>
+<strong>Values:</strong> 1 = failure (event occurred), 0 = no
+failure (no event)</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>event_systemic_excl_pao</code></td>
+<td>Systemic control (excl. PAO)</td>
+<td><ul>
+<li>
+<strong>Calculation:</strong> Triggered when systemic failure
+(<code>event_systemicfailure</code>) occurs AND at least one of:
+supraclavicular nodes, mediastinal nodes, liver, bone, brain, lung
+metastases, abdominal carcinomatosis, or other metastases is
+present</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/emii_add_systemic_excl_pao.html">emii_add_systemic_excl_pao()</a></code>
+</li>
+<li>
+<strong>Values:</strong> 1 = failure (event occurred), 0 = no
+failure (no event)</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+<table style="width:99%;" class="table">
+<colgroup>
+<col width="27%">
+<col width="24%">
+<col width="47%">
+</colgroup>
+<thead><tr class="header">
+<th>Variable</th>
+<th>Endpoint</th>
+<th>Details</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>event_vitalstatus</code></td>
+<td>Overall Survival</td>
+<td><ul>
+<li>
+<strong>Calculation:</strong> Uses the value from
+<code>vital_status</code> when available; otherwise sets to 0 (alive) if
+a disease assessment date exists
+(<code>latest_assessment_date_   disease</code>)</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_vitalstatus_event.html">add_vitalstatus_event()</a></code>
+</li>
+<li>
+<strong>Values:</strong> 1 = death (event occurred), 0 = alive (no
+event)</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>event_pelvic_nodal</code></td>
+<td>Pelvic Nodal control</td>
+<td><ul>
+<li>
+<strong>Calculation:</strong> Triggered when nodal failure
+(<code>event_nodalfailure</code>) occurs AND at least one node is
+positive in any pelvic location: external iliac, internal iliac, common
+iliac, or parametrial/paracervical regions (left or right)</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/emii_add_pelvic_nodal_event.html">emii_add_pelvic_nodal_event()</a></code>
+</li>
+<li>
+<strong>Values:</strong> 1 = failure (event occurred), 0 = no
+failure (no event)</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>event_pelvic</code></td>
+<td>Pelvic control (local + nodal)</td>
+<td><ul>
+<li>
+<strong>Calculation:</strong> Triggered when either local failure
+(<code>event_localfailure</code>) OR pelvic nodal failure
+(<code>event_pelvic_nodal</code>) occurs</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/emii_add_pelvic_event.html">emii_add_pelvic_event()</a></code>
+</li>
+<li>
+<strong>Values:</strong> 1 = failure (event occurred), 0 = no
+failure (no event)</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>event_paraaortic_nodal</code></td>
+<td>Para-aortic nodal control (below L2)</td>
+<td><ul>
+<li>
+<strong>Calculation:</strong> Triggered when either para-aortic
+nodes above L2 (<code>has_paraaortic_nodes_above_l2</code>) OR
+para-aortic nodes below L2 (<code>has_Para.Aortic_followup</code>) is
+detected</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/emii_add_paraaortic_nodal.html">emii_add_paraaortic_nodal()</a></code>
+</li>
+<li>
+<strong>Values:</strong> 1 = failure (event occurred), 0 = no
+failure (no event)</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>event_locoregional</code></td>
+<td>Locoregional (Pelvic/PAO)</td>
+<td><ul>
+<li>
+<strong>Calculation:</strong> Triggered when either local failure
+(<code>event_localfailure</code>) OR nodal control including para-aortic
+(<code>event_nodalcontrol_incl_pao</code>) occurs</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_locoregional_event.html">add_locoregional_event()</a></code>
+</li>
+<li>
+<strong>Values:</strong> 1 = failure (event occurred), 0 = no
+failure (no event)</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+<table style="width:99%;" class="table">
+<colgroup>
+<col width="27%">
+<col width="24%">
+<col width="47%">
+</colgroup>
+<thead><tr class="header">
+<th>Variable</th>
+<th>Endpoint</th>
+<th>Details</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>
+<code>event_locoregional_</code> <code>alone</code>
+</td>
+<td>Locoregional alone (no metastases)</td>
+<td><ul>
+<li>
+<strong>Calculation:</strong> Triggered when a locoregional failure
+occurs (<code>event_locoregional=1</code>) WITHOUT any concurrent
+distant metastases (<code>event_systemic_excl_pao=0</code>)</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_locoregional_event.html">add_locoregional_event()</a></code>
+</li>
+<li>
+<strong>Values:</strong> 1 = isolated locoregional recurrence, 0 =
+no recurrence or recurrence with distant metastases</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>event_cancer_specific</code></td>
+<td>Cancer-Specific Survival</td>
+<td><ul>
+<li>
+<strong>Calculation:</strong> Triggered when death occurs
+(<code>event_vitalstatus=1</code>) AND the main cause of death is
+primary cancer (codes 1 or 3 in
+<code>vital_status_cause_of_death_vital_</code>
+<code>status</code>)</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/emii_add_cancer_specific.html">emii_add_cancer_specific()</a></code>
+</li>
+<li>
+<strong>Values:</strong> 1 = cancer death, 0 = alive or non-cancer
+death</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>event_disease_control</code></td>
+<td>Disease Control</td>
+<td><ul>
+<li>
+<strong>Calculation:</strong> Triggered when any failure occurs at
+any site: local failure OR nodal failure OR systemic failure</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/emii_add_disease_control.html">emii_add_disease_control()</a></code>
+</li>
+<li>
+<strong>Values:</strong> 1 = any disease failure, 0 = disease
+controlled at all sites</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>event_progression_free</code></td>
+<td>Progression-Free Survival</td>
+<td><ul>
+<li>
+<strong>Calculation:</strong> Triggered when any disease event
+(<code>event_disease_control=1</code>) OR death occurs
+(<code>event_vitalstatus=1</code>)</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/emii_add_progression_free_survival.html">emii_add_progression_free_survival()</a></code>
+</li>
+<li>
+<strong>Values:</strong> 1 = progression or death, 0 = alive without
+progression</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>event_distant_alone</code></td>
+<td>Distant Metastases Alone</td>
+<td><ul>
+<li>
+<strong>Calculation:</strong> Triggered when systemic failure occurs
+(<code>event_systemicfailure=1</code>) WITHOUT para-aortic nodes above
+L2 AND WITHOUT concurrent local failure or pelvic nodal failure</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/emii_add_distant_alone.html">emii_add_distant_alone()</a></code>
+</li>
+<li>
+<strong>Values:</strong> 1 = isolated distant metastases, 0 = no
+distant metastases or concurrent locoregional disease</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+<table style="width:99%;" class="table">
+<colgroup>
+<col width="27%">
+<col width="24%">
+<col width="47%">
+</colgroup>
+<thead><tr class="header">
+<th>Variable</th>
+<th>Endpoint</th>
+<th>Details</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>timetoevent_disease</code></td>
+<td>Time to Disease Event</td>
+<td><ul>
+<li>
+<strong>Calculation:</strong> Time interval in months from histology
+assessment date to either the first disease event date or the latest
+assessment date if no event occurred</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_time_to_diseaseevent.html">add_time_to_diseaseevent()</a></code>
+</li>
+<li>
+<strong>Values:</strong> Number of months</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>timetoevent_vitalstatus</code></td>
+<td>Time to Last Vital Status</td>
+<td><ul>
+<li>
+<strong>Calculation:</strong> Time interval in months from histology
+assessment date to the latest vital status date</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_time_to_last_vitalstatus.html">add_time_to_last_vitalstatus()</a></code>
+</li>
+<li>
+<strong>Values:</strong> Number of months</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>
+<code>latest_vital_status_</code> <code>date</code>
+</td>
+<td>Latest Vital Status Date</td>
+<td><ul>
+<li>
+<strong>Description:</strong> The date of the latest available
+information on vital status, calculated from assessment dates, last info
+date, and date of death when available</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/add_time_to_last_vitalstatus.html">add_time_to_last_vitalstatus()</a></code>
+</li>
+<li>
+<strong>Values:</strong> Date format</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="section level3">
+<h3 id="late-toxicity-and-morbidity-only-followup-assessments">7. Late Toxicity and Morbidity (only followup assessments)<a class="anchor" aria-label="anchor" href="#late-toxicity-and-morbidity-only-followup-assessments"></a>
+</h3>
+<table class="table">
+<colgroup>
+<col width="36%">
+<col width="63%">
+</colgroup>
+<thead><tr class="header">
+<th>Variable</th>
+<th>Details</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>max_value_*</code></td>
+<td><ul>
+<li>Maximum grade of a specific toxicity or morbidity across all
+follow-up time points</li>
+<li>
+<strong>Calculation:</strong> Maximum CTCAE grade value observed for
+the specific toxicity across all follow-up assessments</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/get_max_side_effects.html">get_max_side_effects()</a></code>
+</li>
+<li>
+<strong>Values:</strong> 0-5 (CTCAE grade scale)</li>
+<li>
+<strong>Example variables:</strong>
+<ul>
+<li><code>max_value_bladder_cystitis</code></li>
+<li><code>max_value_vagina_stenosis</code></li>
+<li><code>max_value_fistula</code></li>
+<li><code>max_value_gastro_proctitis</code></li>
+</ul>
+</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>max_timepoint_*</code></td>
+<td><ul>
+<li>Follow-up timepoint at which the maximum grade of toxicity was
+observed</li>
+<li>
+<strong>Calculation:</strong> Time point (e.g., “3m” for 3 months)
+at which maximum CTCAE grade was observed for each specific
+toxicity</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/get_max_side_effects.html">get_max_side_effects()</a></code>
+</li>
+<li>
+<strong>Values:</strong> Time point indicators (e.g., “3m”, “6m”,
+“12m”, etc.)</li>
+<li>
+<strong>Example variables:</strong>
+<ul>
+<li><code>max_timepoint_bladder_cystitis</code></li>
+<li><code>max_timepoint_vagina_stenosis</code></li>
+<li><code>max_timepoint_fistula</code></li>
+<li><code>max_timepoint_gastro_proctitis</code></li>
+</ul>
+</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>
+<code>overall_max_morbidity_</code> <code>grade</code>
+</td>
+<td><ul>
+<li>Overall maximum morbidity grade across all toxicity endpoints and
+all time points</li>
+<li>
+<strong>Calculation:</strong> The maximum value across all
+<code>max_value_*</code> variables for each patient</li>
+<li>
+<strong>Implementation:</strong>
+<code><a href="../reference/emii_add_max_morbidity.html">emii_add_max_morbidity()</a></code>
+</li>
+<li>
+<strong>Values:</strong> 0-5 (CTCAE grade scale)</li>
+<li>
+<strong>Purpose:</strong> Represents the highest toxicity
+experienced by a patient regardless of specific type or timepoint</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+<p>The toxicity and morbidity data include various organ systems and
+toxicity types:</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Bladder toxicity</strong>: Cystitis, frequency,
+incontinence, urgency, stenosis/stricture, bleeding</li>
+<li>
+<strong>Gastrointestinal toxicity</strong>: Abdominal pain/cramping,
+constipation, diarrhea, incontinence, proctitis, bleeding (at different
+sites), stenosis/stricture</li>
+<li>
+<strong>Vaginal toxicity</strong>: Bleeding, discharge, dryness,
+mucositis, stenosis</li>
+<li>
+<strong>Fistula</strong>: Grading and localization (bladder, rectum,
+vagina, etc.)</li>
+<li>
+<strong>Lymphatic complications</strong>: Edema (limb,
+trunk/genital), lymphocele, thromboembolic events</li>
+<li>
+<strong>Muscle/skeletal toxicity</strong>: Fibrosis, fracture,
+back/pelvic pain</li>
+<li>
+<strong>Other toxicities</strong>: Fatigue, hot flashes, insomnia,
+and other patient-specific issues</li>
+</ol>
+</div>
+</div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 

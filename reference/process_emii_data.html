@@ -24,7 +24,7 @@ process_combined_data. The processing includes:"><meta property="og:image" conte
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/01_getting-started.html">Getting Started</a></li>
     <li><a class="dropdown-item" href="../articles/embrace-ii-pipeline.html">EMBRACE-II Data Processing Pipeline</a></li>
-    <li><a class="dropdown-item" href="../articles/variable-description.html">Variable Description</a></li>
+    <li><a class="dropdown-item" href="../articles/variable-description.html">EMBRACE-II Variable Description</a></li>
   </ul></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -88,10 +88,10 @@ process_combined_data. The processing includes:</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span>  <span class="co"># Load raw data</span></span></span>
 <span class="r-in"><span>  <span class="va">raw_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="load_combined_embrace.html">load_combined_embrace</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  </span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># Process with common transformations</span></span></span>
 <span class="r-in"><span>  <span class="va">common_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="process_combined_data.html">process_combined_data</a></span><span class="op">(</span><span class="va">raw_data</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  </span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># Add EMBRACE-II specific transformations</span></span></span>
 <span class="r-in"><span>  <span class="va">processed_data</span> <span class="op">&lt;-</span> <span class="fu">process_emii_data</span><span class="op">(</span><span class="va">common_data</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>

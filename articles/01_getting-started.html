@@ -41,7 +41,7 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/01_getting-started.html">Getting Started</a></li>
     <li><a class="dropdown-item" href="../articles/embrace-ii-pipeline.html">EMBRACE-II Data Processing Pipeline</a></li>
-    <li><a class="dropdown-item" href="../articles/variable-description.html">Variable Description</a></li>
+    <li><a class="dropdown-item" href="../articles/variable-description.html">EMBRACE-II Variable Description</a></li>
   </ul>
 </li>
       </ul>
@@ -102,8 +102,10 @@ project.</p>
 <span><span class="co"># Load EMBRACE I data</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/load_embrace_i.html">load_embrace_i</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Load EMBRACE II data</span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/load_embrace_ii.html">load_embrace_ii</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co"># Get a clean version of EMBRACE II data with essential columns</span></span>
+<span><span class="va">clean_emii</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/emii_get_clean_data.html">emii_get_clean_data</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co"># Get full dataset with all columns</span></span>
+<span><span class="va">clean_emii_full</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/emii_get_clean_data.html">emii_get_clean_data</a></span><span class="op">(</span>minimal <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Load combined data</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/load_combined_embrace.html">load_combined_embrace</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
