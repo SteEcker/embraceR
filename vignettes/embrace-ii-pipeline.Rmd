@@ -1,13 +1,13 @@
 ---
 title: "EMBRACE-II Data Processing Pipeline"
-# pkgdown:
-#   as_is: true
-#   extension: pdf
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{EMBRACE-II Data Processing Pipeline}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+pkgdown:
+  as_is: true
+  extension: pdf
+# output: rmarkdown::html_vignette
+# vignette: >
+#   %\VignetteIndexEntry{EMBRACE-II Data Processing Pipeline}
+#   %\VignetteEngine{knitr::rmarkdown}
+#   %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}
