@@ -524,7 +524,7 @@ This document describes the custom variables added to the EMBRACE-II dataset dur
 +---------------------------+------------------------+-----------------------------------------------+
 +---------------------------+------------------------+-----------------------------------------------+
 | `event_paraaortic_nodal`  | Para-aortic nodal      | - **Calculation:** Triggered when either      |
-|                           | control (below L2)     |   para-aortic nodes above L2                  |
+|                           | control                |   para-aortic nodes above L2                  |
 |                           |                        |   (`has_paraaortic_nodes_above_l2`) OR        |
 |                           |                        |   para-aortic nodes below L2                  |
 |                           |                        |   (`has_Para.Aortic_followup`) is detected    |
