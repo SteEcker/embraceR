@@ -1,11 +1,11 @@
 pandoc: 3.1.11
-pkgdown: 2.1.1
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   01_getting-started: 01_getting-started.html
-  embrace-ii-pipeline: embrace-ii-pipeline.html
-  variable-description: variable-description.html
-last_built: 2025-03-21T13:46Z
+  embrace-ii-pipeline: embrace-ii-pipeline.pdf
+  variable-description: variable-description.pdf
+last_built: 2025-10-23T12:09Z
 urls:
   reference: https://steecker.github.io/embraceR/reference
   article: https://steecker.github.io/embraceR/articles
