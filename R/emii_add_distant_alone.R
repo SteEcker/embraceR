@@ -72,8 +72,16 @@ emii_add_distant_alone_with_verification <- function(.data, save_excel = FALSE) 
     emii_add_distant_alone() %>%
     select(
       embrace_id,
-      event_systemic_excl_pao,
+      # Base events
+      event_localfailure,
+      event_systemicfailure,
+      # Components of locoregional
+      event_nodalcontrol_incl_pao,
       event_locoregional,
+      # Components of systemic_excl_pao
+      has_paraaortic_nodes_above_l2,
+      event_systemic_excl_pao,
+      # Final endpoint
       event_distant_alone
     )
   

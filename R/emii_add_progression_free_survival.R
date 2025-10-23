@@ -93,8 +93,15 @@ emii_add_progression_free_survival_with_verification <- function(.data, save_exc
     emii_add_progression_free_survival() %>%
     select(
       embrace_id,
+      # Base events that feed into disease_control
+      event_localfailure,
+      event_nodalfailure,
+      event_systemicfailure,
+      # Composite endpoint
       event_disease_control,
+      # Vital status
       event_vitalstatus,
+      # Final endpoint
       event_progression_free
     )
   
