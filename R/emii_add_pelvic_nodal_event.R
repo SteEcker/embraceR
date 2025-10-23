@@ -4,7 +4,7 @@
 #' This function adds a column indicating whether a patient had a pelvic nodal event.
 #' A pelvic nodal event is defined as having event_nodalfailure AND at least one positive
 #' node in any of the following locations: external iliac, internal iliac, common iliac,
-#' or parametrial/paracervical regions (left or right).
+#' parametrial/paracervical regions (left or right), or other pelvic nodal locations.
 #'
 #' @param .data The input dataframe containing patient node data
 #'
@@ -23,7 +23,9 @@ emii_add_pelvic_nodal_event <- function(.data) {
          has_R.int.iliac_followup |
          has_R.com.iliac_followup |
          has_R.parame.paracervix_followup |
-         has_L.parame.paracervix_followup)
+         has_L.parame.paracervix_followup |
+         has_other_followup
+         )
     )
 }
 

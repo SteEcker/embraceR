@@ -1,10 +1,12 @@
 #' Add Systemic Control Status (Excluding Para-aortic)
 #'
 #' @description
-#' This function adds a column indicating whether a patient had systemic failure,
-#' defined as having systemic failure AND at least one of the following:
-#' supraclavicular nodes, mediastinal nodes, liver metastases, bone metastases,
-#' brain metastases, lung metastases, abdominal carcinomatosis, or other metastases.
+#' This function adds a column indicating systemic failure excluding isolated
+#' para-aortic lymph node involvement above L2. 
+#' 
+#' Definition: All systemic failures MINUS cases where para-aortic nodes above L2 
+#' are the ONLY systemic failure. Cases with para-aortic nodes above L2 plus any 
+#' other systemic metastasis remain included.
 #'
 #' @param .data The input dataframe containing patient failure data
 #' @return Original dataframe with an additional boolean column 'event_systemic_excl_pao'
@@ -15,16 +17,17 @@ emii_add_systemic_excl_pao <- function(.data) {
   .data %>%
     add_metastases() %>%
     mutate(
+      # Check if patient has any other systemic metastases besides para-aortic above L2
+      has_other_systemic_metastases = has_supraclavicular_nodes | 
+        has_mediastinal_nodes | has_liver_metastases | has_bone_metastases | 
+        has_brain_metastases | has_lung_metastases | 
+        has_abdominal_carcinomatosis | has_other_metastases,
+      
+      # All systemic failures MINUS isolated para-aortic above L2
       event_systemic_excl_pao = event_systemicfailure & 
-        (has_supraclavicular_nodes |
-         has_mediastinal_nodes |
-         has_liver_metastases |
-         has_bone_metastases |
-         has_brain_metastases |
-         has_lung_metastases |
-         has_abdominal_carcinomatosis |
-         has_other_metastases)
-    )
+        !(has_paraaortic_nodes_above_l2 & !has_other_systemic_metastases)
+    ) %>%
+    select(-has_other_systemic_metastases)  # Remove temporary variable
 }
 
 #' Add Systemic Control Status (Excluding Para-aortic) with Verification

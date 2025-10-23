@@ -474,12 +474,12 @@ This document describes the custom variables added to the EMBRACE-II dataset dur
 |                           |                        |   0 = no failure (no event)                   |
 +---------------------------+------------------------+-----------------------------------------------+
 +---------------------------+------------------------+-----------------------------------------------+
-| `event_systemic_excl_pao` | Systemic control       | - **Calculation:** Triggered when systemic    |
-|                           | (excl. PAO)            |   failure (`event_systemicfailure`) occurs    |
-|                           |                        |   AND at least one of: supraclavicular nodes, |
-|                           |                        |   mediastinal nodes, liver, bone, brain, lung |
-|                           |                        |   metastases, abdominal carcinomatosis, or    |
-|                           |                        |   other metastases is present                 |
+| `event_systemic_excl_pao` | Systemic control       | - **Calculation:** All systemic failures      |
+|                           | (excl. PAO)            |   (`event_systemicfailure`) MINUS cases where |
+|                           |                        |   para-aortic nodes above L2 are the ONLY     |
+|                           |                        |   systemic failure. Cases with para-aortic     |
+|                           |                        |   nodes above L2 plus any other systemic      |
+|                           |                        |   metastasis remain included                   |
 |                           |                        | - **Implementation:**                         |
 |                           |                        |   `emii_add_systemic_excl_pao()`              |
 |                           |                        | - **Values:** 1 = failure (event occurred),   |
@@ -591,10 +591,10 @@ This document describes the custom variables added to the EMBRACE-II dataset dur
 +---------------------------+------------------------+-----------------------------------------------+
 +---------------------------+------------------------+-----------------------------------------------+
 | `event_distant_alone`     | Distant Metastases     | - **Calculation:** Triggered when systemic    |
-|                           | Alone                  |   failure occurs (`event_systemicfailure=1`)  |
-|                           |                        |   WITHOUT para-aortic nodes above L2 AND      |
-|                           |                        |   WITHOUT concurrent local failure or pelvic  |
-|                           |                        |   nodal failure                               |
+|                           | Alone                  |   failure excluding para-aortic nodes         |
+|                           |                        |   (`event_systemic_excl_pao=1`) occurs AND   |
+|                           |                        |   no locoregional failure                     |
+|                           |                        |   (`event_locoregional=0`)                   |
 |                           |                        | - **Implementation:**                         |
 |                           |                        |   `emii_add_distant_alone()`                  |
 |                           |                        | - **Values:** 1 = isolated distant metastases,|

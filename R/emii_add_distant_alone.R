@@ -2,18 +2,20 @@
 #'
 #' @description
 #' This function adds a column indicating whether a patient had distant metastases alone,
-#' defined as having systemic failure without para-aortic nodes and no local or nodal failures.
+#' defined as having systemic failure excluding para-aortic nodes (event_systemic_excl_pao) 
+#' AND no locoregional failure (event_locoregional != 1).
 #'
 #' @param .data The input dataframe containing patient failure data
 #' @return Original dataframe with an additional boolean column 'distant_alone'
 #' @export
 #'
 #' @import dplyr
+#' @importFrom rlang .data
 emii_add_distant_alone <- function(.data) {
   .data %>%
     mutate(
-      has_other_metas = event_systemicfailure == 1 & (!has_paraaortic_nodes_above_l2),
-      event_distant_alone = has_other_metas & !event_paraaortic_nodal & !event_localfailure & !event_pelvic_nodal
+      # Distant alone = distant failure (excl. PAO) AND locoregional failure != 1
+      event_distant_alone = event_systemic_excl_pao & (!event_locoregional)
     )
 }
 
@@ -31,6 +33,7 @@ emii_add_distant_alone <- function(.data) {
 #'
 #' @import dplyr
 #' @importFrom openxlsx write.xlsx
+#' @importFrom rlang .data
 #'
 #' @examples
 #' \dontrun{
@@ -49,8 +52,7 @@ emii_add_distant_alone_with_verification <- function(.data, save_excel = FALSE) 
   # Validate required columns
   required_cols <- c(
     "embrace_id",
-    "event_systemicfailure",
-    "event_localfailure"
+    "event_systemicfailure"
   )
   
   missing_cols <- setdiff(required_cols, names(.data))
@@ -64,14 +66,14 @@ emii_add_distant_alone_with_verification <- function(.data, save_excel = FALSE) 
     emii_add_recurrent_nodes() %>%
     emii_add_paraaortic_nodal() %>%
     emii_add_pelvic_nodal_event() %>%
+    emii_add_nodalcontrol_incl_pao() %>%
+    add_locoregional_event() %>%
+    emii_add_systemic_excl_pao() %>%
     emii_add_distant_alone() %>%
     select(
       embrace_id,
-      event_systemicfailure,
-      has_paraaortic_nodes_above_l2,
-      event_paraaortic_nodal,
-      event_localfailure,
-      event_pelvic_nodal,
+      event_systemic_excl_pao,
+      event_locoregional,
       event_distant_alone
     )
   
