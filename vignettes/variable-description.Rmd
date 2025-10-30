@@ -507,7 +507,7 @@ This document describes the custom variables added to the EMBRACE-II dataset dur
 |                           |                        |   at least one node is positive in any pelvic |
 |                           |                        |   location: external iliac, internal iliac,   |
 |                           |                        |   common iliac, or parametrial/paracervical   |
-|                           |                        |   regions (left or right)                     |
+|                           |                        |   regions (left or right), Other              |
 |                           |                        | - **Implementation:**                         |
 |                           |                        |   `emii_add_pelvic_nodal_event()`             |
 |                           |                        | - **Values:** 1 = failure (event occurred),   |
