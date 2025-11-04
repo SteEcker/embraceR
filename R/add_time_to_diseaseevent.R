@@ -33,6 +33,11 @@
 add_time_to_diseaseevent <- function(df) {
   message('Calculating maximum followup time until disease event...')
   
+  # Ensure last_treatment_date exists by calling emii_add_ott if needed
+  if (!"last_treatment_date" %in% names(df)) {
+    df <- df %>% emii_add_ott()
+  }
+  
   # Define assessment_cols
   assessment_cols <- names(df)[startsWith(names(df), 'assessment_date') & endsWith(names(df), 'm')]
   
