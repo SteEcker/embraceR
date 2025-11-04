@@ -3,6 +3,7 @@
 #' Adds `timetoevent_vitalstatus` column measuring months from histology assessment
 #' to the latest vital status date. For EMBRACE-I, uses the latest of assessment dates
 #' or last info date. For EMBRACE-II, also considers date of death when available.
+#' If histology assessment date is missing, uses ebrt_start_date_tdvh as the baseline date.
 #'
 #' @param df A data frame with histology assessment date and vital status information
 #'
@@ -66,12 +67,33 @@ add_time_to_last_vitalstatus <- function(df) {
     select(embrace_id, latest_vital_status_date)
   
   # Join and calculate time interval
-  df %>%
-    left_join(tmp, by = "embrace_id") %>%
+  result_df <- df %>%
+    left_join(tmp, by = "embrace_id")
+  
+  # Use histology_assesment_date if available, otherwise use ebrt_start_date_tdvh (if exists)
+  if ("ebrt_start_date_tdvh" %in% names(result_df)) {
+    result_df <- result_df %>%
+      mutate(
+        baseline_date = if_else(
+          is.na(histology_assesment_date),
+          as.Date(ebrt_start_date_tdvh),
+          as.Date(histology_assesment_date)
+        )
+      )
+  } else {
+    result_df <- result_df %>%
+      mutate(
+        baseline_date = as.Date(histology_assesment_date)
+      )
+  }
+  
+  # Calculate time interval
+  result_df %>%
     mutate(
       timetoevent_vitalstatus = lubridate::interval(
-        histology_assesment_date,
+        baseline_date,
         latest_vital_status_date
       ) %/% months(1)
-    )
+    ) %>%
+    select(-baseline_date)
 }
