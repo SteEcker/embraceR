@@ -455,8 +455,8 @@ This document describes the custom variables added to the EMBRACE-II dataset dur
 +---------------------------+------------------------+-----------------------------------------------+
 +---------------------------+------------------------+-----------------------------------------------+
 | `event_nodalcontrol_`     | Nodal control          | - **Calculation:** Triggered when either      |
-| `incl_pao`                | (incl. all PAO)        |   pelvic nodal failure (`event_pelvic_nodal`) |
-|                           |                        |   OR para-aortic nodal failure                |
+| `incl_pao`                | (incl. all PAO)        |   nodal failure (`event_nodalfailure`) OR     |
+|                           |                        |   para-aortic nodal failure                   |
 |                           |                        |   (`event_paraaortic_nodal`) occurs           |
 |                           |                        | - **Implementation:**                         |
 |                           |                        |   `emii_add_nodalcontrol_incl_pao()`          |

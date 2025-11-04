@@ -102,7 +102,7 @@ emii_verify_all_events <- function(save_excel = TRUE) {
         "   - Based on: has_paraaortic_nodes_above_l2 OR has_Para.Aortic_followup",
         "",
         "9. Nodal Control incl. PAO (event_nodalcontrol_incl_pao)",
-        "   - Based on: event_pelvic_nodal OR event_paraaortic_nodal",
+        "   - Based on: event_nodalfailure OR event_paraaortic_nodal",
         "",
         "10. Locoregional (event_locoregional + event_locoregional_alone)",
         "    - event_locoregional: event_localfailure OR event_nodalcontrol_incl_pao",

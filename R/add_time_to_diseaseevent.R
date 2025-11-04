@@ -3,7 +3,9 @@
 #' Determines the latest assessment date for a disease event and calculates
 #' the follow-up time in months from histology assessment to this date. If 
 #' no disease event is found, the follow-up time is calculated from the 
-#' histology assessment to the latest assessment date.
+#' histology assessment to the latest assessment date. If histology assessment
+#' date is missing, uses ebrt_start_date_tdvh as the baseline date. If no
+#' assessment date can be found, uses last_treatment_date as the end date.
 #'
 #' @param df A data frame with assessment dates and disease status information
 #'
@@ -40,6 +42,8 @@ add_time_to_diseaseevent <- function(df) {
       embrace_id,
       all_of(assessment_cols),
       histology_assesment_date,
+      ebrt_start_date_tdvh,
+      last_treatment_date,
       matches("disease_(local|nodal|systemic)_status_\\d+m$")
     )
   
@@ -91,12 +95,24 @@ add_time_to_diseaseevent <- function(df) {
     mutate(
       latest_assessment_date_disease = map_chr(latest_data, ~as.character(.x$date)) %>% as.Date(),
       latest_followup_id = map_chr(latest_data, ~.x$id),
+      # Use histology_assesment_date if available, otherwise use ebrt_start_date_tdvh
+      baseline_date = if_else(
+        is.na(histology_assesment_date),
+        as.Date(ebrt_start_date_tdvh),
+        as.Date(histology_assesment_date)
+      ),
+      # Use last_treatment_date if latest_assessment_date_disease is NA
+      latest_assessment_date_disease = if_else(
+        is.na(latest_assessment_date_disease),
+        as.Date(last_treatment_date),
+        latest_assessment_date_disease
+      ),
       timetoevent_disease = lubridate::interval(
-        histology_assesment_date, 
+        baseline_date, 
         latest_assessment_date_disease
       ) %/% months(1)
     ) %>%
-    select(-latest_data)
+    select(-latest_data, -baseline_date)
   
   # Join the new columns back to the original data frame
   df %>% 

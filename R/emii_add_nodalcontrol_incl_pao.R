@@ -17,7 +17,7 @@
 #' 
 #' # Create sample data
 #' data <- tibble(
-#'   event_pelvic_nodal = c(0L, 1L, 0L, 1L),
+#'   event_nodalfailure = c(0L, 1L, 0L, 1L),
 #'   event_paraaortic_nodal = c(0L, 0L, 1L, 1L)
 #' )
 #' 
@@ -31,7 +31,7 @@ emii_add_nodalcontrol_incl_pao <- function(data) {
   # Create the new variable based on the simplified definition
   data %>%
     mutate(
-      event_nodalcontrol_incl_pao = event_pelvic_nodal | event_paraaortic_nodal
+      event_nodalcontrol_incl_pao = event_nodalfailure | event_paraaortic_nodal
     )
 }
 
@@ -46,7 +46,7 @@ validate_input <- function(data) {
     stop("Input 'data' must be a data frame or tibble.")
   }
   
-  required_vars <- c("event_pelvic_nodal", "event_paraaortic_nodal")
+  required_vars <- c("event_nodalfailure", "event_paraaortic_nodal")
   missing_vars <- setdiff(required_vars, names(data))
   
   if (length(missing_vars) > 0) {
@@ -74,7 +74,7 @@ validate_input <- function(data) {
 #' \dontrun{
 #' data <- tibble(
 #'   embrace_id = c("A1", "A2"),
-#'   event_pelvic_nodal = c(0L, 1L),
+#'   event_nodalfailure = c(0L, 1L),
 #'   event_paraaortic_nodal = c(0L, 1L)
 #' )
 #' result <- emii_add_nodalcontrol_incl_pao_with_verification(data)
@@ -86,17 +86,17 @@ emii_add_nodalcontrol_incl_pao_with_verification <- function(data, save_excel = 
   data <- data %>%
     add_metastases() %>% 
     emii_add_recurrent_nodes() %>% 
-    emii_add_pelvic_nodal_event() %>%
+    add_nodal_failure_event() %>%
     emii_add_paraaortic_nodal()
   
   # Create the new variable based on the simplified definition
   result <- data %>%
     mutate(
-      event_nodalcontrol_incl_pao = event_pelvic_nodal | event_paraaortic_nodal
+      event_nodalcontrol_incl_pao = event_nodalfailure | event_paraaortic_nodal
     ) %>%
     select(
       embrace_id,
-      event_pelvic_nodal,
+      event_nodalfailure,
       event_paraaortic_nodal,
       event_nodalcontrol_incl_pao
     )
