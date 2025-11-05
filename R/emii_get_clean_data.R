@@ -511,6 +511,23 @@ emii_get_clean_data <- function(minimal = TRUE,
     select(all_of(existing_columns)) %>%
     recode_and_convert_all_columns()
 
+  # Replace NA with 0 for event variables where all three are NA
+  event_vars <- c("event_localfailure", "event_nodalfailure", "event_systemicfailure")
+  if (all(event_vars %in% names(clean_data))) {
+    clean_data <- clean_data %>%
+      mutate(
+        # Identify patients where all three event variables are NA
+        all_events_na = is.na(event_localfailure) & 
+                        is.na(event_nodalfailure) & 
+                        is.na(event_systemicfailure),
+        # Replace NA with 0 for those patients only
+        event_localfailure = if_else(all_events_na, 0, event_localfailure),
+        event_nodalfailure = if_else(all_events_na, 0, event_nodalfailure),
+        event_systemicfailure = if_else(all_events_na, 0, event_systemicfailure)
+      ) %>%
+      select(-all_events_na)  # Remove temporary helper column
+  }
+
   # Save as Excel if requested
   if (save_excel) {
     file_suffix <- if(minimal) "preset" else "full"
